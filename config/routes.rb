@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   get "/users/:id", to: "users#show", as: "user"
   patch "/users/:id", to: "users#update"
   put "/users/:id", to: "users#update"
-  delete "/users/:id", to: "users#destroy", as: "delete_user"
+  delete "/users/:id", to: "users#destroy"
   # resources :users
   # Defines the root path route ("/")
   # root "articles#index"
