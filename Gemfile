@@ -51,6 +51,9 @@ gem "bootsnap", require: false
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
+  gem 'pry-rails'
+  gem "rspec-rails", "~> 4.0.1"
+  gem 'factory_bot_rails', '~> 5.0'
 end
 
 group :development do
@@ -69,4 +72,6 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
   gem "webdrivers"
+  gem 'minitest'
+  gem 'minitest-reporters' 
 end
