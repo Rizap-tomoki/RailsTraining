@@ -13,6 +13,18 @@
 ActiveRecord::Schema[7.0].define(version: 2023_08_21_042646) do
   create_table "users", charset: "utf8mb4", force: :cascade do |t|
     t.string "name"
+    t.string "rubi"
+    t.string "seibetu"
+    t.string "denwa"
+    t.string "keitai"
+    t.string "mairu"
+    t.string "yuubinbango"
+    t.string "jusho1"
+    t.string "jusho2"
+    t.string "jusho3"
+    t.string "jusho4"
+    t.string "jusho5"
+    t.date "tanjobi"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
