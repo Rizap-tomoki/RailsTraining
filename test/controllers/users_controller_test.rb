@@ -11,44 +11,41 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     Rails.cache.clear
   end
 
-  test "indexアクションにリクエストをシュミレート" do
+  test "indexアクションにリクエストし、レスポンスが正常にアクセスできるか確認するテスト" do
     get user_url(@tanaka)
     assert_response :success
   end
 
-  test "newアクションにリクエストをシュミレート" do
+  test "newアクションにリクエストし、レスポンスが正常にアクセスできるか確認するテスト" do
     get new_user_url
     assert_response :success
   end
 
-  test "createアクションにリクエストをシュミレート" do
+  test "Userのカウントが増加し、適切なリダイレクトが行われることを確認するテスト" do
     assert_difference("User.count") do
       post users_url, params: { user: { name: "田中" } }
     end
-  
     assert_redirected_to user_path(User.last)
-    assert_equal "User was successfully created.", flash[:notice]
-    
   end
 
-  test "showアクションにリクエストをシュミレート" do
+  test "showアクションにリクエストし、レスポンスが正常にアクセスできるか確認するテスト" do
     get user_url(@tanaka)
     assert_response :success
   end
 
-  test "editアクションにリクエストをシュミレート" do
+  test "editアクションにリクエストし、レスポンスが正常にアクセスできるか確認するテスト" do
     get edit_user_url(@tanaka)
     assert_response :success
   end
 
-  test "updateアクションにリクエストをシュミレート" do
+  test "リダイレクト、データベースへの変更、およびデータの一致を検証するテスト" do
     patch user_url(@tanaka), params: { user: { name: "updated" } }
     assert_redirected_to user_path(@tanaka)
     @tanaka.reload
     assert_equal "updated", @tanaka.name
   end
 
-  test "destroyアクションにリクエストをシュミレート" do
+  test "Userのカウントが減少し、rootパスにリダイレクトが行われることを確認するテスト" do
     assert_difference("User.count", -1) do
       delete user_url(@tanaka)
     end

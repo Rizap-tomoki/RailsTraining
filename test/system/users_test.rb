@@ -5,7 +5,7 @@ class UsersTest < ApplicationSystemTestCase
   driven_by :selenium, using: :chrome
 
   test "viewing the index" do
-    visit articles_path
+    visit users_path
     assert_selector "h1", text: "Users"
   end
 end
