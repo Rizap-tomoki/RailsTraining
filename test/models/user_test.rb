@@ -1,14 +1,14 @@
 require "test_helper"
 
 class UserTest < ActiveSupport::TestCase
-  test "the truth" do
+  def test_the_truth
     assert true
   end
-  test "should not save user without name" do
+  test "名前のないuserを保存しない" do
     user = User.new
     assert_not user.save, "Saved the user without a name"
   end
-  test "should report error" do
+  test "エラーの表示" do
     # some_undefined_variableはテストケースのどこにも定義されていない
     assert_raises(NameError) do
       some_undefined_variable

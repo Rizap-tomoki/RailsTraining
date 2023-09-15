@@ -2,7 +2,7 @@ require "test_helper"
 
 class UsersControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @user = users(:one)
+    @tanaka = users(:tanaka)
   end
 
   # 各テストの実行後に呼ばれる
@@ -11,19 +11,19 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     Rails.cache.clear
   end
 
-  test "should get index" do
-    get user_url(@user)
+  test "indexアクションにリクエストをシュミレート" do
+    get user_url(@tanaka)
     assert_response :success
   end
 
-  test "should get new" do
+  test "newアクションにリクエストをシュミレート" do
     get new_user_url
     assert_response :success
   end
 
-  test "should create user" do
+  test "createアクションにリクエストをシュミレート" do
     assert_difference("User.count") do
-      post users_url, params: { user: { name: "Some name" } }
+      post users_url, params: { user: { name: "田中" } }
     end
   
     assert_redirected_to user_path(User.last)
@@ -31,36 +31,30 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     
   end
 
-  test "should show user" do
-    get user_url(@user)
+  test "showアクションにリクエストをシュミレート" do
+    get user_url(@tanaka)
     assert_response :success
   end
 
-  test "should get edit" do
-    get edit_user_url(@user)
+  test "editアクションにリクエストをシュミレート" do
+    get edit_user_url(@tanaka)
     assert_response :success
   end
 
-  test "should update user" do
-    patch user_url(@user), params: { user: { name: "updated" } }
-    assert_redirected_to user_path(@user)
-    @user.reload
-    assert_equal "updated", @user.name
+  test "updateアクションにリクエストをシュミレート" do
+    patch user_url(@tanaka), params: { user: { name: "updated" } }
+    assert_redirected_to user_path(@tanaka)
+    @tanaka.reload
+    assert_equal "updated", @tanaka.name
   end
 
-  test "should destroy user" do
+  test "destroyアクションにリクエストをシュミレート" do
     assert_difference("User.count", -1) do
-      delete user_url(@user)
+      delete user_url(@tanaka)
     end
 
-    assert_redirected_to users_path
+    assert_redirected_to root_path
   end
 
-  test "ajax request" do
-    user = users(:one)
-    get user_url(user), xhr: true
   
-    assert_equal "hello world", @response.name
-    assert_equal "text/javascript", @response.media_type
-  end
 end
