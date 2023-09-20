@@ -10,23 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_21_042646) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_20_034256) do
   create_table "users", charset: "utf8mb4", force: :cascade do |t|
     t.string "name"
-    t.string "rubi"
-    t.string "seibetu"
-    t.string "denwa"
-    t.string "keitai"
-    t.string "mairu"
-    t.string "yuubinbango"
-    t.string "jusho1"
-    t.string "jusho2"
-    t.string "jusho3"
-    t.string "jusho4"
-    t.string "jusho5"
-    t.date "tanjobi"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "hiragana_nama"
+    t.string "sex"
+    t.string "tel"
+    t.string "mobile"
+    t.string "mail"
+    t.string "postcode"
+    t.string "address1"
+    t.string "address2"
+    t.string "address3"
+    t.string "address4"
+    t.string "address5"
+    t.date "birthday"
   end
 
 end

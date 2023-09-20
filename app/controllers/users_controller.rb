@@ -45,7 +45,7 @@ class UsersController < ApplicationController
 
   private
     def user_params
-      params.require(:user).permit(:name,:rubi,:seibetu,:denwa,:keitai,:mairu,:yuubinbango,:jusho1,:jusho2,:jusho3,:jusho4,:jusho5,:tanjobi)
+      params.require(:user).permit(:name,:hiragana_nama,:sex,:tel,:mobile,:mail,:postcode,:address1,:address2,:address3,:address4,:address5,:birthday)
     end
 end
 

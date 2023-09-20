@@ -15,41 +15,43 @@
     <%= form.text_field :name , placeholder: "例: 山田 太郎"%><br>
     
     <%= form.label :rubi, "フリガナ" %><br>
-    <%= form.text_field :rubi, placeholder: "例: ヤマダ タロウ"%><br>
+    <%= form.text_field :hiragana_nama, placeholder: "例: ヤマダ タロウ"%><br>
     
-    <%= form.label :seibetu, "性別" %><br>
-    <%= form.radio_button :seibetu, "male" %> 男
-    <%= form.radio_button :seibetu, "female" %> 女<br>
+    <%= form.label :sex, "性別" %><br>
+    <%= form.radio_button :sex, "男性" %> 男性
+    <%= form.radio_button :sex, "女性" %> 女性
+    <%= form.radio_button :sex, "その他" %> その他
+    <%= form.radio_button :sex, "回答なし" %> 回答なし<br>
     
-    <%= form.label :denwa, "電話番号" %><br>
-    <%= form.telephone_field :denwa, placeholder: "例:  03-1234-5678" %><br>
+    <%= form.label :tel, "電話番号" %><br>
+    <%= form.telephone_field :tel, placeholder: "例:  03-1234-5678" %><br>
     
-    <%= form.label :keitai, "携帯電話番号" %><br>
-    <%= form.telephone_field :keitai , placeholder: "例: 090-0000-0000"%><br>
+    <%= form.label :mobile, "携帯電話番号" %><br>
+    <%= form.telephone_field :mobile , placeholder: "例: 090-0000-0000"%><br>
     
-    <%= form.label :yuubinbango, "郵便番号" %><br>
-    <%= form.text_field :yuubinbango, placeholder: "例: 123-4567"%><br>
+    <%= form.label :postcode, "郵便番号" %><br>
+    <%= form.text_field :postcode, placeholder: "例: 123-4567"%><br>
 
-    <%= form.label :mairu, "メールアドレス" %><br>
-    <%= form.text_field :mairu, placeholder: "例: example@example.com"%><br>
+    <%= form.label :mail, "メールアドレス" %><br>
+    <%= form.text_field :mail, placeholder: "例: example@example.com"%><br>
     
-    <%= form.label :jusho1, "住所1" %><br>
-    <%= form.text_field :jusho1 %><br>
+    <%= form.label :address1, "住所1" %><br>
+    <%= form.select :address1, ["北海道", "青森県", "岩手県", "宮城県", "秋田県", "山形県", "福島県", "東京都", "神奈川県", "千葉県", "埼玉県", "茨城県", "栃木県", "群馬県", "新潟県", "富山県", "石川県", "福井県", "山梨県", "長野県", "岐阜県", "静岡県", "愛知県", "三重県", "滋賀県", "京都府", "大阪府", "兵庫県", "奈良県", "和歌山県", "鳥取県", "島根県", "岡山県", "広島県", "山口県", "徳島県", "香川県", "愛媛県", "高知県", "福岡県", "佐賀県", "長崎県", "熊本県", "大分県", "宮崎県", "鹿児島県", "沖縄県"] %><br>
     
-    <%= form.label :jusho2, "住所2" %><br>
-    <%= form.text_field :jusho2 %><br>
+    <%= form.label :address2, "住所2"%><br>
+    <%= form.text_field :address2, placeholder: "市町村" %><br>
     
-    <%= form.label :jusho3, "住所3" %><br>
-    <%= form.text_field :jusho3 %><br>
+    <%= form.label :address3, "住所3" %><br>
+    <%= form.text_field :address3 %><br>
     
-    <%= form.label :jusho4, "住所4" %><br>
-    <%= form.text_field :jusho4 %><br>
+    <%= form.label :address4, "住所4" %><br>
+    <%= form.text_field :address4 %><br>
     
-    <%= form.label :jusho5, "住所5" %><br>
-    <%= form.text_field :jusho5 %><br>
+    <%= form.label :address5, "住所5" %><br>
+    <%= form.text_field :address5 %><br>
     
     <%= form.label :tanjobi, "誕生日" %><br>
-    <%= form.date_field :tanjobi, type: 'date' %><br>
+    <%= form.date_field :birthday, type: 'date' %><br>
     
     </div>
   

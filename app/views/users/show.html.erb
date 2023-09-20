@@ -1,18 +1,18 @@
 <h1>個人情報詳細ページ</h1>
 <div class="userdetail">
   <label>名前：</label><%= @user.name %><br>
-  <label>フリガナ：</label><%= @user.rubi %><br>
-  <label>性別：</label><%= @user.seibetu %><br>
-  <label>電話：</label><%= @user.denwa %><br>
-  <label>携帯電話：</label><%= @user.keitai %><br>
-  <label>郵便番号：</label><%= @user.yuubinbango %><br>
-  <label>メールアドレス：</label><%= @user.mairu %><br>
-  <label>住所１：</label><%= @user.jusho1 %><br>
-  <label>住所２：</label><%= @user.jusho2 %><br> 
-  <label>住所３：</label><%= @user.jusho3 %><br>
-  <label>住所４：</label><%= @user.jusho4 %><br>
-  <label>住所５：</label><%= @user.jusho5 %><br>
-  <label>誕生日：</label><%= @user.tanjobi %><br>
+  <label>フリガナ：</label><%= @user.hiragana_nama %><br>
+  <label>性別：</label><%= @user.sex %><br>
+  <label>電話：</label><%= @user.tel %><br>
+  <label>携帯電話：</label><%= @user.mobile %><br>
+  <label>郵便番号：</label><%= @user.postcode %><br>
+  <label>メールアドレス：</label><%= @user.mail %><br>
+  <label>住所１：</label><%= @user.address1 %><br>
+  <label>住所２：</label><%= @user.address2 %><br> 
+  <label>住所３：</label><%= @user.address3 %><br>
+  <label>住所４：</label><%= @user.address4 %><br>
+  <label>住所５：</label><%= @user.address5 %><br>
+  <label>誕生日：</label><%= @user.birthday %><br>
 </div>
 <ul>
   <li><%= link_to "Edit", edit_user_path(@user) %></li>
