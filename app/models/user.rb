@@ -13,5 +13,11 @@ class User < ApplicationRecord
     validates :postcode, format: { with: /\A\d{3}-\d{4}\z/, message: "は無効な形式です（例: 000-0000-0000）" }
     #メールアドレスのバリデーション
     validates :mail,  format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i, message: "は無効な形式です" }
+    validate :age_must_be_18_or_higher
+    def age_must_be_18_or_higher
+        if birthday.present? && birthday > 18.years.ago.to_date
+          errors.add(:birthday, "は18歳以上である必要があります")
+        end
+    end
 end
 
