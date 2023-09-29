@@ -8,10 +8,16 @@ class UserTest < ActiveSupport::TestCase
     user = User.new
     assert_not user.save, "Saved the user without a name"
   end
+  
   test "エラーの表示" do
     # some_undefined_variableはテストケースのどこにも定義されていない
     assert_raises(NameError) do
       some_undefined_variable
     end
+  end
+
+  test "全項目の入力のない投稿を保存しない" do
+    user = User.new
+    assert_not user.save, "Saved the user without a name"
   end
 end
