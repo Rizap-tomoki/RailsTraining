@@ -3,11 +3,11 @@
 tanaka:
   name: 田中
 
-test:
+user:
   name: 佐藤智希
   hiragana_nama: サトウトモキ
   sex: 男性
-  tel: 00-0000-0000
+  tel: 00-000-0000
   mobile: 000-0000-0000
   mail: example@example.com
   postcode: 000-0000
