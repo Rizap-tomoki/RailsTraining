@@ -52,6 +52,11 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   test "editアクションにリクエストし、レスポンスが正常にアクセスできるか確認するテスト" do
     get edit_user_url(@user)
     assert_response :success
+    # ビューテスト
+    assert_select "h1","個人情報詳細ページ"
+    assert_select "div.userdetail" do
+      assert_select "label",13
+    end
   end
 
   test "リダイレクト、データベースへの変更、およびデータの一致を検証するテスト" do
@@ -96,6 +101,21 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to root_path
   end
+
+  test "indexページでユーザー名をクリックしてユーザーのshowページに移動することを確認するテスト" do
+   get users_path
+
+   assert_select "a[href=?]", user_path(@user), text: @user.name
+
+   get user_path(@user)
+
+   assert_response :success
+
+   assert_select "h1", text: "個人情報詳細ページ"
+   assert_select "div.userdetail" do
+     assert_select "label", 13
+   end
+ end
 
   
 end

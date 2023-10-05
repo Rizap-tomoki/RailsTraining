@@ -14,7 +14,7 @@
     <%= form.label :name, "名前" %><br>
     <%= form.text_field :name , placeholder: "例: 山田 太郎"%><br>
     
-    <%= form.label :rubi, "フリガナ" %><br>
+    <%= form.label :hiragana_nama, "フリガナ" %><br>
     <%= form.text_field :hiragana_nama, placeholder: "例: ヤマダ タロウ"%><br>
     
     <%= form.label :sex, "性別" %><br>
@@ -47,13 +47,13 @@
     <%= form.label :address5, "住所5" %><br>
     <%= form.text_field :address5 %><br>
     
-    <%= form.label :tanjobi, "誕生日" %><br>
+    <%= form.label :birthday, "誕生日" %><br>
     <%= form.date_field :birthday, type: 'date' %><br>
     
     </div>
   
     <div>
-      <%= form.submit %>
+      <%= form.submit "送信" %>
     </div>
     <%= link_to "User一覧に戻る", users_path %>
   <% end %>
