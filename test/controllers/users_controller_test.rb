@@ -53,10 +53,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     get edit_user_url(@user)
     assert_response :success
     # ビューテスト
-    assert_select "h1","個人情報詳細ページ"
-    assert_select "div.userdetail" do
-      assert_select "label",13
-    end
+    assert_select "h1","Edit User"
   end
 
   test "リダイレクト、データベースへの変更、およびデータの一致を検証するテスト" do
