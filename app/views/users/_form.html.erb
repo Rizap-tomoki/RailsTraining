@@ -1,54 +1,87 @@
 <% if @user.errors.any? %>
   <div id="error_explanation">
     <h2><%= pluralize(@user.errors.count, "error") %>が原因でこの記事を保存できませんでした</h2>
-
-    <ul>
-      <% @user.errors.each do |error| %>
-        <li><%= error.full_message %></li>
-      <% end %>
-    </ul>
   </div>
 <% end %>
 <%= form_with model: user do |form| %>
     <div class="user_form">
     <%= form.label :name, "名前" %><br>
     <%= form.text_field :name , placeholder: "例: 山田 太郎"%><br>
+    <% @user.errors.full_messages_for(:name).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
     
     <%= form.label :hiragana_nama, "フリガナ" %><br>
     <%= form.text_field :hiragana_nama, placeholder: "例: ヤマダ タロウ"%><br>
-    
+    <% @user.errors.full_messages_for(:hiragana_nama).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+
     <%= form.label :sex, "性別" %><br>
     <%= form.collection_radio_buttons :sex, User.sexes, :first, :last %><br>
-    
+    <% @user.errors.full_messages_for(:sex).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  
     <%= form.label :tel, "電話番号" %><br>
     <%= form.telephone_field :tel, placeholder: "例:  03-1234-5678" %><br>
-    
+    <% @user.errors.full_messages_for(:tel).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+
     <%= form.label :mobile, "携帯電話番号" %><br>
     <%= form.telephone_field :mobile , placeholder: "例: 090-0000-0000"%><br>
+     <% @user.errors.full_messages_for(:mobile).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
     
     <%= form.label :postcode, "郵便番号" %><br>
     <%= form.text_field :postcode, placeholder: "例: 123-4567"%><br>
+    <% @user.errors.full_messages_for(:postcode).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
 
     <%= form.label :mail, "メールアドレス" %><br>
     <%= form.text_field :mail, placeholder: "例: example@example.com"%><br>
-    
+    <% @user.errors.full_messages_for(:mail).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+
     <%= form.label :address1, "住所1" %><br>
-    <%= form.select :address1, options_for_select(User.address1s.map { |key, value| [key, value] }) %><br>
-    
+    <%= form.select :address1, User.address1s, include_blank: true %><br>
+    <% @user.errors.full_messages_for(:address1).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+
     <%= form.label :address2, "住所2"%><br>
     <%= form.text_field :address2, placeholder: "市町村" %><br>
-    
+    <% @user.errors.full_messages_for(:address2).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+
     <%= form.label :address3, "住所3" %><br>
     <%= form.text_field :address3 %><br>
-    
+    <% @user.errors.full_messages_for(:address3).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+
     <%= form.label :address4, "住所4" %><br>
     <%= form.text_field :address4 %><br>
+    <% @user.errors.full_messages_for(:address4).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
     
     <%= form.label :address5, "住所5" %><br>
     <%= form.text_field :address5 %><br>
+    <% @user.errors.full_messages_for(:address5).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
     
     <%= form.label :birthday, "誕生日" %><br>
     <%= form.date_field :birthday, type: 'date' %><br>
+    <% @user.errors.full_messages_for(:birthday).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
     
     </div>
   
