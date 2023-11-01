@@ -28,9 +28,9 @@ class User < ApplicationRecord
     validates :mobile, :mail, :tel, uniqueness: { message: "既存のデータがあります" }
 
     #誕生日のバリデーション
-    validates :birthday, under_age: true
+    validates :birthday, over_age_18: true
     #誕生日が未来の日付でないことの確認
-    validates :birthday, birthday_cannot_be_in_the_future: true
+    validates :birthday, past_date: true
 
 end
 
