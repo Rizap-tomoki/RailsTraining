@@ -15,7 +15,6 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      flash[:notice] = "User was successfully created."
       redirect_to @user
     else
       render :new, status: :unprocessable_entity
@@ -46,7 +45,7 @@ class UsersController < ApplicationController
 
   private
     def user_params
-      params.require(:user).permit(:name)
+      params.require(:user).permit(:name,:hiragana_nama,:sex,:tel,:mobile,:mail,:postcode,:address1,:address2,:address3,:address4,:address5,:birthday)
     end
 end
 

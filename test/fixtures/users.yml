@@ -3,5 +3,47 @@
 tanaka:
   name: 田中
 
-sato:
-  name: 佐藤
+user:
+  name: 佐藤智希
+  hiragana_nama: サトウトモキ
+  sex: 男性
+  tel: 00-000-0000
+  mobile: 000-0000-0000
+  mail: example@example.com
+  postcode: 000-0000
+  address1: 宮城県
+  address2: 栗原市
+  address3: 栗駒
+  address4: 沼倉
+  address5: 日照田3
+  birthday: 2000-01-01
+
+over_18_user:
+  name: 佐藤智希
+  hiragana_nama: サトウトモキ
+  sex: 男性
+  tel: 00-000-0000
+  mobile: 000-0000-0000
+  mail: example@example.com
+  postcode: 000-0000
+  address1: 宮城県
+  address2: 栗原市
+  address3: 栗駒
+  address4: 沼倉
+  address5: 日照田3
+  birthday: 2005-04-01
+
+under_18_user:
+  name: 佐藤智希
+  hiragana_nama: サトウトモキ
+  sex: 男性
+  tel: 00-000-0000
+  mobile: 000-0000-0000
+  mail: example@example.com
+  postcode: 000-0000
+  address1: 宮城県
+  address2: 栗原市
+  address3: 栗駒
+  address4: 沼倉
+  address5: 日照田3
+  birthday: 2005-04-03
