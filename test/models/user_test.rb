@@ -58,6 +58,6 @@ class UserTest < ActiveSupport::TestCase
   test "誕生日が未来でないことを確認する" do
     user = User.new(birthday: Date.tomorrow)
     assert_not user.valid?
-    assert_includes user.errors[:birthday], "誕生日が未来の日付になっています"
+    assert_includes user.errors[:birthday], "未来の日付になっています"
   end
 end
