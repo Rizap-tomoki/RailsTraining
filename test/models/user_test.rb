@@ -4,12 +4,13 @@ class UserTest < ActiveSupport::TestCase
 
   setup do
     # テスト環境の日付を4月2日に設定
-    Timecop.freeze(Date.new(Date.current.year, 4, 2))
+    Timecop.freeze(('2023-04-02'))
   end
   
   teardown do
     # Timecopで設定した日付をリセット
     Timecop.return
+    Rails.cache.clear
   end
 
   test "全項目の入力のない投稿を保存しない" do
@@ -32,7 +33,7 @@ class UserTest < ActiveSupport::TestCase
       address4: "沼倉",
       birthday: Date.new(2005, 4, 3)
     )
-    assert_not under_18_person.valid?  # 18歳未満の人はバリデーションエラーが発生
+    assert_not under_18_person.valid?
   end
 
   test "基準日によって18歳以上になっていることを検出" do
@@ -50,6 +51,13 @@ class UserTest < ActiveSupport::TestCase
       address4: "沼倉",
       birthday: Date.new(2005, 4, 1)
     )  
-    assert over_18_person.valid?     # 18歳以上の人はバリデーションエラーが発生しない
+    p over_18_person.errors.full_messages if over_18_person.invalid?
+    assert over_18_person.valid?
+  end
+
+  test "誕生日が未来でないことを確認する" do
+    user = User.new(birthday: Date.tomorrow)
+    assert_not user.valid?
+    assert_includes user.errors[:birthday], "誕生日が未来の日付になっています"
   end
 end

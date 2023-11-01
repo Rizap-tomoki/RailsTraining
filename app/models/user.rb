@@ -1,7 +1,14 @@
 # encoding: UTF-8
 class User < ApplicationRecord
+    # 正規表記のバリデーション
+    validates :mail, regex_mail: true
+    validates :mobile, regex_mobile: true
+    validates :tel, regex_tel: true
+    validates :postcode, regex_postcode: true
+    validates :hiragana_nama, regex_hiragana: true
+
     #性別enum使用
-    enum sex: { 男性: '男性', 女性: '女性', その他: 'その他', 回答なし: '回答なし' }
+    enum sex: { male: '男性', female: '女性', other: 'その他', no_answer: '回答なし' }
     #都道府県enum使用
     enum address1: {
         "北海道": "北海道", "青森県": "青森県", "岩手県": "岩手県", "宮城県": "宮城県", "秋田県": "秋田県",
@@ -19,22 +26,11 @@ class User < ApplicationRecord
     validates :name, :hiragana_nama, :sex, :tel, :mobile,  :mail, :postcode, :address1, :address2, :address3, :address4, :birthday, presence: { message: "空白の入力は避けてください" }
     #重複の投稿をさせないバリデーション
     validates :mobile, :mail, :tel, uniqueness: { message: "既存のデータがあります" }
-    #カタカナ表記のバリデーション
-    validates :hiragana_nama, format: { with: /\A[ァ-ヶー－]+\z/ ,message: "%{value}カタカナ表記にしてください"}
-    #固定電話のバリデーション
-    validates :tel, format: { with: /\A\d{2,5}-\d{1,4}-\d{4}\z/, message: "は無効な形式です" }
-    #携帯電話のバリデーション
-    validates :mobile, format: { with: /\A\d{3}-\d{4}-\d{4}\z/, message: "は無効な形式です（例: 000-0000-0000）" }
-    #郵便電話のバリデーション
-    validates :postcode, format: { with: /\A\d{3}-\d{4}\z/, message: "は無効な形式です（例: 000-0000-0000）" }
-    #メールアドレスのバリデーション
-    validates :mail,  format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i, message: "は無効な形式です" }
+
     #誕生日のバリデーション
-    validate :under_age_18
-    def under_age_18
-        if birthday.present? && birthday > 18.years.ago.to_date
-        errors.add(:birthday, "は18歳以上である必要があります")
-        end
-    end
+    validates :birthday, under_age: true
+    #誕生日が未来の日付でないことの確認
+    validates :birthday, birthday_cannot_be_in_the_future: true
+
 end
 
