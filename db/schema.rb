@@ -10,7 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_20_034256) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_06_015322) do
+  create_table "departments", charset: "utf8mb4", force: :cascade do |t|
+    t.string "department_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", charset: "utf8mb4", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -27,6 +33,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_20_034256) do
     t.string "address4"
     t.string "address5"
     t.date "birthday"
+    t.bigint "department_id"
+    t.index ["department_id"], name: "index_users_on_department_id"
   end
 
+  add_foreign_key "users", "departments"
 end

@@ -1,5 +1,6 @@
-<h1>Users</h1>
-<%= link_to "New User", new_user_path %>
+<h1>従業員管理サイト</h1>
+<%= link_to "従業員情報登録", new_user_path %><br/>
+<%= link_to "部署登録", departments_path %>
 <ul>
   <% @users.each do |user| %>
     <li>

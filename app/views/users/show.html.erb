@@ -1,5 +1,6 @@
-<h1>個人情報詳細ページ</h1>
+<h1>従業員情報詳細ページ</h1>
 <div class="userdetail">
+  <label>部署名 <%= @user.department.try(:department_name) %></label><br>  
   <label>名前:<%= @user.name %></label><br>
   <label>フリガナ:<%= @user.hiragana_nama %></label><br>
   <label>性別:<%= @user.sex %></label><br>

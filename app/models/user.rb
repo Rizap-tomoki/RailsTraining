@@ -1,5 +1,6 @@
 # encoding: UTF-8
 class User < ApplicationRecord
+    belongs_to :department
     # 正規表記のバリデーション
     validates :mail, regex_mail: true
     validates :mobile, regex_mobile: true
@@ -8,7 +9,7 @@ class User < ApplicationRecord
     validates :hiragana_nama, regex_hiragana: true
 
     #性別enum使用
-    enum sex: { male: '男性', female: '女性', other: 'その他', no_answer: '回答なし' }
+    enum sex: { 男性: '男性', 女性: '女性', その他: 'その他', 回答なし: '回答なし' }
     #都道府県enum使用
     enum address1: {
         "北海道": "北海道", "青森県": "青森県", "岩手県": "岩手県", "宮城県": "宮城県", "秋田県": "秋田県",
@@ -22,11 +23,12 @@ class User < ApplicationRecord
         "佐賀県": "佐賀県", "長崎県": "長崎県", "熊本県": "熊本県", "大分県": "大分県", "宮崎県": "宮崎県",
         "鹿児島県": "鹿児島県", "沖縄県": "沖縄県"
       }
-    #空白の投稿をさせないバリデーション
-    validates :name, :hiragana_nama, :sex, :tel, :mobile,  :mail, :postcode, :address1, :address2, :address3, :address4, :birthday, presence: { message: "空白の入力は避けてください" }
-    #重複の投稿をさせないバリデーション
-    validates :mobile, :mail, :tel, uniqueness: { message: "既存のデータがあります" }
 
+    # #空白の投稿をさせないバリデーション
+    validates :name, :hiragana_nama, :sex, :tel, :mobile,  :mail, :postcode, :address1, :address2, :address3, :address4, :birthday,  presence: { message: "空白の入力は避けてください" }
+    # #重複の投稿をさせないバリデーション
+    validates :mobile, :mail, :tel, uniqueness: { message: "既存のデータがあります" }
+    
     #誕生日のバリデーション
     validates :birthday, over_age_18: true
     #誕生日が未来の日付でないことの確認

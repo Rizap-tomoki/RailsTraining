@@ -4,6 +4,7 @@
   </div>
 <% end %>
 <%= form_with model: user do |form| %>
+
     <div class="user_form">
     <%= form.label :name, "名前" %><br>
     <%= form.text_field :name , placeholder: "例: 山田 太郎"%><br>
@@ -19,6 +20,12 @@
 
     <%= form.label :sex, "性別" %><br>
     <%= form.collection_radio_buttons :sex, User.sexes, :first, :last %><br>
+    <% @user.errors.full_messages_for(:sex).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+
+    <%= form.label :sex, "部署名" %><br>
+    <%= form.collection_select :department_id, Department.all, :id, :department_name %><br>
     <% @user.errors.full_messages_for(:sex).each do |message| %>
       <div><%= message %></div>
     <% end %>
