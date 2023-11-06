@@ -5,15 +5,17 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @departments = Department.all
   end
 
   def new
     @user = User.new
+    @departments = Department.all
   end
 
   def create
     @user = User.new(user_params)
-
+    @departments = Department.all
     if @user.save
       redirect_to @user
     else
@@ -23,6 +25,7 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
+    @departments = Department.all
   end
 
   def update
@@ -39,7 +42,6 @@ class UsersController < ApplicationController
   def destroy
     @user = User.find(params[:id])
     @user.destroy
-
     redirect_to root_path, status: :see_other
   end
 

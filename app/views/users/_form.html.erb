@@ -25,7 +25,7 @@
     <% end %>
 
     <%= form.label :sex, "部署名" %><br>
-    <%= form.collection_select :department_id, Department.all, :id, :department_name %><br>
+    <%= form.collection_select :department_id, @departments, :id, :name %><br>
     <% @user.errors.full_messages_for(:sex).each do |message| %>
       <div><%= message %></div>
     <% end %>

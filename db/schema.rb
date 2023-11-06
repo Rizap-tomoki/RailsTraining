@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema[7.0].define(version: 2023_11_06_015322) do
   create_table "departments", charset: "utf8mb4", force: :cascade do |t|
-    t.string "department_name"
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
