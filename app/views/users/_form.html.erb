@@ -19,14 +19,14 @@
     <% end %>
 
     <%= form.label :sex, "性別" %><br>
-    <%= form.collection_radio_buttons :sex, User.sexes, :first, :last %><br>
+    <%= form.select :sex, User.sexes, include_blank: true %><br>
     <% @user.errors.full_messages_for(:sex).each do |message| %>
       <div><%= message %></div>
     <% end %>
 
     <%= form.label :sex, "部署名" %><br>
-    <%= form.collection_select :department_id, @departments, :id, :name %><br>
-    <% @user.errors.full_messages_for(:sex).each do |message| %>
+    <%= form.collection_select :department_id, @departments, :id, :name, include_blank: true %><br>
+    <% @user.errors.full_messages_for(:department_id).each do |message| %>
       <div><%= message %></div>
     <% end %>
   

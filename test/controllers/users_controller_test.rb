@@ -3,6 +3,7 @@ require "test_helper"
 class UsersControllerTest < ActionDispatch::IntegrationTest
   setup do
     @user = users(:user)
+    @department = Department.create(name: "部署名")
   end
 
   # 各テストの実行後に呼ばれる
@@ -27,7 +28,8 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
         address3: "新しい町",
         address4: "新しい住所",
         address5: "新しい番地",
-        birthday: "2000-01-01"
+        birthday: "2000-01-01",
+        department_id: @department.id
       }
     }
       assert_response :redirect
@@ -51,7 +53,8 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
           address3: "新しい町",
           address4: "新しい住所",
           address5: "新しい番地",
-          birthday: "2000-01-01"
+          birthday: "2000-01-01",
+          department_id: @department.id
         }
       }
       assert_redirected_to user_path(@user)
@@ -69,6 +72,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
       assert_equal "新しい住所", @user.address4
       assert_equal "新しい番地", @user.address5
       assert_equal "2000-01-01", @user.birthday.to_s
+      assert_equal "2", @user.department_id
     end
   end
 
@@ -81,13 +85,13 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   test "indexページに正しいタグが存在している確認" do
     get root_path
     assert_response :success
-    assert_select 'h1',text: 'Users'
+    assert_select 'h1',text: '従業員管理サイト'
   end
 
   test "newページに正しいタグが存在している確認" do
     get new_user_path
     assert_response :success
-    assert_select 'h1',text: 'New user'
+    assert_select 'h1',text: '従業員情報登録画面'
     assert_select "div.user_form" do
       assert_select "label",text: '名前'
       assert_select "label",text: 'フリガナ'
@@ -108,7 +112,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   test "showページに正しいタグが存在している確認" do
     get user_url(@user)
     assert_response :success
-    assert_select 'h1',text: '個人情報詳細ページ'
+    assert_select 'h1',text: '従業員情報詳細ページ'
     assert_select "div.userdetail" do
       assert_select "label",text: '名前:佐藤智希'
       assert_select "label",text: 'フリガナ:サトウトモキ'
@@ -129,7 +133,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   test "editページに正しいタグが存在している確認" do
     get edit_user_path(@user)
     assert_response :success
-    assert_select 'h1',text: 'Edit User'
+    assert_select 'h1',text: '従業員情報編集画面'
     assert_select "div.user_form" do
       assert_select "label",text: '名前'
       assert_select "label",text: 'フリガナ'

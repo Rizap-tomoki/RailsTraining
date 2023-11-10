@@ -5,35 +5,35 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @departments = Department.all
+    @departments = Department.select(:name, :id)
   end
 
   def new
     @user = User.new
-    @departments = Department.all
+    @departments = Department.select(:name, :id)
   end
 
   def create
     @user = User.new(user_params)
-    @departments = Department.all
     if @user.save
       redirect_to @user
     else
+      @departments = Department.select(:name, :id)
       render :new, status: :unprocessable_entity
     end
   end
 
   def edit
     @user = User.find(params[:id])
-    @departments = Department.all
+    @departments = Department.select(:name, :id)
   end
 
   def update
     @user = User.find(params[:id])
-
     if @user.update(user_params)
       redirect_to @user
     else
+      @departments = Department.select(:name, :id)
       render :edit, status: :unprocessable_entity
     end
   end

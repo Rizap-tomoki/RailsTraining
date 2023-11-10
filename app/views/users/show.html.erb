@@ -1,6 +1,12 @@
 <h1>従業員情報詳細ページ</h1>
 <div class="userdetail">
-  <label>部署名 <%= @user.department.try(:name) || '所属部署なし' %></label><br>  
+  <label>部署名:
+    <% if @user.department.present? %>
+      <%= @user.department.name %>
+    <% else %>
+      所属部署なし
+    <% end %>
+  </label><br>
   <label>名前:<%= @user.name %></label><br>
   <label>フリガナ:<%= @user.hiragana_nama %></label><br>
   <label>性別:<%= @user.sex %></label><br>

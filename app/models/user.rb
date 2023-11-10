@@ -25,7 +25,7 @@ class User < ApplicationRecord
       }
 
     # #空白の投稿をさせないバリデーション
-    validates :name, :hiragana_nama, :sex, :tel, :mobile,  :mail, :postcode, :address1, :address2, :address3, :address4, :birthday,  presence: { message: "空白の入力は避けてください" }
+    validates :name, :hiragana_nama, :sex, :tel, :mobile,  :mail, :postcode, :address1, :address2, :address3, :address4, :birthday, :department_id,  presence: { message: "空白の入力は避けてください" }
     # #重複の投稿をさせないバリデーション
     validates :mobile, :mail, :tel, uniqueness: { message: "既存のデータがあります" }
     
