@@ -13,5 +13,6 @@ FactoryBot.define do
       address4 { "新しい住所" }
       address5 { "新しい番地" }
       birthday { "2000-01-01" }
+      association :department, factory: :department
     end
   end

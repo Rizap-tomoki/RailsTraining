@@ -1,10 +1,12 @@
 require "rails_helper"
 
 RSpec.describe "userコントローラのシステムテスト", type: :system do
-  let(:user) { FactoryBot.create(:user) }
+  let(:user) { FactoryBot.create(:user, department: department) }
+
 
   it "ユーザー詳細画面の検出" do
     visit user_path(user)
+    expect(page).to have_content('部署名: テスト部署')
     expect(page).to have_content('名前:テストユーザー')
     expect(page).to have_content('フリガナ:テストユーザー')
     expect(page).to have_content('性別:男性')
@@ -29,7 +31,7 @@ RSpec.describe "userコントローラのシステムテスト", type: :system d
     expect(page).to have_css('input[type="radio"][checked="checked"]', count: 0)
     fill_in "名前", with: "新しい名前"
     fill_in "フリガナ", with: "シンキナマエ"
-    choose "女性"
+    select "男性", from: "性別"
     fill_in "電話番号", with: "123-4567-8901"
     fill_in "携帯電話番号", with: "987-6543-2109"
     fill_in "郵便番号", with: "123-4567"
@@ -40,6 +42,7 @@ RSpec.describe "userコントローラのシステムテスト", type: :system d
     fill_in "住所4", with: "新しい住所"
     fill_in "住所5", with: "新しい番地"
     fill_in "誕生日", with: "2000-01-01"
+    select "", from: 'user_department_id'
     click_button "送信"
   end
 
@@ -48,7 +51,7 @@ RSpec.describe "userコントローラのシステムテスト", type: :system d
     visit edit_user_path(user_id)
     fill_in "名前", with: "新しい名前"
     fill_in "フリガナ", with: "シンキナマエ"
-    choose "女性"
+    select "女性", from: "性別"
     fill_in "電話番号", with: "123-4567-8901"
     fill_in "携帯電話番号", with: "987-6543-2109"
     fill_in "郵便番号", with: "123-4567"
@@ -59,6 +62,7 @@ RSpec.describe "userコントローラのシステムテスト", type: :system d
     fill_in "住所4", with: "新しい住所"
     fill_in "住所5", with: "新しい番地"
     fill_in "誕生日", with: "2000-01-01"
+    select "", from: 'user_department_id'
     click_button "送信"
   end
 

@@ -3,7 +3,7 @@ require "test_helper"
 class UsersControllerTest < ActionDispatch::IntegrationTest
   setup do
     @user = users(:user)
-    @department = Department.create(name: "部署名")
+    @department = departments(:department)
   end
 
   # 各テストの実行後に呼ばれる
@@ -13,6 +13,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "User投稿確認テスト" do
+    @department = Department.create(name: "部署名") 
     assert_difference("User.count",+1) do
       post users_url, params: {
       user: {
@@ -72,7 +73,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
       assert_equal "新しい住所", @user.address4
       assert_equal "新しい番地", @user.address5
       assert_equal "2000-01-01", @user.birthday.to_s
-      assert_equal "2", @user.department_id
+      assert_equal 1, @user.department_id
     end
   end
 

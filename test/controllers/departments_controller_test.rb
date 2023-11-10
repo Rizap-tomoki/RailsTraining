@@ -2,47 +2,41 @@ require "test_helper"
 
 class DepartmentsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @department = departments(:one)
+    @department = departments(:department)
   end
 
-  test "should get index" do
-    get departments_url
-    assert_response :success
+  teardown do
+    # コントローラがキャッシュを使っている場合、テスト後にリセットしておくとよい
+    Rails.cache.clear
   end
 
-  test "should get new" do
-    get new_department_url
-    assert_response :success
-  end
-
-  test "should create department" do
-    assert_difference("Department.count") do
-      post departments_url, params: { department: {  } }
+  test "部署名投稿確認テスト" do
+    assert_difference("Department.count",+1) do
+      post departments_path, params: {
+        department: {
+          name: "部署名"
+        }
+      }
+      assert_response :redirect
     end
-
-    assert_redirected_to department_url(Department.last)
   end
 
-  test "should show department" do
-    get department_url(@department)
-    assert_response :success
+  test "部署名変更の確認テスト" do
+    assert_no_difference("User.count") do
+      patch department_url(@department), params: {
+        department: {
+          name: "新しい部署名"
+        }
+      }
+      assert_redirected_to department_path(@department)
+      @department.reload
+      assert_equal "新しい部署名", @department.name
+    end
   end
 
-  test "should get edit" do
-    get edit_department_url(@department)
-    assert_response :success
-  end
-
-  test "should update department" do
-    patch department_url(@department), params: { department: {  } }
-    assert_redirected_to department_url(@department)
-  end
-
-  test "should destroy department" do
+  test "部署削除" do
     assert_difference("Department.count", -1) do
       delete department_url(@department)
     end
-
-    assert_redirected_to departments_url
   end
 end

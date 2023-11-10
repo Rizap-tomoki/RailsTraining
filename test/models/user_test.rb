@@ -3,6 +3,8 @@ require "test_helper"
 class UserTest < ActiveSupport::TestCase
 
   setup do
+    @department = departments(:department)
+    @user = users(:user)
     # テスト環境の日付を4月2日に設定
     Timecop.freeze(('2023-04-02'))
   end
@@ -11,6 +13,15 @@ class UserTest < ActiveSupport::TestCase
     # Timecopで設定した日付をリセット
     Timecop.return
     Rails.cache.clear
+  end
+
+  test "Departmentモデルとのアソシエーションの確認" do
+    # テストデータの作成時に正しい関連性が設定されているか確認
+    assert_equal @department.id, @user.department_id
+    # モデルの関連性を確認
+    assert_respond_to @user, :department
+    assert_instance_of Department, @user.department
+    assert_equal @department, @user.department
   end
 
   test "全項目の入力のない投稿を保存しない" do
@@ -40,6 +51,7 @@ class UserTest < ActiveSupport::TestCase
     over_18_person = User.new(
       name: "佐藤智希",
       hiragana_nama: "サトウトモキ",
+      department_id: @department.id,
       sex: "男性",
       tel: "111-000-0000",
       mobile: "111-0000-0000",
