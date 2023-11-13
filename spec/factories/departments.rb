@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :department do
-    sequence(:name) { |n| "テスト部署#{n}" }
+    name { "新しい部署" }
   end
 end

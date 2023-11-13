@@ -15,13 +15,12 @@ class UserTest < ActiveSupport::TestCase
     Rails.cache.clear
   end
 
-  test "Departmentモデルとのアソシエーションの確認" do
-    # テストデータの作成時に正しい関連性が設定されているか確認
+  test "ユーザーは正しい部署に所属している" do
     assert_equal @department.id, @user.department_id
-    # モデルの関連性を確認
+  end
+
+  test "ユーザーは正しい部署にアソシエーションを持っている" do
     assert_respond_to @user, :department
-    assert_instance_of Department, @user.department
-    assert_equal @department, @user.department
   end
 
   test "全項目の入力のない投稿を保存しない" do

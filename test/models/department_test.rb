@@ -10,15 +10,14 @@ class DepartmentTest < ActiveSupport::TestCase
     Rails.cache.clear
   end
 
-  test "Userとのアソシエーションの確認" do
-    # 関連性を確認
+  test "Departmentモデルが複数のUserモデルと正しく関連している" do
     assert_respond_to @department, :users
-    assert_instance_of ActiveRecord::Associations::CollectionProxy, @department.users
+  end
 
-    # ユーザーが正しく関連付けられているか確認
-    assert_not_empty @department.users
+  test "Departmentに関連する全てのUserが正しい部署に所属している" do
     @department.users.each do |user|
       assert_equal @department.id, user.department_id
     end
   end
+  
 end

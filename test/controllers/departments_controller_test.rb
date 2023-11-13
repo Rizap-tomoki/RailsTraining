@@ -6,11 +6,10 @@ class DepartmentsControllerTest < ActionDispatch::IntegrationTest
   end
 
   teardown do
-    # コントローラがキャッシュを使っている場合、テスト後にリセットしておくとよい
     Rails.cache.clear
   end
 
-  test "部署名投稿確認テスト" do
+  test "部署を新規投稿し、データが一つ増加している" do
     assert_difference("Department.count",+1) do
       post departments_path, params: {
         department: {
@@ -21,8 +20,8 @@ class DepartmentsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test "部署名変更の確認テスト" do
-    assert_no_difference("User.count") do
+  test "部署を更新し、データ数が変化していない" do
+    assert_no_difference("Department.count") do
       patch department_url(@department), params: {
         department: {
           name: "新しい部署名"
@@ -34,7 +33,7 @@ class DepartmentsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test "部署削除" do
+  test "対象の部署データを削除し、データ数が1つ減少している" do
     assert_difference("Department.count", -1) do
       delete department_url(@department)
     end
