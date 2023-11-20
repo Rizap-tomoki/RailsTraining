@@ -22,4 +22,4 @@ Things you may want to cover:
 * Deployment instructions
 
 ## ER図
-<img width="681" alt="スクリーンショット 2023-11-20 9 51 02" src="https://github.com/Rizap-tomoki/RailsTraining/assets/128169244/963d8979-a833-4e64-be27-b2f677502708">
+<img width="735" alt="スクリーンショット 2023-11-20 10 41 26" src="https://github.com/Rizap-tomoki/RailsTraining/assets/128169244/74614d7d-0818-4fd5-86f4-d99a134c506f">
