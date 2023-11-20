@@ -4,6 +4,7 @@
   </div>
 <% end %>
 <%= form_with model: user do |form| %>
+
     <div class="user_form">
     <%= form.label :name, "名前" %><br>
     <%= form.text_field :name , placeholder: "例: 山田 太郎"%><br>
@@ -18,8 +19,14 @@
     <% end %>
 
     <%= form.label :sex, "性別" %><br>
-    <%= form.collection_radio_buttons :sex, User.sexes, :first, :last %><br>
+    <%= form.select :sex, options_for_select(User.sexes.map { |key, value| [value, key] }), include_blank: true %><br>
     <% @user.errors.full_messages_for(:sex).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+
+    <%= form.label :sex, "部署名" %><br>
+    <%= form.collection_select :department_id, @departments, :id, :name, include_blank: true %><br>
+    <% @user.errors.full_messages_for(:department_id).each do |message| %>
       <div><%= message %></div>
     <% end %>
   
@@ -48,7 +55,7 @@
     <% end %>
 
     <%= form.label :address1, "住所1" %><br>
-    <%= form.select :address1, User.address1s, include_blank: true %><br>
+    <%= form.select :address1, options_for_select(User.address1s.map { |key, value| [value, key] }), include_blank: true %><br>
     <% @user.errors.full_messages_for(:address1).each do |message| %>
       <div><%= message %></div>
     <% end %>

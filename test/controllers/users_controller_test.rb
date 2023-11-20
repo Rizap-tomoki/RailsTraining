@@ -3,15 +3,14 @@ require "test_helper"
 class UsersControllerTest < ActionDispatch::IntegrationTest
   setup do
     @user = users(:user)
+    @department = departments(:department)
   end
 
-  # 各テストの実行後に呼ばれる
   teardown do
-    # コントローラがキャッシュを使っている場合、テスト後にリセットしておくとよい
     Rails.cache.clear
   end
 
-  test "User投稿確認テスト" do
+  test "新しいユーザーの登録がデータベースに反映され、データ数が増加していること" do
     assert_difference("User.count",+1) do
       post users_url, params: {
       user: {
@@ -27,7 +26,8 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
         address3: "新しい町",
         address4: "新しい住所",
         address5: "新しい番地",
-        birthday: "2000-01-01"
+        birthday: "2000-01-01",
+        department_id: @department.id
       }
     }
       assert_response :redirect
@@ -35,7 +35,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   end
 
 
-  test "リダイレクト、データベースへの変更、およびデータの一致を検証するテスト" do
+  test "ユーザーを更新し、データ数が変更されていないこと" do
     assert_no_difference("User.count") do
       patch user_url(@user), params: {
         user: {
@@ -51,7 +51,8 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
           address3: "新しい町",
           address4: "新しい住所",
           address5: "新しい番地",
-          birthday: "2000-01-01"
+          birthday: "2000-01-01",
+          department_id: @department.id
         }
       }
       assert_redirected_to user_path(@user)
@@ -69,10 +70,11 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
       assert_equal "新しい住所", @user.address4
       assert_equal "新しい番地", @user.address5
       assert_equal "2000-01-01", @user.birthday.to_s
+      assert_equal 1, @user.department_id
     end
   end
 
-  test "User削除確認テスト" do
+  test "対象のデータを削除し、データ数が1つ減少していること" do
     assert_difference("User.count", -1) do
       delete user_url(@user)
     end
@@ -81,13 +83,13 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   test "indexページに正しいタグが存在している確認" do
     get root_path
     assert_response :success
-    assert_select 'h1',text: 'Users'
+    assert_select 'h1',text: '従業員管理サイト'
   end
 
   test "newページに正しいタグが存在している確認" do
     get new_user_path
     assert_response :success
-    assert_select 'h1',text: 'New user'
+    assert_select 'h1',text: '従業員情報登録画面'
     assert_select "div.user_form" do
       assert_select "label",text: '名前'
       assert_select "label",text: 'フリガナ'
@@ -108,28 +110,28 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   test "showページに正しいタグが存在している確認" do
     get user_url(@user)
     assert_response :success
-    assert_select 'h1',text: '個人情報詳細ページ'
+    assert_select 'h1',text: '従業員情報詳細ページ'
     assert_select "div.userdetail" do
-      assert_select "label",text: '名前:佐藤智希'
-      assert_select "label",text: 'フリガナ:サトウトモキ'
-      assert_select "label",text: '性別:男性'
-      assert_select "label",text: '電話:00-000-0000'
-      assert_select "label",text: '携帯電話:000-0000-0000'
-      assert_select "label",text: '郵便番号:000-0000'
-      assert_select "label",text: 'メールアドレス:example@example.com'
-      assert_select "label",text: '住所1:宮城県'
-      assert_select "label",text: '住所2:栗原市'
-      assert_select "label",text: '住所3:栗駒'
-      assert_select "label",text: '住所4:沼倉'
-      assert_select "label",text: '住所5:日照田3'
-      assert_select "label",text: '誕生日:2000-01-01' 
+      assert_select "label",text: '名前: 佐藤智希'
+      assert_select "label",text: 'フリガナ: サトウトモキ'
+      assert_select "label",text: '性別: 男性'
+      assert_select "label",text: '電話: 00-000-0000'
+      assert_select "label",text: '携帯電話: 000-0000-0000'
+      assert_select "label",text: '郵便番号: 000-0000'
+      assert_select "label",text: 'メールアドレス: example@example.com'
+      assert_select "label",text: '住所1: 宮城県'
+      assert_select "label",text: '住所2: 栗原市'
+      assert_select "label",text: '住所3: 栗駒'
+      assert_select "label",text: '住所4: 沼倉'
+      assert_select "label",text: '住所5: 日照田3'
+      assert_select "label",text: '誕生日: 2000-01-01' 
     end
   end
 
   test "editページに正しいタグが存在している確認" do
     get edit_user_path(@user)
     assert_response :success
-    assert_select 'h1',text: 'Edit User'
+    assert_select 'h1',text: '従業員情報編集画面'
     assert_select "div.user_form" do
       assert_select "label",text: '名前'
       assert_select "label",text: 'フリガナ'

@@ -1,0 +1,18 @@
+<% if @department.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@department.errors.count, "error") %>が原因でこの記事を保存できませんでした</h2>
+  </div>
+<% end %>
+<%= form_with model: department do |form| %>
+    <div class="department_form">
+    <%= form.label :name, "名前" %><br>
+    <%= form.text_field :name , placeholder: "例: プロダクト開発統括1部"%><br>
+    <% @department.errors.full_messages_for(:name).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  
+    <div>
+      <%= form.submit "送信" %>
+    </div>
+    <%= link_to "部署一覧に戻る", departments_path %>
+  <% end %>
