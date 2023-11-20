@@ -21,4 +21,4 @@ Things you may want to cover:
 
 * Deployment instructions
 
-* ...
+<img width="681" alt="スクリーンショット 2023-11-20 9 51 02" src="https://github.com/Rizap-tomoki/RailsTraining/assets/128169244/963d8979-a833-4e64-be27-b2f677502708">
