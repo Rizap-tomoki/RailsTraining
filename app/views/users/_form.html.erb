@@ -31,11 +31,9 @@
     <% end %>
 
     <%= form.label :skill, "スキル" %><br>
-    <%= form.label :skill_ids, 'Skills' %>
-    <% @skills.each do |skill| %>
-      <div class="checkbox">
-        <%= form.check_box :skill_ids, { multiple: true }, skill.id, nil %>
-        <%= form.label "user_skill_ids_#{skill.id}", skill.name %>
+    <%= form.collection_check_boxes :skill_ids, @skills, :id, :name do |skills| %>
+      <div class="skill_checkbox">
+        <%= skills.label %>
       </div>
     <% end %>
   
