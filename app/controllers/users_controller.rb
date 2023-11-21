@@ -6,11 +6,13 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @departments = Department.all
+    @skills = Skill.all
   end
 
   def new
     @user = User.new
     @departments = Department.all
+    @skills = Skill.all
   end
 
   def create
@@ -19,6 +21,7 @@ class UsersController < ApplicationController
       redirect_to @user
     else
       @departments = Department.all
+      @skills = Skill.all
       render :new, status: :unprocessable_entity
     end
   end
@@ -26,6 +29,7 @@ class UsersController < ApplicationController
   def edit
     @user = User.find(params[:id])
     @departments = Department.all
+    @skills = Skill.all
   end
 
   def update
@@ -34,6 +38,7 @@ class UsersController < ApplicationController
       redirect_to @user
     else
       @departments = Department.all
+      @skills = Skill.all
       render :edit, status: :unprocessable_entity
     end
   end
@@ -47,7 +52,7 @@ class UsersController < ApplicationController
 
   private
     def user_params
-      params.require(:user).permit(:name,:hiragana_nama,:sex,:tel,:mobile,:mail,:postcode,:address1,:address2,:address3,:address4,:address5,:birthday,:department_id)
+      params.require(:user).permit(:name,:hiragana_nama,:sex,:tel,:mobile,:mail,:postcode,:address1,:address2,:address3,:address4,:address5,:birthday,:department_id, skill_ids: [])
     end
 end
 

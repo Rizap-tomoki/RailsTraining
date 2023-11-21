@@ -1,0 +1,17 @@
+<h1>スキル名詳細ページ</h1>
+<div class="skilldetail">
+  <label>スキル名:</label><%= @skill.name %><br>
+  <% @skill.users.each do |user| %>
+    <li><%= user.name %></li>
+  <% end %> 
+</div>
+</div>
+<ul>
+  <li><%= link_to "Edit", edit_skill_path(@skill) %></li>
+  <li><%= link_to "Destroy", skill_path(@skill), data: {
+                    turbo_method: :delete,
+                    turbo_confirm: "Are you sure?"
+                  } %></li>
+</ul>
+
+<%= link_to "スキル名一覧に戻る", skills_path %>

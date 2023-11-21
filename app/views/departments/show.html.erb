@@ -1,6 +1,6 @@
 <h1>部署名詳細ページ</h1>
 <div class="departmentdetail">
-  <label>部署名:<%= @department.name %></label><br>
+  <label>部署名:</label><%= @department.name %><br>
   <% @department.users.each do |user| %>
     <li><%= user.name %></li>
   <% end %> 

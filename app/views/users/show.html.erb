@@ -7,26 +7,36 @@
     所属部署なし
   <% end %>
   </label><br>
-  <label>名前: <%= @user.name %></label><br>
-  <label>フリガナ: <%= @user.hiragana_nama %></label><br>
+  <label>名前: </label><%= @user.name %><br>
+  <label>フリガナ: </label><%= @user.hiragana_nama %><br>
   <label>性別: <%= @user.sex %></label><br>
-  <label>電話: <%= @user.tel %></label><br>
-  <label>携帯電話: <%= @user.mobile %></label><br>
-  <label>郵便番号: <%= @user.postcode %></label><br>
-  <label>メールアドレス: <%= @user.mail %></label><br>
-  <label>住所1: <%= @user.address1 %></label><br>
-  <label>住所2: <%= @user.address2 %></label><br> 
-  <label>住所3: <%= @user.address3 %></label><br>
-  <label>住所4: <%= @user.address4 %></label><br>
-  <label>住所5: <%= @user.address5 %></label><br>
-  <label>誕生日: <%= @user.birthday %></label><br>
+  <label>電話: </label><%= @user.tel %><br>
+  <label>携帯電話: </label><%= @user.mobile %><br>
+  <label>郵便番号: </label><%= @user.postcode %><br>
+  <label>メールアドレス: </label><%= @user.mail %><br>
+  <label>住所1: </label><%= @user.address1 %><br>
+  <label>住所2: </label><%= @user.address2 %><br> 
+  <label>住所3: </label><%= @user.address3 %><br>
+  <label>住所4: </label><%= @user.address4 %><br>
+  <label>住所5: </label><%= @user.address5 %><br>
+  <label>誕生日: </label><%= @user.birthday %><br>
+  <label>スキル: </label><br>
+  <% if @user.skills.any? %>
+  <ul>
+    <% @user.skills.each do |skill| %>
+      <li><%= skill.name %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>このユーザーはまだスキルを持っていません。</p>
+<% end %>
 </div>
 <ul>
-  <li><%= link_to "Edit", edit_user_path(@user) %></li>
-  <li><%= link_to "Destroy", user_path(@user), data: {
+  <%= link_to "Edit", edit_user_path(@user) %><br>
+  <%= link_to "Destroy", user_path(@user), data: {
                     turbo_method: :delete,
                     turbo_confirm: "Are you sure?"
-                  } %></li>
+                  } %>
 </ul>
 
 <%= link_to "User一覧に戻る", users_path %>
