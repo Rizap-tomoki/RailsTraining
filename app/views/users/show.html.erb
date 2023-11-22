@@ -1,12 +1,11 @@
 <h1>従業員情報詳細ページ</h1>
 <div class="userdetail">
-  <label>部署名:
+  <label>部署名: </label>
   <% if @user.department.present? %>
     <%= @user.department.name %>
   <% else %>
     所属部署なし
-  <% end %>
-  </label><br>
+  <% end %><br>
   <label>名前: </label><%= @user.name %><br>
   <label>フリガナ: </label><%= @user.hiragana_nama %><br>
   <label>性別: <%= @user.sex %></label><br>
@@ -20,23 +19,23 @@
   <label>住所4: </label><%= @user.address4 %><br>
   <label>住所5: </label><%= @user.address5 %><br>
   <label>誕生日: </label><%= @user.birthday %><br>
-  <label>スキル: </label><br>
-  <% if @user.skills.any? %>
+  <label>スキル一覧</label><br>
+  <% if @user.skills.present? %>
   <ul>
     <% @user.skills.each do |skill| %>
       <li><%= skill.name %></li>
     <% end %>
   </ul>
-<% else %>
-  <p>このユーザーはまだスキルを持っていません。</p>
-<% end %>
+  <% else %>
+    このユーザーはまだスキルを持っていません。
+  <% end %>
 </div>
 <ul>
-  <%= link_to "Edit", edit_user_path(@user) %><br>
-  <%= link_to "Destroy", user_path(@user), data: {
+  <li><%= link_to "Edit", edit_user_path(@user) %></li>
+  <li><%= link_to "Destroy", user_path(@user), data: {
                     turbo_method: :delete,
                     turbo_confirm: "Are you sure?"
-                  } %>
+                  } %></li>
 </ul>
 
 <%= link_to "User一覧に戻る", users_path %>

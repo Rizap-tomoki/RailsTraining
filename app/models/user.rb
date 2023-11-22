@@ -1,8 +1,8 @@
 # encoding: UTF-8
 class User < ApplicationRecord
     belongs_to :department
-    has_many :user_skills
-    has_many :skills, through: :user_skills
+    has_many :user_skills, dependent: :destroy
+    has_many :skills, through: :user_skills, dependent: :destroy
     # 正規表記のバリデーション
     validates :mail, regex_mail: true
     validates :mobile, regex_mobile: true
@@ -27,7 +27,7 @@ class User < ApplicationRecord
   }
 
     # #空白の投稿をさせないバリデーション
-    validates :name, :hiragana_nama, :sex, :tel, :mobile,  :mail, :postcode, :address1, :address2, :address3, :address4, :birthday, :department_id,  presence: { message: '空白の入力は避けてください' }
+    validates :name, :hiragana_nama, :sex, :tel, :mobile,  :mail, :postcode, :address1, :address2, :address3, :address4, :birthday, :department_id,  presence: { message: "空白の入力は避けてください" }
     # #重複の投稿をさせないバリデーション
     validates :mobile, :mail, :tel, uniqueness: { message: "既存のデータがあります" }
     
