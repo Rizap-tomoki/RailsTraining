@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :skill do
-    name { "MyString" }
+    name { "新しいスキル" }
   end
 end

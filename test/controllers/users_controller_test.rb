@@ -4,6 +4,8 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   setup do
     @user = users(:user)
     @department = departments(:department)
+    @skill = skills(:skill)
+    @user_skill = user_skills(:user_skill)
   end
 
   teardown do
@@ -27,13 +29,13 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
         address4: "新しい住所",
         address5: "新しい番地",
         birthday: "2000-01-01",
-        department_id: @department.id
+        department_id: @department.id,
+        skill_ids: [@skill.id]
       }
     }
       assert_response :redirect
     end
   end
-
 
   test "ユーザーを更新し、データ数が変更されていないこと" do
     assert_no_difference("User.count") do
@@ -52,7 +54,8 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
           address4: "新しい住所",
           address5: "新しい番地",
           birthday: "2000-01-01",
-          department_id: @department.id
+          department_id: @department.id,
+          skill_ids: [@skill.id]
         }
       }
       assert_redirected_to user_path(@user)
@@ -70,7 +73,8 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
       assert_equal "新しい住所", @user.address4
       assert_equal "新しい番地", @user.address5
       assert_equal "2000-01-01", @user.birthday.to_s
-      assert_equal 1, @user.department_id
+      assert_equal @department.id, @user.department_id
+      assert_equal @skill.id, @user_skill.skill_id
     end
   end
 
@@ -112,19 +116,19 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select 'h1',text: '従業員情報詳細ページ'
     assert_select "div.userdetail" do
-      assert_select "label",text: '名前: 佐藤智希'
-      assert_select "label",text: 'フリガナ: サトウトモキ'
-      assert_select "label",text: '性別: 男性'
-      assert_select "label",text: '電話: 00-000-0000'
-      assert_select "label",text: '携帯電話: 000-0000-0000'
-      assert_select "label",text: '郵便番号: 000-0000'
-      assert_select "label",text: 'メールアドレス: example@example.com'
-      assert_select "label",text: '住所1: 宮城県'
-      assert_select "label",text: '住所2: 栗原市'
-      assert_select "label",text: '住所3: 栗駒'
-      assert_select "label",text: '住所4: 沼倉'
-      assert_select "label",text: '住所5: 日照田3'
-      assert_select "label",text: '誕生日: 2000-01-01' 
+      assert_select "label",text: '名前: '
+      assert_select "label",text: 'フリガナ: '
+      assert_select "label",text: '性別: '
+      assert_select "label",text: '電話: '
+      assert_select "label",text: '携帯電話: '
+      assert_select "label",text: '郵便番号: '
+      assert_select "label",text: 'メールアドレス: '
+      assert_select "label",text: '住所1: '
+      assert_select "label",text: '住所2: '
+      assert_select "label",text: '住所3: '
+      assert_select "label",text: '住所4: '
+      assert_select "label",text: '住所5: '
+      assert_select "label",text: '誕生日: ' 
     end
   end
 

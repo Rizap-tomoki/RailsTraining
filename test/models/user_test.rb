@@ -5,6 +5,8 @@ class UserTest < ActiveSupport::TestCase
   setup do
     @department = departments(:department)
     @user = users(:user)
+    @skill = skills(:skill)
+    @user_skill = user_skills(:user_skill)
     # テスト環境の日付を4月2日に設定
     Timecop.freeze(('2023-04-02'))
   end
@@ -15,13 +17,27 @@ class UserTest < ActiveSupport::TestCase
     Rails.cache.clear
   end
 
-  test "ユーザーは正しい部署に所属している" do
-    assert_equal @department.id, @user.department_id
+  #departmentsテーブルとのアソシエーション
+  test "userの外部キーと部署idが紐づいている" do
+    assert_equal  @user.department_id, @department.id
   end
-
-  test "ユーザーは正しい部署にアソシエーションを持っている" do
+  test "usersテーブルが1つのdepartmentsテーブルと関連している" do
     assert_respond_to @user, :department
   end
+
+  #user_skillsテーブル（中間テーブル）とのアソシエーション
+  test "user.idが中間テーブルの外部キーと紐づいている" do
+    assert_equal  @user.id, @user_skill.user_id
+  end
+  test "usersテーブルが複数のuser_skillsテーブルと関連している" do
+    assert_respond_to  @user, :user_skills
+  end
+
+  #skillsテーブルとのアソシエーション
+  test "usersテーブルが複数のskillsテーブルと関連している" do
+    assert_respond_to @user, :skills
+  end
+
 
   test "全項目の入力のない投稿を保存しない" do
     user = User.new
@@ -32,6 +48,7 @@ class UserTest < ActiveSupport::TestCase
     under_18_person = User.new(
       name: "佐藤智希",
       hiragana_nama: "サトウトモキ",
+      department_id: @department.id,
       sex: "男性",
       tel: "00-000-0000",
       mobile: "000-0000-0000",
@@ -62,7 +79,7 @@ class UserTest < ActiveSupport::TestCase
       address4: "沼倉",
       birthday: Date.new(2005, 4, 1)
     )  
-    p over_18_person.errors.full_messages if over_18_person.invalid?
+    over_18_person.errors.full_messages if over_18_person.invalid?
     assert over_18_person.valid?
   end
 
