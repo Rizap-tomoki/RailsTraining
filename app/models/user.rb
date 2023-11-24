@@ -2,7 +2,7 @@
 class User < ApplicationRecord
     belongs_to :department
     has_many :user_skills, dependent: :destroy
-    has_many :skills, through: :user_skills, dependent: :destroy
+    has_many :skills, through: :user_skills
     # 正規表記のバリデーション
     validates :mail, regex_mail: true
     validates :mobile, regex_mobile: true
