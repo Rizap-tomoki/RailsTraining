@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "userコントローラのシステムテスト", type: :system do
+RSpec.describe "userのシステムテスト", type: :system do
   let(:department) { FactoryBot.create(:department) }
   let(:user) { FactoryBot.create(:user, department: department) }
   
@@ -95,7 +95,7 @@ RSpec.describe "userコントローラのシステムテスト", type: :system d
     expect(page).to have_content('テストスキル')
   end
 
-  it "ユーザープロフィール情報を編集し、正しいレンダリングがされている" do
+  it "ユーザープロフィール情報を編集し、編集されたデータが表示されている" do
     #編集ページに移動し、データを入力
     visit edit_user_path(user.id)
     fill_in "名前", with: "新しい名前"
@@ -133,7 +133,7 @@ RSpec.describe "userコントローラのシステムテスト", type: :system d
     expect(page).to have_content('2000-01-01')
   end
 
-  it "ユーザープロフィール情報の削除し、正しいレンダリングがされている" do
+  it "ユーザープロフィール情報の削除し、既存のデータが表示されていない" do
     visit user_path(user)
     accept_confirm do
       click_link "Destroy"
@@ -141,7 +141,7 @@ RSpec.describe "userコントローラのシステムテスト", type: :system d
     expect(page).not_to have_content('テストユーザー')
   end
   
-  it "ユーザープロフィール情報の削除をキャンセル、正しいレンダリングがされている" do
+  it "ユーザープロフィール情報の削除をキャンセル、既存のデータが表示されている" do
     visit user_path(user)
     dismiss_confirm do
       click_link "Destroy"
