@@ -5,7 +5,6 @@ Rails.application.routes.draw do
   resources :users do
     resources :departments
     resources :skills
-    resources :user_skills
   end
   root "users#index"
   # Defines the root path route ("/")
