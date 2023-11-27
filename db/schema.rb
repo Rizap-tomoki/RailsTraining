@@ -23,13 +23,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_20_015905) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "user_skills", charset: "utf8mb4", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "skill_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["skill_id"], name: "index_user_skills_on_skill_id"
-    t.index ["user_id"], name: "index_user_skills_on_user_id"
+  create_table "skills_users", id: false, charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "skill_id"
+    t.bigint "user_id"
+    t.index ["skill_id", "user_id"], name: "index_skills_users_on_skill_id_and_user_id", unique: true
+    t.index ["skill_id"], name: "index_skills_users_on_skill_id"
+    t.index ["user_id"], name: "index_skills_users_on_user_id"
   end
 
   create_table "users", charset: "utf8mb4", force: :cascade do |t|
@@ -52,7 +51,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_20_015905) do
     t.index ["department_id"], name: "index_users_on_department_id"
   end
 
-  add_foreign_key "user_skills", "skills"
-  add_foreign_key "user_skills", "users"
   add_foreign_key "users", "departments"
 end

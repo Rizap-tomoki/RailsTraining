@@ -6,7 +6,6 @@ class UserTest < ActiveSupport::TestCase
     @department = departments(:department)
     @user = users(:user)
     @skill = skills(:skill)
-    @user_skill = user_skills(:user_skill)
     # テスト環境の日付を4月2日に設定
     Timecop.freeze(('2023-04-02'))
   end
@@ -25,19 +24,10 @@ class UserTest < ActiveSupport::TestCase
     assert_respond_to @user, :department
   end
 
-  #user_skillsテーブル（中間テーブル）とのアソシエーション
-  test "user.idが中間テーブルの外部キーと紐づいている" do
-    assert_equal  @user.id, @user_skill.user_id
-  end
-  test "usersテーブルが複数のuser_skillsテーブルと関連している" do
-    assert_respond_to  @user, :user_skills
-  end
-
   #skillsテーブルとのアソシエーション
   test "usersテーブルが複数のskillsテーブルと関連している" do
     assert_respond_to @user, :skills
   end
-
 
   test "全項目の入力のない投稿を保存しない" do
     user = User.new

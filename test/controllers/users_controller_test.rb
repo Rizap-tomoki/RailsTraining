@@ -5,7 +5,6 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     @user = users(:user)
     @department = departments(:department)
     @skill = skills(:skill)
-    @user_skill = user_skills(:user_skill)
   end
 
   teardown do
@@ -74,7 +73,6 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
       assert_equal "新しい番地", @user.address5
       assert_equal "2000-01-01", @user.birthday.to_s
       assert_equal @department.id, @user.department_id
-      assert_equal @skill.id, @user_skill.skill_id
     end
   end
 

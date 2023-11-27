@@ -1,11 +1,16 @@
 require "rails_helper"
 
 RSpec.describe "userのシステムテスト", type: :system do
-  let(:department) { FactoryBot.create(:department) }
-  let(:user) { FactoryBot.create(:user, department: department) }
+  before do
+    @department = FactoryBot.create(:department, name: '新しい部署')
+    @user = FactoryBot.create(:user, department: @department)
+    @skill = FactoryBot.create(:skill, name: '新しいスキル')
+    @user.skills << @skill
+  end
+
   
   it "ユーザー詳細画面の検出" do
-    visit user_path(user)
+    visit user_path(@user)
     expect(page).to have_content('部署名: 新しい部署')
     expect(page).to have_content('名前: テストユーザー')
     expect(page).to have_content('フリガナ: テストユーザー')
@@ -41,9 +46,9 @@ RSpec.describe "userのシステムテスト", type: :system do
     fill_in "名前", with: "新しい名前"
     fill_in "フリガナ", with: "アタラシイナマエ"
     select "男性", from: "性別"
-    fill_in "電話番号", with: "123-4567-8901"
-    fill_in "携帯電話番号", with: "987-6543-2109"
-    fill_in "郵便番号", with: "123-4567"
+    fill_in "電話番号", with: "120-4567-8901"
+    fill_in "携帯電話番号", with: "980-6543-2109"
+    fill_in "郵便番号", with: "120-4567"
     fill_in "メールアドレス", with: "new_email@example.com"
     select "神奈川県", from: "住所1"
     fill_in "住所2", with: "新しい市"
@@ -67,7 +72,7 @@ RSpec.describe "userのシステムテスト", type: :system do
     click_button "送信"
 
     #スキル名をもとにユーザー投稿
-    visit new_user_path(user)
+    visit new_user_path
     all_text_fields = all('input[type="text"]')
     all_text_fields.each do |text_field|
       expect(text_field.value).to be_empty
@@ -88,7 +93,7 @@ RSpec.describe "userのシステムテスト", type: :system do
     fill_in "誕生日", with: "01-01-2001"
     select "新しい部署", from: 'user_department_id'
     skill = Skill.find_by(name: "テストスキル")
-    check "user_skill_ids_#{skill.id}"
+    check "user[skill_ids][]", option: skill.id
     click_button "送信"
 
     #投稿内容の確認
@@ -97,7 +102,7 @@ RSpec.describe "userのシステムテスト", type: :system do
 
   it "ユーザープロフィール情報を編集し、編集されたデータが表示されている" do
     #編集ページに移動し、データを入力
-    visit edit_user_path(user.id)
+    visit edit_user_path(@user.id)
     fill_in "名前", with: "新しい名前"
     fill_in "フリガナ", with: "アタラシイナマエ"
     select "女性", from: "性別"
@@ -113,7 +118,7 @@ RSpec.describe "userのシステムテスト", type: :system do
     fill_in "誕生日", with: "01-01-2000"
     select "新しい部署", from: 'user_department_id'
     skill_id = Skill.first.id 
-    check "user_skill_ids_#{skill_id}"
+    check "user[skill_ids][]", option: skill_id
     click_button "送信"
     
     #編集されたデータが正しくレンダリングされているか確認
@@ -134,7 +139,7 @@ RSpec.describe "userのシステムテスト", type: :system do
   end
 
   it "ユーザープロフィール情報の削除し、既存のデータが表示されていない" do
-    visit user_path(user)
+    visit user_path(@user)
     accept_confirm do
       click_link "Destroy"
     end
@@ -142,7 +147,7 @@ RSpec.describe "userのシステムテスト", type: :system do
   end
   
   it "ユーザープロフィール情報の削除をキャンセル、既存のデータが表示されている" do
-    visit user_path(user)
+    visit user_path(@user)
     dismiss_confirm do
       click_link "Destroy"
     end

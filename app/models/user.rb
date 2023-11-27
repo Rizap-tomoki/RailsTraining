@@ -1,8 +1,7 @@
 # encoding: UTF-8
 class User < ApplicationRecord
     belongs_to :department
-    has_many :user_skills, dependent: :destroy
-    has_many :skills, through: :user_skills
+    has_and_belongs_to_many :skills
     # 正規表記のバリデーション
     validates :mail, regex_mail: true
     validates :mobile, regex_mobile: true
