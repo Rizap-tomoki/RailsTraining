@@ -36,6 +36,9 @@
         <%= skill.check_box %>
         <%= skill.label %>
       </div>
+    <% @user.errors.full_messages_for(:skill_id).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
     <% end %>
   
     <%= form.label :tel, "電話番号" %><br>

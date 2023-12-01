@@ -78,4 +78,10 @@ class UserTest < ActiveSupport::TestCase
     assert_not user.valid?
     assert_includes user.errors[:birthday], "未来の日付になっています"
   end
+
+  test '存在しない部署IDの場合は無効であることを確認する' do
+    user = User.new(department_id: 999)
+    assert_not user.valid?
+    assert_includes user.errors[:department_id], '選択された部署が存在しません'
+  end
 end

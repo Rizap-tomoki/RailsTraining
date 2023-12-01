@@ -25,15 +25,22 @@ class User < ApplicationRecord
     '鹿児島県': 'kagoshima', '沖縄県': 'okinawa'
   }
 
-    # #空白の投稿をさせないバリデーション
-    validates :name, :hiragana_nama, :sex, :tel, :mobile,  :mail, :postcode, :address1, :address2, :address3, :address4, :birthday, :department_id,  presence: { message: "空白の入力は避けてください" }
-    # #重複の投稿をさせないバリデーション
+    # 空白の投稿をさせないバリデーション
+    validates :name, :hiragana_nama, :sex, :tel, :mobile,  :mail, :postcode, :address1, :address2, :address3, :address4, :birthday, presence: { message: "空白の入力は避けてください" }
+    # 重複の投稿をさせないバリデーション
     validates :mobile, :mail, :tel, uniqueness: { message: "既存のデータがあります" }
     
-    #誕生日のバリデーション
+    # 誕生日のバリデーション
     validates :birthday, over_age_18: true
-    #誕生日が未来の日付でないことの確認
+    # 誕生日が未来の日付でないことの確認
     validates :birthday, past_date: true
 
+    # 部署の存在を確認
+    validate :validate_department_exists
+    def validate_department_exists
+        errors.add(:department_id, '選択された部署が存在しません') unless Department.exists?(id: department_id)
+    end
+
+ 
 end
 
