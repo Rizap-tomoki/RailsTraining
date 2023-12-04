@@ -15,6 +15,8 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+    @user.department = Department.find(params[:user][:department_id])
+    @user.skills = Skill.where(id: params[:user][:skill_ids])
     if @user.save
       redirect_to @user
     else
@@ -31,16 +33,17 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user = User.find(params[:id])
-    if @user.update(user_params)
-      redirect_to @user
-    else
-      @departments = Department.all
-      @skills = Skill.all
-      render :edit, status: :unprocessable_entity
-    end
+      @user = User.find(params[:id])
+      @user.department = Department.find(params[:user][:department_id])
+      @user.skills = Skill.where(id: params[:user][:skill_ids])
+      if @user.update(user_params)
+        redirect_to @user
+      else
+        @departments = Department.all
+        @skills = Skill.all
+        render :edit, status: :unprocessable_entity
+      end
   end
-
 
   def destroy
     @user = User.find(params[:id])
@@ -50,7 +53,7 @@ class UsersController < ApplicationController
 
   private
     def user_params
-      params.require(:user).permit(:name,:hiragana_nama,:sex,:tel,:mobile,:mail,:postcode,:address1,:address2,:address3,:address4,:address5,:birthday,:department_id,skill_ids:[])
+      params.require(:user).permit(:name,:hiragana_nama,:sex,:tel,:mobile,:mail,:postcode,:address1,:address2,:address3,:address4,:address5,:birthday)
     end
 end
 

@@ -34,13 +34,6 @@ class User < ApplicationRecord
     validates :birthday, over_age_18: true
     # 誕生日が未来の日付でないことの確認
     validates :birthday, past_date: true
-
-    # 部署の存在を確認
-    validate :validate_department_exists
-    def validate_department_exists
-        errors.add(:department_id, '選択された部署が存在しません') unless Department.exists?(id: department_id)
-    end
-
  
 end
 

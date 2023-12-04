@@ -36,7 +36,7 @@
         <%= skill.check_box %>
         <%= skill.label %>
       </div>
-    <% @user.errors.full_messages_for(:skill_id).each do |message| %>
+    <% @user.errors.full_messages_for(:skill_ids).each do |message| %>
       <div><%= message %></div>
     <% end %>
     <% end %>
