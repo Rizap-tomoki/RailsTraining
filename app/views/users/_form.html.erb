@@ -19,7 +19,7 @@
     <% end %>
 
     <%= form.label :sex, "性別" %><br>
-    <%= form.select :sex, options_for_select(User.sexes.map { |key, value| [value, key] }), include_blank: true %><br>
+    <%= form.select :sex, User.sexes, include_blank: true %><br>
     <% @user.errors.full_messages_for(:sex).each do |message| %>
       <div><%= message %></div>
     <% end %>
@@ -28,6 +28,17 @@
     <%= form.collection_select :department_id, @departments, :id, :name, include_blank: true %><br>
     <% @user.errors.full_messages_for(:department_id).each do |message| %>
       <div><%= message %></div>
+    <% end %>
+
+    <%= form.label :skill, "スキル" %><br>
+    <%= form.collection_check_boxes :skill_ids, @skills, :id, :name do |skill| %>
+      <div class="skill_checkbox">
+        <%= skill.check_box %>
+        <%= skill.label %>
+      </div>
+    <% @user.errors.full_messages_for(:skill_ids).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
     <% end %>
   
     <%= form.label :tel, "電話番号" %><br>
@@ -55,7 +66,7 @@
     <% end %>
 
     <%= form.label :address1, "住所1" %><br>
-    <%= form.select :address1, options_for_select(User.address1s.map { |key, value| [value, key] }), include_blank: true %><br>
+    <%= form.select :address1, User.address1s, include_blank: true %><br>
     <% @user.errors.full_messages_for(:address1).each do |message| %>
       <div><%= message %></div>
     <% end %>

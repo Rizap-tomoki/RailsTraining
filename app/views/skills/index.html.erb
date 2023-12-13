@@ -1,0 +1,11 @@
+<h1>スキル名一覧</h1>
+<%= link_to "スキル作成", new_skill_path %><br/>
+<%= link_to "従業員一覧画面", users_path %><br/>
+
+<ul>
+  <% @skills.each do |skill| %>
+    <li>
+     <%= link_to skill.name, skill %>
+    </li>
+  <% end %>
+</ul>

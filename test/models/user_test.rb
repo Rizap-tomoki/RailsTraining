@@ -5,6 +5,7 @@ class UserTest < ActiveSupport::TestCase
   setup do
     @department = departments(:department)
     @user = users(:user)
+    @skill = skills(:skill)
     # テスト環境の日付を4月2日に設定
     Timecop.freeze(('2023-04-02'))
   end
@@ -15,12 +16,17 @@ class UserTest < ActiveSupport::TestCase
     Rails.cache.clear
   end
 
-  test "ユーザーは正しい部署に所属している" do
-    assert_equal @department.id, @user.department_id
+  #departmentsテーブルとのアソシエーション
+  test "userの外部キーと部署idが紐づいている" do
+    assert_equal  @user.department_id, @department.id
+  end
+  test "usersテーブルが1つのdepartmentsテーブルと関連している" do
+    assert_respond_to @user, :department
   end
 
-  test "ユーザーは正しい部署にアソシエーションを持っている" do
-    assert_respond_to @user, :department
+  #skillsテーブルとのアソシエーション
+  test "usersテーブルが複数のskillsテーブルと関連している" do
+    assert_respond_to @user, :skills
   end
 
   test "全項目の入力のない投稿を保存しない" do
@@ -32,6 +38,7 @@ class UserTest < ActiveSupport::TestCase
     under_18_person = User.new(
       name: "佐藤智希",
       hiragana_nama: "サトウトモキ",
+      department_id: @department.id,
       sex: "男性",
       tel: "00-000-0000",
       mobile: "000-0000-0000",
@@ -62,7 +69,7 @@ class UserTest < ActiveSupport::TestCase
       address4: "沼倉",
       birthday: Date.new(2005, 4, 1)
     )  
-    p over_18_person.errors.full_messages if over_18_person.invalid?
+    over_18_person.errors.full_messages if over_18_person.invalid?
     assert over_18_person.valid?
   end
 
@@ -70,5 +77,11 @@ class UserTest < ActiveSupport::TestCase
     user = User.new(birthday: Date.tomorrow)
     assert_not user.valid?
     assert_includes user.errors[:birthday], "未来の日付になっています"
+  end
+
+  test '存在しない部署IDの場合は無効であることを確認する' do
+    user = User.new(department_id: 999)
+    assert_not user.valid?
+    assert_includes user.errors[:department_id], '選択された部署が存在しません'
   end
 end

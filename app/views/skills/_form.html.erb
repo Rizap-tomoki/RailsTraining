@@ -1,0 +1,8 @@
+<%= form_with model: skill do |form| %>
+    <div class="skill_form">
+    <%= form.label :name, "名前" %><br>
+    <%= form.text_field :name , placeholder: "例: Rails"%><br>
+    <%= form.submit "送信" %>
+    </div>
+    <%= link_to "部署一覧に戻る", skills_path %>
+  <% end %>
