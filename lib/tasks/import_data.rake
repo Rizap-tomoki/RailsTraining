@@ -1,13 +1,11 @@
 require 'csv'
 
-namespace :import do
   desc 'CSVファイルから個人情報をインポートする'
   task users: :environment do
-    file_path = 'lib/tasks/personal_infomation.csv'  # CSVファイルのパスを指定
+    file_path = 'lib/tasks/personal_infomation.csv'
 
     CSV.foreach(file_path, headers: true) do |row|
         User.create!(
-            id: row['no'],
             name: row['namae'],
             hiragana_nama: row['rubi'],
             sex: row['seibetu'],
@@ -24,4 +22,3 @@ namespace :import do
           )
     end
   end
-end
