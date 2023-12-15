@@ -10,7 +10,7 @@ class User < ApplicationRecord
     validates :hiragana_nama, regex_hiragana: true
 
     #性別enum使用
-    enum sex: { '男性': '男', '女性': '女', 'その他': 'その他', '回答なし': '回答なし' }
+    enum sex: { '男性': 'male', '女性': 'female', 'その他': 'other', '回答なし': 'no_answer' }
     #都道府県enum使用
     enum address1: {
     '北海道': 'hokkaido', '青森県': 'aomori', '岩手県': 'iwate', '宮城県': 'miyagi', '秋田県': 'akita',
