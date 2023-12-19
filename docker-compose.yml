@@ -8,17 +8,23 @@ services:
       MYSQL_ROOT_PASSWORD: password
       TZ: "Asia/Tokyo"
       SELENIUM_DRIVER_URL: http://selenium_chrome:4444/wd/hub
+    volumes:
+      - ./db-data:/var/lib/mysql
   web:
+    tty: true
+    stdin_open: true
     build: .
     command: bundle exec rails s -p 3000 -b '0.0.0.0'
-    volumes:
-      - .:/myapp
     ports:
       - "3000:3000"
     depends_on:
       - db
       - chrome
+    volumes:
+      - .:/myapp
   chrome:
     image: seleniarm/standalone-chromium
     ports:
       - "4444:4444"
+volumes:
+  db-data:

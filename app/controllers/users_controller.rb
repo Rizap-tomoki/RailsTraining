@@ -16,7 +16,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     @user.department = Department.find(params[:user][:department_id]) if params[:user][:department_id].present?
-    @user.skills = Skill.where(id: params[:user][:skill_ids]) if params[:user][:skill_ids].present?
+    @user.skills = Skill.find(params[:user][:skill_ids]) if params[:user][:skill_ids].present?
     if @user.save
       redirect_to @user
     else
@@ -35,7 +35,8 @@ class UsersController < ApplicationController
   def update
       @user = User.find(params[:id])
       @user.department = Department.find(params[:user][:department_id]) if params[:user][:department_id].present?
-      @user.skills = Skill.where(id: params[:user][:skill_ids]) if params[:user][:skill_ids].present?
+      @user.skills = Skill.find(params[:user][:skill_ids]) if params[:user][:skill_ids].present?
+
       if @user.update(user_params)
         redirect_to @user
       else

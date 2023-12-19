@@ -1,17 +1,16 @@
 require 'csv'
 
 desc 'CSVファイルから個人情報をインポートする'
-task users: :environment do
-  file_path = 'lib/tasks/personal_infomation.csv'
+task :users, [:file_path] => :environment do |task, args|
+  file_path = args.file_path
+  convert_sex_to_enum = { '男' => 'male', '女' => 'female'}
   begin
     User.transaction do
       CSV.foreach(file_path, headers: true) do |row|
-        convert_sex_to_enum = { '男' => 'male', '女' => 'female'}
-        sex = convert_sex_to_enum[row['seibetu']]
         User.create!(
           name: row['namae'],
           hiragana_nama: row['rubi'],
-          sex: sex,
+          sex: convert_sex_to_enum[row['seibetu']],
           tel: row['denwa'],
           mobile: row['keitai'],
           mail: row['mairu'],
@@ -21,7 +20,8 @@ task users: :environment do
           address3: row['jusho3'],
           address4: row['jusho4'],
           address5: row['jusho5'],
-          birthday: row['tanjobi']
+          birthday: row['tanjobi'],
+          skip_birthday_validation: true
         )
       end
       puts "CSVのインポートが成功しました！"
