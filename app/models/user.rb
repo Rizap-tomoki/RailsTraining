@@ -32,8 +32,7 @@ class User < ApplicationRecord
     # 誕生日が未来の日付でないことの確認
     validates :birthday, past_date: true
     # 誕生日のバリデーション
-    attr_accessor :skip_birthday_validation
-    validates :birthday, over_age_18: true, if: -> { !skip_birthday_validation }
+    validates :birthday, over_age_18: true
  
 end
 

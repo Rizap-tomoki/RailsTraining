@@ -20,9 +20,8 @@ task :users, [:file_path] => :environment do |task, args|
           address3: row['jusho3'],
           address4: row['jusho4'],
           address5: row['jusho5'],
-          birthday: row['tanjobi'],
-          skip_birthday_validation: true
-        )
+          birthday: row['tanjobi']
+        ), validate: false
       end
       puts "CSVのインポートが成功しました！"
     end

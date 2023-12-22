@@ -3,7 +3,7 @@
     <h2><%= pluralize(@user.errors.count, "error") %>が原因でこの記事を保存できませんでした</h2>
   </div>
 <% end %>
-<%= form_with model: @user do |form| %>
+<%= form_with model: user do |form| %>
 
     <div class="user_form">
     <%= form.label :name, "名前" %><br>
@@ -31,7 +31,7 @@
     <% end %>
 
     <%= form.label :skill, "スキル" %><br>
-    <%= form.collection_check_boxes :skill_ids, @skills, :id, :name do |skill| %>
+    <%= form.collection_check_boxes :skill_ids, @skills, :id, :name, include_hidden: false do |skill| %>
       <div class="skill_checkbox">
         <%= skill.check_box %>
         <%= skill.label %>
