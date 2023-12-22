@@ -33,16 +33,16 @@ class UsersController < ApplicationController
   end
 
   def update
-      @user = User.find(params[:id])
-      @user.department = Department.find(params[:user][:department_id]) if params[:user][:department_id].present?
-      @user.skills = Skill.find(params[:user][:skill_ids]) if params[:user][:skill_ids].present?
-      if @user.update(user_params)
-        redirect_to @user
-      else
-        @departments = Department.all
-        @skills = Skill.all
-        render :edit, status: :unprocessable_entity
-      end
+    @user = User.find(params[:id])
+    @user.department = Department.find(params[:user][:department_id]) if params[:user][:department_id].present?
+    @user.skills = Skill.find(params[:user][:skill_ids]) if params[:user][:skill_ids].present?
+    if @user.update(user_params)
+      redirect_to @user
+    else
+      @departments = Department.all
+      @skills = Skill.all
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   def destroy
@@ -56,4 +56,3 @@ class UsersController < ApplicationController
       params.require(:user).permit(:name,:hiragana_nama,:sex,:tel,:mobile,:mail,:postcode,:address1,:address2,:address3,:address4,:address5,:birthday)
     end
 end
-

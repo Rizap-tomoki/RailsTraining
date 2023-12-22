@@ -24,14 +24,14 @@
       <div><%= message %></div>
     <% end %>
 
-    <%= form.label :sex, "部署名" %><br>
+    <%= form.label :department_id, "部署名" %><br>
     <%= form.collection_select :department_id, @departments, :id, :name, include_blank: true %><br>
     <% @user.errors.full_messages_for(:department_id).each do |message| %>
       <div><%= message %></div>
     <% end %>
 
     <%= form.label :skill, "スキル" %><br>
-    <%= form.collection_check_boxes :skill_ids, @skills, :id, :name do |skill| %>
+    <%= form.collection_check_boxes :skill_ids, @skills, :id, :name, include_hidden: false do |skill| %>
       <div class="skill_checkbox">
         <%= skill.check_box %>
         <%= skill.label %>
