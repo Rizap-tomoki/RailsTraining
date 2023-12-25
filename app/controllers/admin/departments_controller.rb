@@ -1,4 +1,4 @@
-class DepartmentsController < ApplicationController
+class Admin::DepartmentsController < ApplicationController
     def index
       @departments = Department.all
     end
@@ -15,7 +15,7 @@ class DepartmentsController < ApplicationController
       @department = Department.new(department_params)
     
       if @department.save
-        redirect_to @department
+        redirect_to admin_department_path(@department)
       else
         render :new, status: :unprocessable_entity
       end

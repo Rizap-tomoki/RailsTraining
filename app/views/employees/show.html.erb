@@ -1,0 +1,34 @@
+<h1>従業員情報詳細ページ</h1>
+<div class="employeedetail">
+  <label>部署名: </label>
+  <% if @employee.department.present? %>
+    <%= @employee.department_name %>
+  <% else %>
+    所属部署なし
+  <% end %><br>
+  <label>名前: </label><%= @employee.name %><br>
+  <label>フリガナ: </label><%= @employee.hiragana_nama %><br>
+  <label>性別: <%= @employee.sex %></label><br>
+  <label>電話: </label><%= @employee.tel %><br>
+  <label>携帯電話: </label><%= @employee.mobile %><br>
+  <label>郵便番号: </label><%= @employee.postcode %><br>
+  <label>メールアドレス: </label><%= @employee.mail %><br>
+  <label>住所1: </label><%= @employee.address1 %><br>
+  <label>住所2: </label><%= @employee.address2 %><br> 
+  <label>住所3: </label><%= @employee.address3 %><br>
+  <label>住所4: </label><%= @employee.address4 %><br>
+  <label>住所5: </label><%= @employee.address5 %><br>
+  <label>誕生日: </label><%= @employee.birthday %><br>
+  <label>スキル一覧</label><br>
+  <% if @employee.skills.present? %>
+  <ul>
+    <% @employee.skills.each do |skill| %>
+      <li><%= skill.name %></li>
+    <% end %>
+  </ul>
+  <% else %>
+    このユーザーはまだスキルを持っていません。
+  <% end %>
+</div>
+
+<%= link_to "User一覧に戻る", employees_path %>

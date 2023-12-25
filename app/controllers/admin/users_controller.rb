@@ -1,4 +1,4 @@
-class UsersController < ApplicationController
+class Admin::UsersController < ApplicationController
   def index
     @users=User.all
   end
@@ -18,7 +18,7 @@ class UsersController < ApplicationController
     @user.department = Department.find(params[:user][:department_id]) if params[:user][:department_id].present?
     @user.skills = Skill.find(params[:user][:skill_ids]) if params[:user][:skill_ids].present?
     if @user.save
-      redirect_to @user
+      redirect_to admin_user_path(@user)
     else
       @departments = Department.all
       @skills = Skill.all
@@ -37,7 +37,7 @@ class UsersController < ApplicationController
     @user.department = Department.find(params[:user][:department_id]) if params[:user][:department_id].present?
     @user.skills = Skill.find(params[:user][:skill_ids]) if params[:user][:skill_ids].present?
     if @user.update(user_params)
-      redirect_to @user
+      redirect_to admin_user_path(@user)
     else
       @departments = Department.all
       @skills = Skill.all

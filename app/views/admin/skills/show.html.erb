@@ -6,11 +6,11 @@
   <% end %> 
 </div>
 <ul>
-  <li><%= link_to "Edit", edit_skill_path(@skill) %></li>
-  <li><%= link_to "Destroy", skill_path(@skill), data: {
+  <li><%= link_to "Edit", edit_admin_skill_path(@skill) %></li>
+  <li><%= link_to "Destroy", admin_skill_path(@skill), data: {
                     turbo_method: :delete,
                     turbo_confirm: "Are you sure?"
                   } %></li>
 </ul>
 
-<%= link_to "スキル名一覧に戻る", skills_path %>
+<%= link_to "スキル名一覧に戻る", admin_skills_path %>
