@@ -6,10 +6,10 @@
   <% end %> 
 </div>
 <ul>
-  <li><%= link_to "Edit", edit_department_path(@department) %></li>
-  <li><%= link_to "Destroy", department_path(@department), data: {
+  <li><%= link_to "Edit", edit_admin_department_path(@department) %></li>
+  <li><%= link_to "Destroy", admin_department_path(@department), data: {
                     turbo_method: :delete,
                     turbo_confirm: "Are you sure?"
                   } %></li>
 </ul>
-<%= link_to "部署一覧に戻る", departments_path %>
+<%= link_to "部署一覧に戻る", admin_departments_path %>

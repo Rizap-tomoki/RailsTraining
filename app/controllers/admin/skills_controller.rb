@@ -1,4 +1,4 @@
-class SkillsController < ApplicationController
+class Admin::SkillsController < ApplicationController
     
     def index
       @skills = Skill.all
@@ -15,7 +15,7 @@ class SkillsController < ApplicationController
     def create
       @skill = Skill.new(skill_params)
       if @skill.save
-        redirect_to @skill
+        redirect_to admin_skill_path(@skill)
       else
         render :new, status: :unprocessable_entity
       end
@@ -39,7 +39,7 @@ class SkillsController < ApplicationController
     def destroy
       @skill = Skill.find(params[:id])
       @skill.destroy
-      redirect_to skills_path, status: :see_other
+      redirect_to admin_skills_path, status: :see_other
     end
       
     private

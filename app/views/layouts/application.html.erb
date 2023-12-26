@@ -11,6 +11,14 @@
   </head>
 
   <body>
+    <header>
+    <% if request.path.start_with?('/admin') %>
+      <h1>ここは管理画面です</h1>
+    <% else %>
+      <h1>みなさんこんにちは</h1>
+    <% end %>
+    </header>
+
     <%= yield %>
   </body>
 </html>
