@@ -8,9 +8,7 @@ Rails.application.routes.draw do
       resources :skills
     end
   end
-  resources :employees do
-    resources :users, only: [:index, :show]
-  end
+  resources :employees, only: [:index, :show]
   root "employees#index"
   # Defines the root path route ("/")
 end

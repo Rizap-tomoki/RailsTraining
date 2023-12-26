@@ -29,7 +29,7 @@ class Admin::DepartmentsController < ApplicationController
       @department = Department.find(params[:id])
     
       if @department.update(department_params)
-        redirect_to @department
+        redirect_to admin_department_path(@department)
       else
         render :edit, status: :unprocessable_entity
       end

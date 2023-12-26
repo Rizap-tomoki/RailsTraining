@@ -1,28 +1,28 @@
 <h1>従業員情報詳細ページ</h1>
 <div class="employeedetail">
   <label>部署名: </label>
-  <% if @employee.department.present? %>
-    <%= @employee.department_name %>
+  <% if @user.department.present? %>
+    <%= @user.department_name %>
   <% else %>
     所属部署なし
   <% end %><br>
-  <label>名前: </label><%= @employee.name %><br>
-  <label>フリガナ: </label><%= @employee.hiragana_nama %><br>
-  <label>性別: <%= @employee.sex %></label><br>
-  <label>電話: </label><%= @employee.tel %><br>
-  <label>携帯電話: </label><%= @employee.mobile %><br>
-  <label>郵便番号: </label><%= @employee.postcode %><br>
-  <label>メールアドレス: </label><%= @employee.mail %><br>
-  <label>住所1: </label><%= @employee.address1 %><br>
-  <label>住所2: </label><%= @employee.address2 %><br> 
-  <label>住所3: </label><%= @employee.address3 %><br>
-  <label>住所4: </label><%= @employee.address4 %><br>
-  <label>住所5: </label><%= @employee.address5 %><br>
-  <label>誕生日: </label><%= @employee.birthday %><br>
+  <label>名前: </label><%= @user.name %><br>
+  <label>フリガナ: </label><%= @user.hiragana_nama %><br>
+  <label>性別: <%= @user.sex %></label><br>
+  <label>電話: </label><%= @user.tel %><br>
+  <label>携帯電話: </label><%= @user.mobile %><br>
+  <label>郵便番号: </label><%= @user.postcode %><br>
+  <label>メールアドレス: </label><%= @user.mail %><br>
+  <label>住所1: </label><%= @user.address1 %><br>
+  <label>住所2: </label><%= @user.address2 %><br> 
+  <label>住所3: </label><%= @user.address3 %><br>
+  <label>住所4: </label><%= @user.address4 %><br>
+  <label>住所5: </label><%= @user.address5 %><br>
+  <label>誕生日: </label><%= @user.birthday %><br>
   <label>スキル一覧</label><br>
-  <% if @employee.skills.present? %>
+  <% if @user.skills.present? %>
   <ul>
-    <% @employee.skills.each do |skill| %>
+    <% @user.skills.each do |skill| %>
       <li><%= skill.name %></li>
     <% end %>
   </ul>
