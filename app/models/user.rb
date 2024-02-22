@@ -1,6 +1,7 @@
 # encoding: UTF-8
 class User < ApplicationRecord
     belongs_to :department, optional: true
+    delegate :name, to: :department, prefix: true
     has_and_belongs_to_many :skills
     # 正規表記のバリデーション
     validates :mail, regex_mail: true
