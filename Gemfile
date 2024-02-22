@@ -76,3 +76,5 @@ group :test do
   gem 'minitest-reporters' 
   gem 'timecop'
 end
+
+gem 'kaminari'
