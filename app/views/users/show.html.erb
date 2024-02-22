@@ -7,8 +7,8 @@
     所属部署なし
   <% end %><br>
   <label>画像: </label>
-  <% if @user.avatar.present? %>
-    <%= image_tag @user.avatar, :size =>'200x300' %><br>
+  <% if @user.image.present? %>
+    <%= image_tag @user.image, :size =>'200x300' %><br>
   <% else %>
      画像なし
   <% end %><br>
