@@ -21,7 +21,7 @@ task :users, [:file_path] => :environment do |task, args|
           address4: row['jusho4'],
           address5: row['jusho5'],
           birthday: row['tanjobi']
-        ), validate: false
+        )
       end
       puts "CSVのインポートが成功しました！"
     end

@@ -6,6 +6,11 @@
   <% else %>
     所属部署なし
   <% end %><br>
+  <% if @user.avatar.present? %>
+    <%= image_tag @user.avatar, :size =>'200x300' %><br>
+  <% else %>
+     画像なし
+  <% end %><br>
   <label>名前: </label><%= @user.name %><br>
   <label>フリガナ: </label><%= @user.hiragana_nama %><br>
   <label>性別: <%= @user.sex %></label><br>

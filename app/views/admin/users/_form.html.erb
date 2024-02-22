@@ -6,6 +6,9 @@
 <%= form_with model: user, url: [:admin, @user] do |form| %>
 
     <div class="user_form">
+    <%= form.label :avatar, "画像ファイル" %><br>
+    <%= form.file_field :avatar %><br>
+
     <%= form.label :name, "名前" %><br>
     <%= form.text_field :name , placeholder: "例: 山田 太郎"%><br>
     <% @user.errors.full_messages_for(:name).each do |message| %>

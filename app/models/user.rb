@@ -1,5 +1,6 @@
 # encoding: UTF-8
 class User < ApplicationRecord
+    has_one_attached :avatar
     belongs_to :department, optional: true
     delegate :name, to: :department, prefix: true
     has_and_belongs_to_many :skills
