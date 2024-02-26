@@ -7,7 +7,7 @@
     所属部署なし
   <% end %><br>
   <% if @user.image.present? %>
-    <%= image_tag url_for(controller: :users, action: :serve, id: @user.id), width: '200', height: '200' %><br>
+    <%= image_tag url_for(controller: :users, action: :img, id: @user.id), width: '200', height: '200' %><br>
   <% else %>
     <p>画像がありません</p>
   <% end %>

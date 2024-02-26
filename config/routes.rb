@@ -7,7 +7,7 @@ Rails.application.routes.draw do
       resources :departments
       resources :skills
         member do
-          get :serve
+          get :img
         end
     end
   end

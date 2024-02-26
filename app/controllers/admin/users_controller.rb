@@ -7,9 +7,9 @@ class Admin::UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
-  def serve
+  def img
     @user = User.find(params[:id])
-    send_data @user.image, type: 'image/jpeg', disposition: 'inline'
+    send_data @user.image, type: 'image/jpeg, image/png', disposition: 'inline'
   end
 
   def new
