@@ -7,6 +7,11 @@ class Admin::UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
+  def serve
+    @user = User.find(params[:id])
+    send_data @user.image, type: 'image/jpeg', disposition: 'inline'
+  end
+
   def new
     @user = User.new
     @departments = Department.all
@@ -15,6 +20,7 @@ class Admin::UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+    @user.image = params[:user][:image].read if params[:user][:image]
     @user.department = Department.find(params[:user][:department_id]) if params[:user][:department_id].present?
     @user.skills = Skill.find(params[:user][:skill_ids]) if params[:user][:skill_ids].present?
     if @user.save
@@ -34,6 +40,7 @@ class Admin::UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
+    @user.image = params[:user][:image].read if params[:user][:image]
     @user.department = Department.find(params[:user][:department_id]) if params[:user][:department_id].present?
     @user.skills = Skill.find(params[:user][:skill_ids]) if params[:user][:skill_ids].present?
     if @user.update(user_params)
