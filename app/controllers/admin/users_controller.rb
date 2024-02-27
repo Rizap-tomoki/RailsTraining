@@ -1,5 +1,4 @@
 class Admin::UsersController < ApplicationController
-  before_action :converting_image_to_binary, only: [:update]
   def index
     @users=User.all
   end
@@ -41,6 +40,9 @@ class Admin::UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
+    if params[:user] && params[:user][:image].present?
+      params[:user][:image] = params[:user][:image].read
+    end
     @user.department = Department.find(params[:user][:department_id]) if params[:user][:department_id].present?
     @user.skills = Skill.find(params[:user][:skill_ids]) if params[:user][:skill_ids].present?
     if @user.update(user_params)
@@ -59,13 +61,6 @@ class Admin::UsersController < ApplicationController
   end
 
   private
-    def converting_image_to_binary
-      @user = User.find(params[:id])
-      if params[:user] && params[:user][:image].present?
-        params[:user][:image] = params[:user][:image].read
-      end
-    end
-
     def user_params
       params.require(:user).permit(:name,:hiragana_nama,:sex,:tel,:mobile,:mail,:postcode,:address1,:address2,:address3,:address4,:address5,:birthday,:image)
     end
