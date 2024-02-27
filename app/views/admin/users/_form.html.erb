@@ -6,7 +6,7 @@
 <%= form_with model: user, url: [:admin, @user] do |form| %>
 
     <div class="user_form">
-    <%= form.label :name, "画像" %><br>
+    <%= form.label :image, "画像" %><br>
     <%= form.file_field :image %><br>
 
     <%= form.label :name, "名前" %><br>

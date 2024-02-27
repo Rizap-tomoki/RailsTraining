@@ -5,6 +5,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     @user = users(:user)
     @department = departments(:department)
     @skill = skills(:skill)
+    @image = fixture_file_upload('test/fixtures/files/image/img (2).jpeg')
   end
 
   teardown do
@@ -13,7 +14,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
 
   test "新しいユーザーの登録がデータベースに反映され、データ数が増加していること" do
     assert_difference("User.count",+1) do
-      post users_url, params: {
+      post admin_users_url, params: {
       user: {
         name: "新しい名前",
         hiragana_nama: "アタラシイヒラガナ",
@@ -28,6 +29,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
         address4: "新しい住所",
         address5: "新しい番地",
         birthday: "2000-01-01",
+        image: @image,
         department_id: @department.id,
         skill_ids: [@skill.id]
       }
@@ -38,7 +40,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
 
   test "ユーザーを更新し、データ数が変更されていないこと" do
     assert_no_difference("User.count") do
-      patch user_url(@user), params: {
+      patch admin_user_url(@user), params: {
         user: {
           name: "新しい名前",
           hiragana_nama: "アタラシイヒラガナ",
@@ -53,11 +55,12 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
           address4: "新しい住所",
           address5: "新しい番地",
           birthday: "2000-01-01",
+          image: @image,
           department_id: @department.id,
           skill_ids: [@skill.id]
         }
       }
-      assert_redirected_to user_path(@user)
+      assert_redirected_to admin_user_path(@user)
       @user.reload
       assert_equal "新しい名前", @user.name
       assert_equal "アタラシイヒラガナ", @user.hiragana_nama
@@ -72,13 +75,14 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
       assert_equal "新しい住所", @user.address4
       assert_equal "新しい番地", @user.address5
       assert_equal "2000-01-01", @user.birthday.to_s
+      assert_equal @image, @user.image
       assert_equal @department.id, @user.department_id
     end
   end
 
   test "対象のデータを削除し、データ数が1つ減少していること" do
     assert_difference("User.count", -1) do
-      delete user_url(@user)
+      delete admin_user_url(@user)
     end
   end
 
@@ -89,10 +93,11 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "newページに正しいタグが存在している確認" do
-    get new_user_path
+    get new_admin_user_path
     assert_response :success
     assert_select 'h1',text: '従業員情報登録画面'
     assert_select "div.user_form" do
+      assert_select "label",text: '画像'
       assert_select "label",text: '名前'
       assert_select "label",text: 'フリガナ'
       assert_select "label",text: '性別'
@@ -110,10 +115,12 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "showページに正しいタグが存在している確認" do
-    get user_url(@user)
+    get admin_user_url(@user)
     assert_response :success
     assert_select 'h1',text: '従業員情報詳細ページ'
     assert_select "div.userdetail" do
+      assert_select "label",text: '部署名:'
+      assert_select "label",text: '画像: '
       assert_select "label",text: '名前: '
       assert_select "label",text: 'フリガナ: '
       assert_select "label",text: '性別: '
@@ -131,10 +138,11 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "editページに正しいタグが存在している確認" do
-    get edit_user_path(@user)
+    get edit_admin__user_path(@user)
     assert_response :success
     assert_select 'h1',text: '従業員情報編集画面'
     assert_select "div.user_form" do
+      assert_select "label",text: '画像: '
       assert_select "label",text: '名前'
       assert_select "label",text: 'フリガナ'
       assert_select "label",text: '性別'

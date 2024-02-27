@@ -10,7 +10,7 @@ RSpec.describe "userのシステムテスト", type: :system do
 
   
   it "ユーザー詳細画面の検出" do
-    visit user_path(@user)
+    visit admin_user_path(@user)
     expect(page).to have_content('部署名: 新しい部署')
     expect(page).to have_content('名前: テストユーザー')
     expect(page).to have_content('フリガナ: テストユーザー')
@@ -26,11 +26,12 @@ RSpec.describe "userのシステムテスト", type: :system do
     expect(page).to have_content('住所4: 新しい住所')
     expect(page).to have_content('住所5: 新しい番地')
     expect(page).to have_content('誕生日: 2000-01-01')
+    expect(page).to have_selector("img[src='test_image.jpg']")
   end
 
   it "部署名を作成し、作成した部署名でユーザー投稿を行う" do
     #部署名を投稿
-    visit new_department_path
+    visit new_admin_department_path
     text_field = find('input[type="text"]')
     expect(text_field.value).to be_empty
     fill_in "名前", with: "テスト部署"
@@ -65,14 +66,14 @@ RSpec.describe "userのシステムテスト", type: :system do
 
   it "スキルを作成し、作成したスキルでユーザー投稿を行う" do
     #スキル名を投稿
-    visit new_skill_path
+    visit new_admin_skill_path
     text_field = find('input[type="text"]')
     expect(text_field.value).to be_empty
     fill_in "名前", with: "テストスキル"
     click_button "送信"
 
     #スキル名をもとにユーザー投稿
-    visit new_user_path
+    visit new_admin_user_path
     all_text_fields = all('input[type="text"]')
     all_text_fields.each do |text_field|
       expect(text_field.value).to be_empty
@@ -102,7 +103,9 @@ RSpec.describe "userのシステムテスト", type: :system do
 
   it "ユーザープロフィール情報を編集し、編集されたデータが表示されている" do
     #編集ページに移動し、データを入力
-    visit edit_user_path(@user.id)
+    visit edit_admin_user_path(@user.id)
+    image_path = Rails.root.join('spec/image/test_image.jpg')
+    attach_file('desk[image]', image_path, make_visible: true)
     fill_in "名前", with: "新しい名前"
     fill_in "フリガナ", with: "アタラシイナマエ"
     select "女性", from: "性別"
@@ -136,10 +139,12 @@ RSpec.describe "userのシステムテスト", type: :system do
     expect(page).to have_content('新しい住所')
     expect(page).to have_content('新しい番地')
     expect(page).to have_content('2000-01-01')
+    expect(page).to have_selector("img[src$='test_image.jpg']")
+
   end
 
   it "ユーザープロフィール情報の削除し、既存のデータが表示されていない" do
-    visit user_path(@user)
+    visit admin_user_path(@user)
     accept_confirm do
       click_link "Destroy"
     end
@@ -147,7 +152,7 @@ RSpec.describe "userのシステムテスト", type: :system do
   end
   
   it "ユーザープロフィール情報の削除をキャンセル、既存のデータが表示されている" do
-    visit user_path(@user)
+    visit admin_user_path(@user)
     dismiss_confirm do
       click_link "Destroy"
     end
