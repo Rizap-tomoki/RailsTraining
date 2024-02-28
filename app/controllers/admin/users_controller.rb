@@ -40,7 +40,7 @@ class Admin::UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    if params[:user] && params[:user][:image].present?
+    if params[:user].present? && params[:user][:image].present?
       params[:user][:image] = params[:user][:image].read
     end
     @user.department = Department.find(params[:user][:department_id]) if params[:user][:department_id].present?

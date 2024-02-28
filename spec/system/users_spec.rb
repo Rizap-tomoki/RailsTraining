@@ -103,8 +103,8 @@ RSpec.describe "userのシステムテスト", type: :system do
 
   it "ユーザープロフィール情報を編集し、編集されたデータが表示されている" do
     #編集ページに移動し、データを入力
-    visit edit_admin_user_path(@user.id)
-    image_path = Rails.root.join('spec/image/test_image.jpg')
+    visit edit_admin_user_path(@user)
+    image_path = Rails.root.join('spec', 'image', 'test_image.jpg')
     attach_file('desk[image]', image_path, make_visible: true)
     fill_in "名前", with: "新しい名前"
     fill_in "フリガナ", with: "アタラシイナマエ"

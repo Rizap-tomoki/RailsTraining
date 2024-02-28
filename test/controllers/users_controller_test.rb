@@ -5,7 +5,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     @user = users(:user)
     @department = departments(:department)
     @skill = skills(:skill)
-    @image = fixture_file_upload('test/fixtures/files/image/img (2).jpeg')
+    @image = Rack::Test::UploadedFile.new(Rails.root.join('spec', 'image', 'test_image.jpg'))
   end
 
   teardown do
