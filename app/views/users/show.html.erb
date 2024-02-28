@@ -6,6 +6,11 @@
   <% else %>
     所属部署なし
   <% end %><br>
+  <% if @user.image.present? %>
+    <%= image_tag  img_admin_user_path(@user), width: '200', height: '200' %><br>
+  <% else %>
+    <p>画像がありません</p>
+  <% end %>
   <label>名前: </label><%= @user.name %><br>
   <label>フリガナ: </label><%= @user.hiragana_nama %><br>
   <label>性別: <%= @user.sex %></label><br>

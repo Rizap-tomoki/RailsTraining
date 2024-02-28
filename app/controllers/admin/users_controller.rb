@@ -7,6 +7,11 @@ class Admin::UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
+  def img
+    @user = User.find(params[:id])
+    send_data @user.image, disposition: 'inline'
+  end
+
   def new
     @user = User.new
     @departments = Department.all
@@ -15,6 +20,7 @@ class Admin::UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+    @user.image = params[:user][:image].read if params[:user][:image]
     @user.department = Department.find(params[:user][:department_id]) if params[:user][:department_id].present?
     @user.skills = Skill.find(params[:user][:skill_ids]) if params[:user][:skill_ids].present?
     if @user.save
@@ -34,6 +40,9 @@ class Admin::UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
+    if params[:user].present? && params[:user][:image].present?
+      params[:user][:image] = params[:user][:image].read
+    end
     @user.department = Department.find(params[:user][:department_id]) if params[:user][:department_id].present?
     @user.skills = Skill.find(params[:user][:skill_ids]) if params[:user][:skill_ids].present?
     if @user.update(user_params)
@@ -53,6 +62,6 @@ class Admin::UsersController < ApplicationController
 
   private
     def user_params
-      params.require(:user).permit(:name,:hiragana_nama,:sex,:tel,:mobile,:mail,:postcode,:address1,:address2,:address3,:address4,:address5,:birthday)
+      params.require(:user).permit(:name,:hiragana_nama,:sex,:tel,:mobile,:mail,:postcode,:address1,:address2,:address3,:address4,:address5,:birthday,:image)
     end
 end

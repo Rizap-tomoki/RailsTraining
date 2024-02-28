@@ -6,6 +6,9 @@ Rails.application.routes.draw do
     resources :users do
       resources :departments
       resources :skills
+        member do
+          get :img
+        end
     end
   end
   resources :users, only: [:index, :show]
