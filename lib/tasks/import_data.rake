@@ -7,7 +7,7 @@ task :users, [:file_path] => :environment do |task, args|
   begin
     User.transaction do
       CSV.foreach(file_path, headers: true) do |row|
-        User.create!(
+        user = User.new(
           name: row['namae'],
           hiragana_nama: row['rubi'],
           sex: convert_sex_to_enum[row['seibetu']],
@@ -21,7 +21,8 @@ task :users, [:file_path] => :environment do |task, args|
           address4: row['jusho4'],
           address5: row['jusho5'],
           birthday: row['tanjobi']
-        ), validate: false
+        )
+        user.save(validate: false)
       end
       puts "CSVのインポートが成功しました！"
     end
