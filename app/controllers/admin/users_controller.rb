@@ -21,8 +21,6 @@ class Admin::UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     @user.image = params[:user][:image].read if params[:user][:image]
-    @user.department = Department.find(params[:user][:department_id]) if params[:user][:department_id].present?
-    @user.skills = Skill.find(params[:user][:skill_ids]) if params[:user][:skill_ids].present?
     if @user.save
       redirect_to admin_user_path(@user)
     else
@@ -43,8 +41,6 @@ class Admin::UsersController < ApplicationController
     if params[:user].present? && params[:user][:image].present?
       params[:user][:image] = params[:user][:image].read
     end
-    @user.department = Department.find(params[:user][:department_id]) if params[:user][:department_id].present?
-    @user.skills = Skill.find(params[:user][:skill_ids]) if params[:user][:skill_ids].present?
     if @user.update(user_params)
       redirect_to admin_user_path(@user)
     else
@@ -62,6 +58,6 @@ class Admin::UsersController < ApplicationController
 
   private
     def user_params
-      params.require(:user).permit(:name,:hiragana_nama,:sex,:tel,:mobile,:mail,:postcode,:address1,:address2,:address3,:address4,:address5,:birthday,:image)
+      params.require(:user).permit(:name,:hiragana_nama,:sex,:tel,:mobile,:mail,:postcode,:address1,:address2,:address3,:address4,:address5,:birthday,:image,:department,skill_ids:[])
     end
 end
