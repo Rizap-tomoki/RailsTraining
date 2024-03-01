@@ -7,7 +7,7 @@
       <%= form.label :name, "名前を検索:" %>
       <%= form.text_field :name, value: params[:name]  %><br>
       <%= form.label :address1, "都道府県を検索:" %>
-      <%= form.select :address1, User.address1s, prompt: '都道府県を選択してください', selected: params[:address1]%><br>
+      <%= form.select :address1, @users.address1s, prompt: '都道府県を選択してください', selected: params[:address1]%><br>
       <%= form.label :birthday, "誕生日で並び替え:" %>
       <%= form.select :birthday, [["新しい順", "desc"], ["古い順", "asc"]], selected: params[:birthday]%><br>
       <%= form.label :per_page, "1ページあたりの項目数:" %>
