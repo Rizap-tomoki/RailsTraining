@@ -4,14 +4,14 @@
 <div class="search">
   <h2>投稿検索</h2>
     <%= form_with(url: users_path, method: :get) do |form| %>
-      <%= form.label :user_name_search, "名前を検索:" %>
-      <%= form.text_field :user_name_search %><br>
-      <%= form.label :user_address1_search, "都道府県を検索:" %>
-      <%= form.select :user_address1_search, User.address1s.keys, prompt: '都道府県を選択してください' %><br>
-      <%= form.label :birthday_sort, "誕生日で並び替え:" %>
-      <%= form.select :birthday_sort, { "誕生日(新しい順)" => "latest", "誕生日(古い順)" => "oldest" }, prompt: '並び替えを選択してください' %><br>
+      <%= form.label :name, "名前を検索:" %>
+      <%= form.text_field :name, value: params[:name]  %><br>
+      <%= form.label :address1, "都道府県を検索:" %>
+      <%= form.select :address1, User.address1s, prompt: '都道府県を選択してください', selected: params[:address1]%><br>
+      <%= form.label :birthday, "誕生日で並び替え:" %>
+      <%= form.select :birthday, [["新しい順", "desc"], ["古い順", "asc"]], selected: params[:birthday]%><br>
       <%= form.label :per_page, "1ページあたりの項目数:" %>
-      <%= form.select :per_page, [10, 50, 100], prompt: '選択してください' %><br>
+      <%= form.select :per_page, [10, 50, 100], prompt: '選択してください', selected: params[:per_page] %><br>
       <%= form.submit '検索する' %>
   <% end %>
 </div>
