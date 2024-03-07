@@ -12,6 +12,41 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     Rails.cache.clear
   end
 
+  test "ユーザー名を検索が成功していること" do
+    get users_path, params: { name: @user.name }
+    assert_response :success
+  end
+
+  test "住所を検索が成功していること" do
+    get users_path, params: { address1: @user.address1 }
+    assert_response :success
+  end
+
+  test "誕生日を降順検索が成功していること" do
+    get users_path, params: { birthday: 'desc' }
+    assert_response :success
+  end
+
+  test "誕生日を昇順検索が成功していること" do
+    get users_path, params: { birthday: 'asc' }
+    assert_response :success
+  end
+
+  test "1ページあたり 10個表示させる" do
+    get users_path, params: { per_page: 10 }
+    assert_response :success
+  end
+
+  test "1ページあたり50個表示させる" do
+    get users_path, params: { per_page: 50 }
+    assert_response :success
+  end
+
+  test "1ページあたり100個表示させる" do
+    get users_path, params: { per_page: 100 }
+    assert_response :success
+  end
+
   test "新しいユーザーの登録がデータベースに反映され、データ数が増加していること" do
     assert_difference("User.count",+1) do
       post admin_users_url, params: {
