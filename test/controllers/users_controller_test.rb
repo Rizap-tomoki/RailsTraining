@@ -23,12 +23,12 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "誕生日を降順検索が成功していること" do
-    get users_path, params: { birthday: 'desc' }
+    get users_path, params: { birthday: :desc }
     assert_response :success
   end
 
   test "誕生日を昇順検索が成功していること" do
-    get users_path, params: { birthday: 'asc' }
+    get users_path, params: { birthday: :asc }
     assert_response :success
   end
 
