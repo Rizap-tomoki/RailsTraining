@@ -1,9 +1,10 @@
 class UsersController < ApplicationController
   def index
-    @users = User.page(params[:page]).per(params[:per_page])
-    @users = @users.where("name LIKE ?", "%#{params[:name]}%") if params[:name].present?
-    @users = @users.where(address1: params[:address1]) if params[:address1].present?
-    @users = @users.order(birthday: params[:birthday]) if params[:birthday].present?
+    @per_page = params[:per_page]
+    @name = params[:name]
+    @address1 = params[:address1]
+    @order = params[:order]
+    @users = User.page(params[:page]).per(@per_page).search_name(@name).search_address1(@address1).order_by(@order)
   end
   
   def show
