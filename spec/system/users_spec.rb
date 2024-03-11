@@ -159,4 +159,10 @@ RSpec.describe "userのシステムテスト", type: :system do
     expect(page).to have_content('テストユーザー')
   end
 
+  it "ログイン画面からログインし、ログイン状態の画面に遷移されている" do
+    visit login_path
+    fill_in "Mail", with: @user.mail
+    click_on "ログイン"
+    assert_selector "h1", text: "こんにちは#{@user.name}さん"
+  end
 end

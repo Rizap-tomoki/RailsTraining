@@ -13,9 +13,11 @@
   <body>
     <header>
     <% if request.path.start_with?('/admin') %>
-      <h1>ここは管理画面です</h1>
+      <h1>こんにちは<%= current_user.name %>さん</h1>
+      <%= link_to "管理者画面からログアウト", logout_path, method: :delete %>
     <% else %>
       <h1>みなさんこんにちは</h1>
+      <%= link_to "管理者画面にログイン", login_path %>
     <% end %>
     </header>
 
