@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-  resource :session, only: [:new, :create, :destroy]
   get    'login'   => 'sessions#new'
   post   'login'   => 'sessions#create'
   get    'logout'   => 'sessions#new'

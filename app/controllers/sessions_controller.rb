@@ -8,13 +8,13 @@ class SessionsController < ApplicationController
       session[:user_id] = user.id
       redirect_to admin_user_path(user)
     else
+      flash[:alert] = "メールアドレスが間違っています"
       render :new, status: :unprocessable_entity
     end
   end
 
   def destroy
     session.delete(:user_id)
-    @current_user = nil
     redirect_to root_url
   end
 end
