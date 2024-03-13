@@ -78,4 +78,3 @@ group :test do
 end
 
 gem 'kaminari'
-gem 'heavens_door', group: :development
