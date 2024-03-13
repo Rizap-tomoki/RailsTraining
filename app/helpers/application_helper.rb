@@ -11,4 +11,9 @@ module ApplicationHelper
         
         input_html.html_safe
     end
+
+    def current_user
+        @current_user ||= User.find_by(id: session[:user_id])
+    end
+
 end
