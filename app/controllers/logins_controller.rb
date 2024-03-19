@@ -8,13 +8,13 @@ class LoginsController < ApplicationController
         redirect_to admin_users_path, status: :see_other
       else
         flash[:alert] = "メールアドレスが間違っています"
-        render :new, status: :unprocessable_entity
+        render :new, status: :unauthorized
       end
     end
 
     def destroy
-      session.delete(:user_id)
-      @current_user = nil
-      redirect_to root_url, status: :see_other
+      session.delete(:current_user_id)
+      @_current_user = nil
+      redirect_to users_url, status: :see_other
     end
 end

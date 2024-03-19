@@ -1,9 +1,5 @@
 Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-  get    'login'   => 'logins#new'
-  post   'login'   => 'logins#create'
-  get    'logout'   => 'logins#new'
-  delete 'logout'  => 'logins#destroy'
   namespace :admin do
     resources :departments
     resources :skills
@@ -15,6 +11,7 @@ Rails.application.routes.draw do
         end
     end
   end
+  resources :logins, only: [:new, :destroy, :create]
   resources :users, only: [:index, :show]
   root "users#index"
   # Defines the root path route ("/")
