@@ -13,8 +13,7 @@ class LoginsController < ApplicationController
     end
 
     def destroy
-      session.delete(:current_user_id)
-      @_current_user = nil
+      reset_session
       redirect_to new_login_url, status: :see_other
     end
 end
