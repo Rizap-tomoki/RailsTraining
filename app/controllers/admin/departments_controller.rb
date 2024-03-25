@@ -1,4 +1,4 @@
-class Admin::DepartmentsController < ApplicationController
+class Admin::DepartmentsController <  ApplicationController
     def index
       @departments = Department.all
     end

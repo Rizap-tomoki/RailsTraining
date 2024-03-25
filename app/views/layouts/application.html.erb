@@ -9,18 +9,17 @@
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
-
   <body>
     <header>
-    <% if request.path.start_with?('/admin') %>
-      <h1>こんにちは<%= current_user.name %>さん</h1>
-      <%= link_to "管理者画面からログアウト", login_path(@_current_user), data: {
-                    turbo_method: :delete,
-                    turbo_confirm: "ログアウトしますか？"
-                    } %>
+    <% if current_user %>
+    <h1>こんにちは<%= current_user.name %>さん</h1>
+    <%= link_to "管理者画面からログアウト", admin_login_path(current_user), data: {
+                  turbo_method: :delete,
+                  turbo_confirm: "ログアウトしますか？"
+                  } %>
     <% else %>
       <h1>みなさんこんにちは</h1>
-      <%= link_to "管理者画面にログイン", new_login_path %>
+      <%= link_to "管理者画面にログイン", new_admin_login_path %>
     <% end %>
     </header>
 
