@@ -3,11 +3,12 @@ class Admin::LoginsController < ApplicationController
     end
 
     def create
-      if user = User.find_by(mail: params[:mail])
+      user = User.find_by(mail: params[:mail])
+      if user && user.authenticate(params[:password])
         session[:current_user_id] = user.id
         redirect_to admin_users_path
       else
-        flash[:alert] = "メールアドレスが間違っています"
+        flash[:alert] = "メールアドレスかパスワードが間違っています"
         render :new, status: :unauthorized
       end
     end

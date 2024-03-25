@@ -68,6 +68,12 @@
       <div><%= message %></div>
     <% end %>
 
+    <%= form.label :password, "パスワード" %><br>
+    <%= form.password_field :password %><br>
+    <% @user.errors.full_messages_for(:password).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+
     <%= form.label :address1, "住所1" %><br>
     <%= form.select :address1, User.address1s, include_blank: true %><br>
     <% @user.errors.full_messages_for(:address1).each do |message| %>

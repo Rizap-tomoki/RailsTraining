@@ -27,13 +27,17 @@ class User < ApplicationRecord
   }
 
     # 空白の投稿をさせないバリデーション
-    validates :name, :hiragana_nama, :sex, :tel, :mail, :postcode, :address1, :address2, :address3, :address4, :birthday, presence: { message: "空白の入力は避けてください" }
+    validates :name, :hiragana_nama, :sex, :tel, :mail, :password, :postcode, :address1, :address2, :address3, :address4, :birthday, presence: { message: "空白の入力は避けてください" }
     # 重複の投稿をさせないバリデーション
     validates :mail, :tel, uniqueness: { message: "既存のデータがあります" }
     # 誕生日が未来の日付でないことの確認
     validates :birthday, past_date: true
     # 誕生日のバリデーション
     validates :birthday, over_age_18: true
- 
+
+    # ログインの際にパスワードの一致確認
+    def authenticate(password)
+      self.password == password
+    end
 end
 

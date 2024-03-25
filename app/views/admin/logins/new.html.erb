@@ -5,6 +5,8 @@
 <%= form_with(url: admin_logins_path) do |form| %>
     <%= form.label :mail %>
     <%= form.email_field :mail, required: true %>
+    <%= form.label :password %>
+    <%= form.password_field :password, required: true %>
     <%= form.submit "ログイン" %>
 <% end %>
 <%= link_to "一覧に戻る", users_path %>
