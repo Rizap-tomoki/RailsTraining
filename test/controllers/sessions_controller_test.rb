@@ -1,6 +1,6 @@
 require "test_helper"
 
-class LoginsControllerTest < ActionDispatch::IntegrationTest
+class SessionsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @user = users(:user)
   end
@@ -10,8 +10,8 @@ class LoginsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "存在しているメールアドレスでログインできている" do
-    get login_url
-    post login_url, params: {
+    get admin_session_url
+    post admin_session_url, params: {
       session: {
       mail: @user.mail.downcase
       }
@@ -20,8 +20,8 @@ class LoginsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "ログイン状態からログアウトができている" do
-    get login_url
-    post login_url, params: {
+    get admin_session_url
+    post admin_session_url, params: {
       session: {
       mail: @user.mail.downcase
       }

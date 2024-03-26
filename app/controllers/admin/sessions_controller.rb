@@ -1,4 +1,4 @@
-class Admin::LoginsController < ApplicationController
+class Admin::SessionsController < ApplicationController
     def new
     end
 
@@ -14,6 +14,6 @@ class Admin::LoginsController < ApplicationController
 
     def destroy
       reset_session
-      redirect_to new_admin_login_url, status: :see_other
+      redirect_to new_admin_session_url, status: :see_other
     end
 end
