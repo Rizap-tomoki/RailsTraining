@@ -84,4 +84,13 @@ class UserTest < ActiveSupport::TestCase
     assert_not user.valid?
     assert_includes user.errors[:department_id], '選択された部署が存在しません'
   end
+
+  # authenticateメソッドのテスト
+  test "与えられたパスワードがユーザーのパスワードと一致する場合にtrueを返すことを確認" do
+    assert_equal true, @user.authenticate("password")
+  end
+
+  test "与えられたパスワードがユーザーのパスワードと一致しない場合にfalseを返すことを確認" do
+    assert_equal false, @user.authenticate("falsepassword")
+  end
 end
