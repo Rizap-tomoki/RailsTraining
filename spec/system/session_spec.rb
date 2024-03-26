@@ -9,7 +9,7 @@ RSpec.describe "sessionのシステムテスト", type: :system do
     visit new_admin_session_path
     fill_in "Mail", with: @user.mail
     click_on "ログイン"
-    expect(page).to have_selector("h1", text: "こんにちは#{@user.name}さん")
+    assert_selector "h1", text: "こんにちは#{@user.name}さん"
   end
 
   it "ログイン画面から不正メールアドレスでログインし、メッセージが表示されている" do
