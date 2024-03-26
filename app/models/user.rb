@@ -34,10 +34,5 @@ class User < ApplicationRecord
     validates :birthday, past_date: true
     # 誕生日のバリデーション
     validates :birthday, over_age_18: true
-
-    # ログインの際にパスワードの一致確認
-    def authenticate(password)
-      self.password == password
-    end
 end
 
