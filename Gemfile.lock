@@ -98,6 +98,7 @@ GEM
       railties (>= 4.2.0)
     globalid (1.2.1)
       activesupport (>= 6.1)
+    heavens_door (0.3.0)
     i18n (1.14.1)
       concurrent-ruby (~> 1.0)
     importmap-rails (1.2.1)
@@ -270,6 +271,7 @@ DEPENDENCIES
   capybara
   debug
   factory_bot_rails (~> 5.0)
+  heavens_door
   importmap-rails
   jbuilder
   kaminari
