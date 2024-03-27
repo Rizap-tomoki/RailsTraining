@@ -49,7 +49,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_25_023618) do
     t.date "birthday"
     t.bigint "department_id"
     t.binary "image"
-    t.string "password"
+    t.string "password_digest"
     t.index ["department_id"], name: "index_users_on_department_id"
   end
 

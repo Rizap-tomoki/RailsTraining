@@ -4,7 +4,7 @@ class Admin::SessionController < ApplicationController
 
     def create
       user = User.find_by(mail: params[:mail])
-      if user && authenticate(user,params[:password])
+      if user && user.authenticate(params[:password])
         session[:current_user_id] = user.id
         redirect_to admin_users_path
       else
@@ -16,11 +16,5 @@ class Admin::SessionController < ApplicationController
     def destroy
       reset_session
       redirect_to new_admin_session_url, status: :see_other
-    end
-
-    private
-
-    def authenticate(user,password)
-      user.password == password
     end
 end
