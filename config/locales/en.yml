@@ -37,12 +37,8 @@ en:
     errors:
       messages:
         confirmation: "パスワード確認がパスワードと一致しません"
-
-en:
-  activerecord:
-      errors:
-        models:
-          user:
-            attributes:
-              password:
-                blank: "パスワードを入力してください"
+      models:
+        user:
+          attributes:
+            password:
+              blank: "パスワードを入力してください"
