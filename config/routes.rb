@@ -1,8 +1,7 @@
 Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   namespace :admin do
-    resources :session, only: [:new, :destroy]
-    post 'session', to: 'session#create', as: :login
+    resource :session, only: [:new, :destroy, :create]
     resources :departments
     resources :skills
     resources :users do
