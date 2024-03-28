@@ -3,8 +3,7 @@ class Admin::SessionsController < ApplicationController
     end
 
     def create
-      user = User.find_by(mail: params[:mail])
-      if user && user.authenticate(params[:password])
+      if user = User.find_by(mail: params[:mail])&.authenticate(params[:password])
         session[:current_user_id] = user.id
         redirect_to admin_users_path
       else
