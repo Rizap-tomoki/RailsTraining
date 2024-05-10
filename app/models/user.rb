@@ -1,9 +1,23 @@
 # encoding: UTF-8
+require 'bcrypt'
+
 class User < ApplicationRecord
-    include CustomPasswordSecure
+    # has_secure_passwordを自作
+    attr_accessor :password
+    before_save :encrypt_password
+    validate :password_presence
+    validates_confirmation_of :password, allow_blank: true
+    def encrypt_password
+      self.password_digest = BCrypt::Password.create(password)
+    end
+    def password_presence
+      errors.add(:password, :blank) if password_digest.blank?
+    end
+
     belongs_to :department, optional: true
     delegate :name, to: :department, prefix: true
     has_and_belongs_to_many :skills
+    
     # 正規表記のバリデーション
     validates :mail, regex_mail: true
     validates :mobile, regex_mobile: true
