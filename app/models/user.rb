@@ -1,6 +1,6 @@
 # encoding: UTF-8
 class User < ApplicationRecord
-    has_secure_password
+    include CustomPasswordSecure
     belongs_to :department, optional: true
     delegate :name, to: :department, prefix: true
     has_and_belongs_to_many :skills
@@ -10,6 +10,11 @@ class User < ApplicationRecord
     validates :tel, regex_tel: true
     validates :postcode, regex_postcode: true
     validates :hiragana_nama, regex_hiragana: true
+
+    # 検索機能でのスコープ
+    scope :search_name, -> (name){ where("name LIKE ?", "%#{name}%") if name.present? }
+    scope :search_address1, -> (address1){ where(address1: address1) if address1.present? }
+    scope :order_by, -> (order){ order(order) if order.present? }
 
     #性別enum使用
     enum sex: { '男性': 'male', '女性': 'female', 'その他': 'other', '回答なし': 'no_answer' }
