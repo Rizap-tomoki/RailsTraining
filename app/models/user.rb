@@ -2,12 +2,8 @@
 class User < ApplicationRecord
     # has_secure_passwordを自作
     attr_accessor :password
-    before_save :encrypt_password
     validate :password_presence
     validates :password, confirmation: true
-    def encrypt_password
-      self.password_digest = BCrypt::Password.create(password)
-    end
     def password_presence
       errors.add(:password, :blank) if password_digest.blank?
     end

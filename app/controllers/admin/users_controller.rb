@@ -22,6 +22,7 @@ class Admin::UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     @user.image = params[:user][:image].read if params[:user][:image]
+    encrypt_password_digest(@user, params[:user][:password])
     if @user.save
       redirect_to admin_user_path(@user)
     else
@@ -42,6 +43,7 @@ class Admin::UsersController < ApplicationController
     if params[:user].present? && params[:user][:image].present?
       params[:user][:image] = params[:user][:image].read
     end
+    encrypt_password_digest(@user, params[:user][:password])
     if @user.update(user_params)
       redirect_to admin_user_path(@user)
     else
@@ -60,5 +62,8 @@ class Admin::UsersController < ApplicationController
   private
     def user_params
       params.require(:user).permit(:name,:hiragana_nama,:sex,:tel,:mobile,:mail,:password,:password_confirmation,:postcode,:address1,:address2,:address3,:address4,:address5,:birthday,:image,:department,skill_ids:[])
+    end
+    def encrypt_password_digest(user, password)
+      user.password_digest = BCrypt::Password.create(password) if password.present?
     end
 end
