@@ -1,5 +1,7 @@
 <h1>従業員管理サイト</h1>
 
+<%= link_to "管理者画面", admin_users_path %><br/>
+
 <div class="search">
   <h2>投稿検索</h2>
     <%= form_with(url: users_path, method: :get) do |form| %>

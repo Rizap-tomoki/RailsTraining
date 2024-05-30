@@ -47,7 +47,6 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-
   test "新しいユーザーの登録がデータベースに反映され、データ数が増加していること" do
     assert_difference("User.count",+1) do
       post admin_users_url, params: {
