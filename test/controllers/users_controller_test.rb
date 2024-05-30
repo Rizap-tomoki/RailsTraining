@@ -16,7 +16,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     get users_path, params: { name: @user.name }
     assert_response :success
   end
-
+  
   test "住所を検索が成功していること" do
     get users_path, params: { address1: @user.address1 }
     assert_response :success

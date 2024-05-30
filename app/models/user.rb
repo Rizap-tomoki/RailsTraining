@@ -1,8 +1,17 @@
 # encoding: UTF-8
 class User < ApplicationRecord
+    # has_secure_passwordを自作
+    attr_accessor :password
+    validate :password_presence
+    validates :password, confirmation: true
+    def password_presence
+      errors.add(:password, :blank) if password_digest.blank?
+    end
+
     belongs_to :department, optional: true
     delegate :name, to: :department, prefix: true
     has_and_belongs_to_many :skills
+
     # 正規表記のバリデーション
     validates :mail, regex_mail: true
     validates :mobile, regex_mobile: true
@@ -32,13 +41,14 @@ class User < ApplicationRecord
   }
 
     # 空白の投稿をさせないバリデーション
-    validates :name, :hiragana_nama, :sex, :tel, :mail, :postcode, :address1, :address2, :address3, :address4, :birthday, presence: { message: "空白の入力は避けてください" }
+    validates :name, :hiragana_nama, :sex, :tel, :mail, :postcode, :password_confirmation, :address1, :address2, :address3, :address4, :birthday, presence: { message: "空白の入力は避けてください" }
     # 重複の投稿をさせないバリデーション
     validates :mail, :tel, uniqueness: { message: "既存のデータがあります" }
     # 誕生日が未来の日付でないことの確認
     validates :birthday, past_date: true
     # 誕生日のバリデーション
     validates :birthday, over_age_18: true
- 
+    # パスワードのバリデーション
+    validates :password, presence: true, length: { minimum: 8 }, format: { with: /\A(?=.*?[a-zA-Z])(?=.*?\d)[a-zA-Z\d]+\z/, message: "は8文字以上の半角英数字の組み合わせで入力してください" }
 end
 

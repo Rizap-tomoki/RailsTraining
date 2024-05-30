@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  
   def index
     @per_page = params[:per_page]
     @name = params[:name]
@@ -10,5 +11,6 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
   end
+  
 end
   

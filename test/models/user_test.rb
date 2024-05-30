@@ -84,4 +84,41 @@ class UserTest < ActiveSupport::TestCase
     assert_not user.valid?
     assert_includes user.errors[:department_id], '選択された部署が存在しません'
   end
+
+  # パスワードのバリデーションテスト
+  test "パスワードは空白であってはならない" do
+    user = User.new(password: "", password_confirmation: "password")
+    assert_not user.valid?
+  end
+
+  test "パスワードは8文字以上である必要があります" do
+    user = User.new(password: "pass", password_confirmation: "pass")
+    assert_not user.valid?
+  end
+
+  test "パスワードには英字と数字の両方が含まれる必要があります" do
+    user = User.new(password: "password", password_confirmation: "password")
+    assert_not user.valid?
+  end
+
+  test "有効なパスワード" do
+    user = User.new(
+      name: "佐藤智希",
+      hiragana_nama: "サトウトモキ",
+      department_id: @department.id,
+      sex: "男性",
+      tel: "00-000-1111",
+      mobile: "000-0000-1111",
+      mail: "example1@example1.com",
+      password: "password123",
+      password_confirmation: "password123",
+      postcode: "000-0000",
+      address1: "宮城県",
+      address2: "栗原市",
+      address3: "栗駒",
+      address4: "沼倉",
+      birthday: Date.new(2000, 4, 3)
+    )
+   assert user.valid?
+  end
 end

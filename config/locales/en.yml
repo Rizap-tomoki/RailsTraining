@@ -31,3 +31,14 @@
 
 en:
   hello: "Hello world"
+
+en:
+  activerecord:
+    errors:
+      messages:
+        confirmation: "パスワード確認がパスワードと一致しません"
+      models:
+        user:
+          attributes:
+            password:
+              blank: "パスワードを入力してください"

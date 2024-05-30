@@ -6,6 +6,8 @@ FactoryBot.define do
     tel { "123-4567-8901" }
     mobile { "987-6543-2109" }
     mail { "test@example.com" }
+    password { "password123" }
+    password_confirmation { "password123" }
     postcode { "123-4567" }
     address1 { "宮城県" }
     address2 { "新しい市" }
