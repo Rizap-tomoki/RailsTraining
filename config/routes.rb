@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  # Google認証によって追加
+  get "auth/:provider/callback", to: "admin/sessions#google"
+  get "auth/failure", to: redirect("/admin/session/new", status: :see_other)
   namespace :admin do
     resource :session, only: [:new, :destroy, :create]
     resources :departments

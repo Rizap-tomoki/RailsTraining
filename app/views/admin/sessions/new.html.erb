@@ -9,4 +9,5 @@
     <%= form.password_field :password, required: true %>
     <%= form.submit "ログイン" %>
 <% end %>
+<%= button_to "Google認証でログイン", "/auth/google_oauth2", data: { turbo: false } %>
 <%= link_to "一覧に戻る", users_path %>
