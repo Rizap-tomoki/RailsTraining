@@ -3,8 +3,8 @@ class Admin::SessionsController < ApplicationController
     end
 
     def create
-      if email = request.env["omniauth.auth"]["info"]["email"]
-        @user = User.find_by(mail: email)
+      if auth = request.env["omniauth.auth"]
+        @user = User.find_by(mail: auth["info"]["email"])
       else
         @user = User.find_by(mail: params[:mail])
         unless @user && BCrypt::Password.new(@user.password_digest) == params[:password]
