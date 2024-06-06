@@ -3,8 +3,7 @@ class Admin::SessionsController < ApplicationController
     end
 
     def create
-      if auth = request.env["omniauth.auth"]
-        email = auth["info"]["email"]
+      if email = request.env["omniauth.auth"]["info"]["email"]
         @user = User.find_by(mail: email)
       else
         @user = User.find_by(mail: params[:mail])
