@@ -3,18 +3,23 @@ class Admin::SessionsController < ApplicationController
     end
 
     def create
-      @user = User.find_by(mail: params[:mail])
-      if @user && BCrypt::Password.new(@user.password_digest) == params[:password]
-        session[:current_user_id] = @user.id
-        redirect_to admin_users_path
+      if auth = request.env["omniauth.auth"]
+        @user = User.find_by(mail: auth["info"]["email"])
       else
-        flash[:alert] = "メールアドレスかパスワードが間違っています"
-        render :new, status: :unauthorized
+        @user = User.find_by(mail: params[:mail])
+        unless @user && BCrypt::Password.new(@user.password_digest) == params[:password]
+          flash[:alert] = "メールアドレスかパスワードが間違っています"
+          return render :new, status: :unauthorized
+        end
       end
+      session[:current_user_id] = @user.id
+      redirect_to admin_users_path
     end
+    
 
     def destroy
       reset_session
       redirect_to new_admin_session_url, status: :see_other
     end
+
 end
