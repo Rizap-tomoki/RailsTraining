@@ -1,0 +1,29 @@
+.bg-light.search {
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.form-control,
+.form-select,
+.btn-primary {
+  border-radius: 0.25rem;
+}
+
+.form-label {
+  font-weight: bold;
+}
+
+.form-select.custom-select {
+  background-color: #0076ed; /* 背景色 */
+  border: 1px solid #ced4da; /* 枠線の色 */
+  border-radius: 0.25rem; /* 角の丸み */
+  padding: 0.375rem 0.75rem; /* パディング */
+  font-size: 1rem; /* フォントサイズ */
+  color: #495057; /* テキストの色 */
+}
+
+.form-select.custom-select:focus {
+  border-color: #80bdff; /* フォーカス時の枠線の色 */
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* フォーカス時のボックスシャドウ */
+}

@@ -11,5 +11,15 @@
  * It is generally better to create a new file per style scope.
  *
  *= require_tree .
+ *= require bootstrap.min
+ *= require index
  *= require_self
  */
+
+header.bg-secondary {
+  background-color: #0b708a !important; /* 背景色 */
+  color: #ffffff; /* テキストカラー */
+  padding: 1rem; /* パディング */
+  border-radius: 0.25rem; /* 角の丸み */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* ボックスシャドウ */
+}

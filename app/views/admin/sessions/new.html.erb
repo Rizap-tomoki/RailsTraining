@@ -5,11 +5,11 @@
     <h1>ログイン画面</h1>
     <%= button_to "Google認証でログイン", "/auth/google_oauth2", data: { turbo: false }, class: "btn btn-secondary mt-3" %>
     <%= form_with(url: admin_session_path) do |form| %>
-        <%= form.label :mail, "メールアドレス", class: "form-label" %>
+        <%= form.label :mail, "メールアドレス", class: "form-label mt-3" %>
         <%= form.email_field :mail, required: true, class: "form-control", placeholder: "example@aa.com" %>
         <%= form.label :password, "パスワード", class: "form-label" %>
         <%= form.password_field :password, required: true, class: "form-control", placeholder: "Password" %>
-        <button type="submit" class="btn btn-primary">Button</button>
+        <button type="submit" class="btn btn-primary mt-3">Button</button>
     <% end %>
     <%= link_to "一覧に戻る", users_path, class: "btn btn-link mt-3" %>
 </div>
