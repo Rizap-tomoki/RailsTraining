@@ -1,0 +1,5 @@
+.list-group-title {
+  background-color: #017fee; /* 灰色の背景色 */
+  color: rgb(251, 0, 0); /* テキストの色を白に */
+  border: 1px solid #6c757d; /* 灰色の枠線 */
+}

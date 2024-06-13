@@ -1,15 +1,46 @@
-<h1>部署名詳細ページ</h1>
-<div class="department_detail">
-  <label>部署名:</label><%= @department.name %>
-  <% @department.users.each do |user| %>
-    <li><%= user.name %></li>
-  <% end %> 
-</div>
-<ul>
-  <li><%= link_to "Edit", edit_admin_department_path(@department) %></li>
-  <li><%= link_to "Destroy", admin_department_path(@department), data: {
+<div class="container mt-5">
+  <div class="row mb-4">
+    <div class="col text-center">
+      <h1 class="display-4">部署名詳細ページ</h1>
+    </div>
+  </div>
+
+  <div class="row mb-4 justify-content-center">
+    <div class="col-md-8">
+      <div class="card shadow-lg">
+        <div class="card-header bg-primary text-white text-center">
+          部署詳細
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">部署名:</h5>
+          <p class="card-text"><%= @department.name %></p>
+          <h5 class="card-title">所属ユーザー:</h5>
+          <ul class="list-group list-group-flush">
+            <% @department.users.each do |user| %>
+              <li class="list-group-item"><%= user.name %></li>
+            <% end %>
+          </ul>
+        </div>
+        <div class="card-footer text-center">
+          <ul class="list-inline mb-0">
+            <li class="list-inline-item">
+              <%= link_to "Edit", edit_admin_department_path(@department), class: "btn btn-warning btn-sm" %>
+            </li>
+            <li class="list-inline-item">
+              <%= link_to "Destroy", admin_department_path(@department), data: {
                     turbo_method: :delete,
-                    turbo_confirm: "Are you sure?"
-                  } %></li>
-</ul>
-<%= link_to "部署一覧に戻る", admin_departments_path %>
+                    turbo_confirm: "#{@department.name}を削除しますか？"
+                  }, class: "btn btn-danger btn-sm" %>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col text-center">
+      <%= link_to "部署一覧に戻る", admin_departments_path, class: "btn btn-secondary" %>
+    </div>
+  </div>
+</div>

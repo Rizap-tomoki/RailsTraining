@@ -1,46 +1,124 @@
-<h1>従業員情報詳細ページ</h1>
-<div class="userdetail">
-  <label>部署名: </label>
-  <% if @user.department.present? %>
-    <%= @user.department_name %>
-  <% else %>
-    所属部署なし
-  <% end %><br>
-  <% if @user.image.present? %>
-  <%= image_tag  img_admin_user_path(@user), width: '200', height: '200' %><br>
-  <% else %>
-    <p>画像がありません</p>
-  <% end %>
-  <label>名前: </label><%= @user.name %><br>
-  <label>フリガナ: </label><%= @user.hiragana_nama %><br>
-  <label>性別: <%= @user.sex %></label><br>
-  <label>電話: </label><%= @user.tel %><br>
-  <label>携帯電話: </label><%= @user.mobile %><br>
-  <label>郵便番号: </label><%= @user.postcode %><br>
-  <label>メールアドレス: </label><%= @user.mail %><br>
-  <label>住所1: </label><%= @user.address1 %><br>
-  <label>住所2: </label><%= @user.address2 %><br> 
-  <label>住所3: </label><%= @user.address3 %><br>
-  <label>住所4: </label><%= @user.address4 %><br>
-  <label>住所5: </label><%= @user.address5 %><br>
-  <label>誕生日: </label><%= @user.birthday %><br>
-  <label>スキル一覧</label><br>
-  <% if @user.skills.present? %>
-  <ul>
-    <% @user.skills.each do |skill| %>
-      <li><%= skill.name %></li>
-    <% end %>
-  </ul>
-  <% else %>
-    このユーザーはまだスキルを持っていません。
-  <% end %>
-</div>
-<ul>
-  <li><%= link_to "Edit", edit_admin_user_path(@user) %></li>
-  <li><%= link_to "Destroy", admin_user_path(@user), data: {
-                    turbo_method: :delete,
-                    turbo_confirm: "Are you sure?"
-                  } %></li>
-</ul>
+<div class="container d-flex flex-column align-items-center mt-4">  
+<h2 class="mb-4">従業員情報詳細ページ</h2>
+  <div class="userdetail bg-light p-4 rounded shadow">
+    <div class="row mb-3">
+      <div class="col-md-3 font-weight-bold">部署名:</div>
+      <div class="col-md-9">
+        <% if @user.department.present? %>
+          <%= @user.department_name %>
+        <% else %>
+          所属部署なし
+        <% end %>
+      </div>
+    </div>
 
-<%= link_to "User一覧に戻る", admin_users_path %>
+    <div class="row mb-3">
+      <div class="col-md-3 font-weight-bold">画像:</div>
+      <div class="col-md-9">
+        <% if @user.image.present? %>
+          <%= image_tag img_admin_user_path(@user), class: 'img-thumbnail', width: '200', height: '200' %>
+        <% else %>
+          <p>画像がありません</p>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-md-3 font-weight-bold">名前:</div>
+      <div class="col-md-9"><%= @user.name %></div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-md-3 font-weight-bold">フリガナ:</div>
+      <div class="col-md-9"><%= @user.hiragana_nama %></div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-md-3 font-weight-bold">性別:</div>
+      <div class="col-md-9"><%= @user.sex %></div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-md-3 font-weight-bold">電話:</div>
+      <div class="col-md-9"><%= @user.tel %></div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-md-3 font-weight-bold">携帯電話:</div>
+      <div class="col-md-9"><%= @user.mobile %></div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-md-3 font-weight-bold">郵便番号:</div>
+      <div class="col-md-9"><%= @user.postcode %></div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-md-3 font-weight-bold">メールアドレス:</div>
+      <div class="col-md-9"><%= @user.mail %></div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-md-3 font-weight-bold">住所1:</div>
+      <div class="col-md-9"><%= @user.address1 %></div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-md-3 font-weight-bold">住所2:</div>
+      <div class="col-md-9"><%= @user.address2 %></div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-md-3 font-weight-bold">住所3:</div>
+      <div class="col-md-9"><%= @user.address3 %></div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-md-3 font-weight-bold">住所4:</div>
+      <div class="col-md-9"><%= @user.address4 %></div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-md-3 font-weight-bold">住所5:</div>
+      <div class="col-md-9"><%= @user.address5 %></div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-md-3 font-weight-bold">誕生日:</div>
+      <div class="col-md-9"><%= @user.birthday %></div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-md-3 font-weight-bold">スキル一覧:</div>
+      <div class="col-md-9">
+        <% if @user.skills.present? %>
+          <ul class="list-group">
+            <% @user.skills.each do |skill| %>
+              <li class="list-group-item"><%= skill.name %></li>
+            <% end %>
+          </ul>
+        <% else %>
+          <p>このユーザーはまだスキルを持っていません。</p>
+        <% end %>
+      </div>
+    </div>
+
+    <ul class="list-inline mb-0">
+      <li class="list-inline-item">
+        <%= link_to "Edit", edit_admin_user_path(@user), class: "btn btn-warning btn-sm" %>
+      </li>
+      <li class="list-inline-item">
+        <%= link_to "Destroy", admin_user_path(@user), data: {
+              turbo_method: :delete,
+              turbo_confirm: "#{@user.name}を削除しますか？"
+            }, class: "btn btn-danger btn-sm" %>
+      </li>
+    </ul>
+
+    <div class="row">
+      <div class="col text-center">
+        <%= link_to "従業員一覧に戻る", admin_users_path, class: "btn btn-secondary mt-3" %>
+      </div>
+    </div>
+  </div>
+</div>
