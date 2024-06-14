@@ -78,6 +78,7 @@ group :test do
 end
 
 gem 'kaminari'
+gem 'bootstrap5-kaminari-views', '~> 0.0.1'
 
 gem 'omniauth-google-oauth2'
 gem 'omniauth-rails_csrf_protection'

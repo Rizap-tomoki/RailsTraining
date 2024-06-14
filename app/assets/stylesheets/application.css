@@ -23,3 +23,13 @@ header.bg-secondary {
   border-radius: 0.25rem; /* 角の丸み */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* ボックスシャドウ */
 }
+
+.list-group-title {
+  background-color: #ee1901; /* 灰色の背景色 */
+  color: rgb(251, 0, 0); /* テキストの色を白に */
+  border: 1px solid #6c757d; /* 灰色の枠線 */
+}
+
+.card-text {
+  font-size: 16px;
+}

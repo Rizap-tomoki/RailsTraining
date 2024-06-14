@@ -13,7 +13,7 @@
             <div class="skill_form">
               <div class="mb-3">
                 <%= form.label :name, "スキル名", class: "form-label" %>
-                <%= form.text_field :name, class: "form-control", placeholder: "例: プロダクト開発統括1部" %>
+                <%= form.text_field :name, class: "form-control", placeholder: "例: Rails" %>
                 <% @skill.errors.full_messages_for(:name).each do |message| %>
                   <div class="text-danger"><%= message %></div>
                 <% end %>
@@ -24,7 +24,7 @@
               </div>
 
               <div class="text-center">
-                <%= link_to "部署一覧に戻る", admin_skills_path, class: "btn btn-secondary" %>
+                <%= link_to "スキル一覧に戻る", admin_skills_path, class: "btn btn-secondary" %>
               </div>
             </div>
           <% end %>

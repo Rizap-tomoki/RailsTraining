@@ -2,8 +2,8 @@
 <h2 class="mb-4">従業員情報詳細ページ</h2>
   <div class="userdetail bg-light p-4 rounded shadow">
     <div class="row mb-3">
-      <div class="col-md-3 font-weight-bold">部署名:</div>
-      <div class="col-md-9">
+      <div class="col-md-4 font-weight-bold">部署名:</div>
+      <div class="col-md-6">
         <% if @user.department.present? %>
           <%= @user.department_name %>
         <% else %>
@@ -13,8 +13,8 @@
     </div>
 
     <div class="row mb-3">
-      <div class="col-md-3 font-weight-bold">画像:</div>
-      <div class="col-md-9">
+      <div class="col-md-4 font-weight-bold">画像:</div>
+      <div class="col-md-6">
         <% if @user.image.present? %>
           <%= image_tag img_admin_user_path(@user), class: 'img-thumbnail', width: '200', height: '200' %>
         <% else %>
@@ -24,73 +24,73 @@
     </div>
 
     <div class="row mb-3">
-      <div class="col-md-3 font-weight-bold">名前:</div>
-      <div class="col-md-9"><%= @user.name %></div>
+      <div class="col-md-4 font-weight-bold">名前:</div>
+      <div class="col-md-6"><%= @user.name %></div>
     </div>
 
     <div class="row mb-3">
-      <div class="col-md-3 font-weight-bold">フリガナ:</div>
-      <div class="col-md-9"><%= @user.hiragana_nama %></div>
+      <div class="col-md-4 font-weight-bold">フリガナ:</div>
+      <div class="col-md-6"><%= @user.hiragana_nama %></div>
     </div>
 
     <div class="row mb-3">
-      <div class="col-md-3 font-weight-bold">性別:</div>
-      <div class="col-md-9"><%= @user.sex %></div>
+      <div class="col-md-4 font-weight-bold">性別:</div>
+      <div class="col-md-6"><%= @user.sex %></div>
     </div>
 
     <div class="row mb-3">
-      <div class="col-md-3 font-weight-bold">電話:</div>
-      <div class="col-md-9"><%= @user.tel %></div>
+      <div class="col-md-4 font-weight-bold">電話:</div>
+      <div class="col-md-6"><%= @user.tel %></div>
     </div>
 
     <div class="row mb-3">
-      <div class="col-md-3 font-weight-bold">携帯電話:</div>
-      <div class="col-md-9"><%= @user.mobile %></div>
+      <div class="col-md-4 font-weight-bold">携帯電話:</div>
+      <div class="col-md-6"><%= @user.mobile %></div>
     </div>
 
     <div class="row mb-3">
-      <div class="col-md-3 font-weight-bold">郵便番号:</div>
-      <div class="col-md-9"><%= @user.postcode %></div>
+      <div class="col-md-4 font-weight-bold">郵便番号:</div>
+      <div class="col-md-6"><%= @user.postcode %></div>
     </div>
 
     <div class="row mb-3">
-      <div class="col-md-3 font-weight-bold">メールアドレス:</div>
-      <div class="col-md-9"><%= @user.mail %></div>
+      <div class="col-md-4 font-weight-bold">メールアドレス:</div>
+      <div class="col-md-6"><%= @user.mail %></div>
     </div>
 
     <div class="row mb-3">
-      <div class="col-md-3 font-weight-bold">住所1:</div>
-      <div class="col-md-9"><%= @user.address1 %></div>
+      <div class="col-md-4 font-weight-bold">住所1:</div>
+      <div class="col-md-6"><%= @user.address1 %></div>
     </div>
 
     <div class="row mb-3">
-      <div class="col-md-3 font-weight-bold">住所2:</div>
-      <div class="col-md-9"><%= @user.address2 %></div>
+      <div class="col-md-4 font-weight-bold">住所2:</div>
+      <div class="col-md-6"><%= @user.address2 %></div>
     </div>
 
     <div class="row mb-3">
-      <div class="col-md-3 font-weight-bold">住所3:</div>
-      <div class="col-md-9"><%= @user.address3 %></div>
+      <div class="col-md-4 font-weight-bold">住所3:</div>
+      <div class="col-md-6"><%= @user.address3 %></div>
     </div>
 
     <div class="row mb-3">
-      <div class="col-md-3 font-weight-bold">住所4:</div>
-      <div class="col-md-9"><%= @user.address4 %></div>
+      <div class="col-md-4 font-weight-bold">住所4:</div>
+      <div class="col-md-6"><%= @user.address4 %></div>
     </div>
 
     <div class="row mb-3">
-      <div class="col-md-3 font-weight-bold">住所5:</div>
-      <div class="col-md-9"><%= @user.address5 %></div>
+      <div class="col-md-4 font-weight-bold">住所5:</div>
+      <div class="col-md-6"><%= @user.address5 %></div>
     </div>
 
     <div class="row mb-3">
-      <div class="col-md-3 font-weight-bold">誕生日:</div>
-      <div class="col-md-9"><%= @user.birthday %></div>
+      <div class="col-md-4 font-weight-bold">誕生日:</div>
+      <div class="col-md-6"><%= @user.birthday %></div>
     </div>
 
     <div class="row mb-3">
-      <div class="col-md-3 font-weight-bold">スキル一覧:</div>
-      <div class="col-md-9">
+      <div class="col-md-5 font-weight-bold">スキル一覧:</div>
+      <div class="col-md-10">
         <% if @user.skills.present? %>
           <ul class="list-group">
             <% @user.skills.each do |skill| %>
