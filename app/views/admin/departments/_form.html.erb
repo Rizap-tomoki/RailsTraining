@@ -1,13 +1,12 @@
-<% if @department.errors.any? %>
-  <div id="error_explanation" class="alert alert-danger">
-    <h2><%= pluralize(@department.errors.count, "error") %>が原因でこの記事を保存できませんでした</h2>
-  </div>
-<% end %>
-
 <div class="container mt-5">
   <div class="row justify-content-center">
     <div class="col-md-8">
       <div class="card">
+      <% if @department.errors.any? %>
+        <div id="error_explanation" class="alert alert-danger">
+            <h2>不正な入力があります</h2>
+        </div>
+      <% end %>
         <div class="card-body">
           <%= form_with model: @department, url: [:admin, @department], local: true, class: "needs-validation" do |form| %>
             <div class="department_form">
@@ -23,9 +22,6 @@
                 <%= form.submit "送信", class: "btn btn-primary" %>
               </div>
 
-              <div class="text-center">
-                <%= link_to "部署一覧に戻る", admin_departments_path, class: "btn btn-secondary" %>
-              </div>
             </div>
           <% end %>
         </div>

@@ -1,96 +1,111 @@
-<div class="container d-flex flex-column align-items-center mt-4">  
-<h2 class="mb-4">従業員情報詳細ページ</h2>
+<div class="container d-flex flex-column align-items-center mt-4">
+  <h2 class="mb-4">従業員情報詳細ページ</h2>
   <div class="userdetail bg-light p-4 rounded shadow">
     <div class="row mb-3">
-      <div class="col-md-4 font-weight-bold">部署名:</div>
-      <div class="col-md-6">
+      <div class="col-md-3 font-weight-bold">部署名:</div>
+      <div class="col-md-9 list-group">
         <% if @user.department.present? %>
-          <%= @user.department_name %>
+         <li class="list-group-item"><%= @user.department_name  %></li>
         <% else %>
-          所属部署なし
+         <li class="list-group-item"> 所属部署なし</li>
         <% end %>
       </div>
     </div>
-
     <div class="row mb-3">
-      <div class="col-md-4 font-weight-bold">画像:</div>
-      <div class="col-md-6">
+      <div class="col-md-3 font-weight-bold">画像:</div>
+      <div class="col-md-9 list-group">
         <% if @user.image.present? %>
-          <%= image_tag img_admin_user_path(@user), class: 'img-thumbnail', width: '200', height: '200' %>
+         <li class="list-group-item"><%= image_tag img_admin_user_path(@user), class: 'underline centered', width: '200', height: '200' %></li>
         <% else %>
-          <p>画像がありません</p>
+         <li class="list-group-item">画像がありません</li>
         <% end %>
       </div>
     </div>
-
     <div class="row mb-3">
-      <div class="col-md-4 font-weight-bold">名前:</div>
-      <div class="col-md-6"><%= @user.name %></div>
+      <div class="col-md-3 font-weight-bold">名前:</div>
+      <div class="col-md-9 list-group">
+        <li class="list-group-item"><%= @user.name %></li>
+      </div>
     </div>
-
     <div class="row mb-3">
-      <div class="col-md-4 font-weight-bold">フリガナ:</div>
-      <div class="col-md-6"><%= @user.hiragana_nama %></div>
+      <div class="col-md-3 font-weight-bold">フリガナ:</div>
+      <div class="col-md-9 list-group">
+        <li class="list-group-item"><%= @user.hiragana_nama %></li>
+      </div>
     </div>
-
     <div class="row mb-3">
-      <div class="col-md-4 font-weight-bold">性別:</div>
-      <div class="col-md-6"><%= @user.sex %></div>
+      <div class="col-md-3 font-weight-bold">性別:</div>
+      <div class="col-md-9 list-group">
+        <li class="list-group-item"><%= @user.sex %></li>
+      </div>
     </div>
-
     <div class="row mb-3">
-      <div class="col-md-4 font-weight-bold">電話:</div>
-      <div class="col-md-6"><%= @user.tel %></div>
+      <div class="col-md-3 font-weight-bold">電話:</div>
+      <div class="col-md-9 list-group">
+        <li class="list-group-item"><%= @user.tel %></li>
+      </div>
     </div>
-
     <div class="row mb-3">
-      <div class="col-md-4 font-weight-bold">携帯電話:</div>
-      <div class="col-md-6"><%= @user.mobile %></div>
+      <div class="col-md-3 font-weight-bold">携帯電話:</div>
+      <div class="col-md-9 list-group">
+        <li class="list-group-item"><%= @user.mobile %></li>
+      </div>
     </div>
-
     <div class="row mb-3">
-      <div class="col-md-4 font-weight-bold">郵便番号:</div>
-      <div class="col-md-6"><%= @user.postcode %></div>
+      <div class="col-md-3 font-weight-bold">郵便番号:</div>
+      <div class="col-md-9 list-group">
+        <li class="list-group-item"><%= @user.postcode %></li>
+      </div>
     </div>
-
     <div class="row mb-3">
-      <div class="col-md-4 font-weight-bold">メールアドレス:</div>
-      <div class="col-md-6"><%= @user.mail %></div>
+      <div class="col-md-3 font-weight-bold">メールアドレス:</div>
+      <div class="col-md-9 list-group">
+        <li class="list-group-item"><%= @user.mail %></li>
+      </div>
     </div>
-
     <div class="row mb-3">
-      <div class="col-md-4 font-weight-bold">住所1:</div>
-      <div class="col-md-6"><%= @user.address1 %></div>
+      <div class="col-md-3 font-weight-bold">住所1:</div>
+      <div class="col-md-9 list-group">
+        <li class="list-group-item"><%= @user.address1 %></li>
+      </div>
     </div>
-
     <div class="row mb-3">
-      <div class="col-md-4 font-weight-bold">住所2:</div>
-      <div class="col-md-6"><%= @user.address2 %></div>
+      <div class="col-md-3 font-weight-bold">住所2:</div>
+      <div class="col-md-9 list-group">
+        <li class="list-group-item"><%= @user.address2 %></li>
+      </div>
     </div>
-
     <div class="row mb-3">
-      <div class="col-md-4 font-weight-bold">住所3:</div>
-      <div class="col-md-6"><%= @user.address3 %></div>
+      <div class="col-md-3 font-weight-bold">住所3:</div>
+      <div class="col-md-9 list-group">
+        <li class="list-group-item"><%= @user.address3 %></li>
+      </div>
     </div>
-
     <div class="row mb-3">
-      <div class="col-md-4 font-weight-bold">住所4:</div>
-      <div class="col-md-6"><%= @user.address4 %></div>
+      <div class="col-md-3 font-weight-bold">住所4:</div>
+      <div class="col-md-9 list-group">
+        <li class="list-group-item"><%= @user.address4 %></li>
+      </div>
     </div>
-
     <div class="row mb-3">
-      <div class="col-md-4 font-weight-bold">住所5:</div>
-      <div class="col-md-6"><%= @user.address5 %></div>
+      <div class="col-md-3 font-weight-bold">住所5:</div>
+      <div class="col-md-9 list-group">
+        <% if @user.address5.present? %>
+          <li class="list-group-item"><%= @user.address5 %></li>
+        <% else %>
+          <li class="list-group-item">なし</li>
+        <% end %>
+      </div>
     </div>
-
     <div class="row mb-3">
-      <div class="col-md-4 font-weight-bold">誕生日:</div>
-      <div class="col-md-6"><%= @user.birthday %></div>
+      <div class="col-md-3 font-weight-bold">誕生日:</div>
+      <div class="col-md-9 list-group">
+        <li class="list-group-item"><%= @user.birthday %></li>
+      </div>
     </div>
-
     <div class="row mb-3">
-      <div class="col-md-5 font-weight-bold">スキル一覧:</div>
-      <div class="col-md-10">
+      <div class="col-md-3 font-weight-bold">スキル一覧:</div>
+      <div class="col-md-9">
         <% if @user.skills.present? %>
           <ul class="list-group">
             <% @user.skills.each do |skill| %>
@@ -98,11 +113,10 @@
             <% end %>
           </ul>
         <% else %>
-          <p>このユーザーはまだスキルを持っていません。</p>
+          <li class="list-group-item">スキルを持っていません</li>
         <% end %>
       </div>
     </div>
-
     <div class="row">
       <div class="col text-center">
         <%= link_to "従業員一覧に戻る", users_path, class: "btn btn-secondary mt-3" %>

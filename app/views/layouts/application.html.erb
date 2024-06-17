@@ -6,34 +6,44 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbo-track': 'reload' %>
     <%= javascript_importmap_tags %>
     <%= yield :additional_stylesheets %>
   </head>
   <body>
     <header class="bg-secondary p-4">
-      <div class="container">
-        <div class="d-flex align-items-center">
-          <div class="flex-grow-1">
-            <% if current_user %>
-              <h1>こんにちは <%= current_user.name %> さん</h1>
-            <% else %>
-              <h1>従業員管理サイト</h1>
-            <% end %>
-          </div>
-          <div class="flex-grow-2">
-            <% if current_user %>
-              <%= link_to "管理者画面からログアウト", admin_session_path, data: {
-                            turbo_method: :delete,
-                            turbo_confirm: "ログアウトしますか？"
-                            }, class: "btn btn-danger ml-auto" %>
-            <% else %>
-              <%= link_to "管理者画面にログイン", new_admin_session_path, class: "btn btn-primary ml-auto" %>
-            <% end %>
-          </div>
+      <div class="d-flex align-items-center justify-content-between">
+        <div class="flex-grow-1">
+          <% if current_user %>
+            <h1>こんにちは <%= current_user.name %> さん</h1>
+          <% else %>
+            <h1>従業員管理サイト</h1>
+          <% end %>
         </div>
+        <nav class="nav">
+          <% if current_user %>
+            <%= link_to "HOME", admin_users_path, class: "btn btn-primary mx-3" %>
+            <%= link_to "従業員情報登録", new_admin_user_path, class: "btn btn-primary mx-3" %>
+            <%= link_to "部署名一覧", admin_departments_path, class: "btn btn-primary mx-3" %>
+            <%= link_to "スキル名一覧", admin_skills_path, class: "btn btn-primary mx-3" %>
+            <%= link_to "管理者画面からログアウト", admin_session_path, data: { turbo_method: :delete, turbo_confirm: "ログアウトしますか？" }, class: "btn btn-danger mx-3" %>
+          <% else %>
+            <%= link_to "HOME", users_path, class: "btn btn-primary mx-3" %>
+            <%= link_to "従業員情報登録", new_admin_user_path, class: "btn btn-primary mx-3" %>
+            <%= link_to "管理者画面にログイン", new_admin_session_path, class: "btn btn-primary mx-3" %>
+          <% end %>
+        </nav>
       </div>
     </header>
-    <%= yield %>
+    <main class="d-flex flex-nowrap flex-grow-1">
+      <div class="d-flex flex-column align-items-stretch flex-shrink-0 bg-body-tertiary content">
+        <%= yield %>
+      </div>
+    </main>
+    <footer class="footer mt-auto py-3 bg-light">
+      <div class="container">
+        <p class="text-center">&copy; 2024 Company, Inc</p>
+      </div>
+    </footer>
   </body>
 </html>

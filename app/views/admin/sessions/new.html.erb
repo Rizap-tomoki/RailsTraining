@@ -22,7 +22,9 @@
             <button type="submit" class="btn btn-primary btn-block mt-3">ログイン</button>
           <% end %>
             <p class="mt-4">Googleアカウントを持っている方</p>
-            <%= button_to "Google認証でログイン", "/auth/google_oauth2", data: { turbo: false }, class: "btn btn-danger btn-block mt-3" %>
+            <%= button_to "Google認証でログイン", "/auth/google_oauth2", data: { turbo: false }, class: "btn btn-primary btn-block mt-3" %>
+            <p class="mt-4">アカウントを持っていない方</p>
+            <%= link_to "新規アカウント作成", "/admin/users/new", class: "btn btn-danger btn-block mt-3" %>
         </div>
       </div>
       <div class="text-center mt-3">

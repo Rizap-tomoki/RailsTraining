@@ -5,16 +5,16 @@
     <%= link_to "従業員一覧画面", admin_users_path, class: "btn btn-primary mb-2" %>
   </div>
   </div>
-  <div class="row justify-content-center mb-5">
-    <div class="col-md-6">
-      <div class="text-center">
-        <h2 class="list-group-title text-center border border-secondary p-2 bg-secondary text-white">部署一覧</h2>
-      </div>
-    </div>
-  </div>
 
   <div class="container mt-5">
     <div class="row justify-content-center">
+      <div class="row justify-content-center mb-1">
+        <div class="col-md-6">
+          <div class="text-center">
+            <h2 class="list-group-title text-center border border-secondary p-2 bg-secondary text-white">部署一覧</h2>
+          </div>
+        </div>
+      </div>
       <div class="col-md-6"> 
         <ul class="list-group">
           <% @departments.each do |department| %>

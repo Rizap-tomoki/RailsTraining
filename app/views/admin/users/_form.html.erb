@@ -1,17 +1,15 @@
-<% if @user.errors.any? %>
-  <div id="error_explanation" class="alert alert-danger">
-    <h2><%= pluralize(@user.errors.count, "error") %>が原因でこの記事を保存できませんでした</h2>
-    <ul>
-      <% @user.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-    </ul>
-  </div>
+<% content_for :additional_stylesheets do %>
+  <%= stylesheet_link_tag 'forms', media: 'all', 'data-turbo-track': 'reload' %>
 <% end %>
 <div class="container mt-5">
   <div class="row justify-content-center">
     <div class="col-md-8">
       <div class="card">
+        <% if @user.errors.any? %>
+          <div id="error_explanation" class="alert alert-danger">
+              <h2>不正な入力があります</h2>
+          </div>
+        <% end %>
         <div class="card-body">
           <%= form_with model: @user, url: [:admin, @user], local: true, class: "needs-validation" do |form| %>
             <div class="user_form">
@@ -35,7 +33,7 @@
               </div>
               <div class="mb-3">
                 <%= form.label :sex, "性別", class: "form-label" %>
-                <%= form.select :sex, User.sexes, include_blank: true, class: "form-select" %>
+                <%= form.select :sex, User.sexes, { include_blank: true }, { class: "form-select" } %>
                 <% @user.errors.full_messages_for(:sex).each do |message| %>
                   <div class="text-danger"><%= message %></div>
                 <% end %>
@@ -49,12 +47,12 @@
               </div>
               <div class="mb-3">
                 <%= form.label :skill, "スキル", class: "form-label" %>
-                <%= form.collection_check_boxes :skill_ids, @skills, :id, :name, include_hidden: false do |skill| %>
-                  <div class="form-check">
-                    <%= skill.check_box(class: "form-check-input") %>
-                    <%= skill.label(class: "form-check-label") %>
-                  </div>
-                <% end %>
+                <div class="mb-3">
+                  <%= form.collection_check_boxes :skill_ids, @skills, :id, :name, include_hidden: false do |skill| %>
+                      <%= skill.check_box(class: "form-check-input") %>
+                      <%= skill.label(class: "form-check-label") %>
+                  <% end %>
+                </div>
                 <% @user.errors.full_messages_for(:skill_ids).each do |message| %>
                   <div class="text-danger"><%= message %></div>
                 <% end %>
@@ -103,7 +101,7 @@
               </div>
               <div class="mb-3">
                 <%= form.label :address1, "住所1", class: "form-label" %>
-                <%= form.select :address1, User.address1s, include_blank: true, class: "form-select" %>
+                <%= form.select :address1, User.address1s, { include_blank: true }, { class: "form-select" } %>
                 <% @user.errors.full_messages_for(:address1).each do |message| %>
                   <div class="text-danger"><%= message %></div>
                 <% end %>
@@ -145,9 +143,6 @@
               </div>
               <div class="mb-3 text-center">
                 <%= form.submit "送信", class: "btn btn-primary" %>
-              </div>
-              <div class="text-center">
-                <%= link_to "従業員一覧に戻る", admin_users_path, class: "btn btn-secondary" %>
               </div>
             </div>
           <% end %>
