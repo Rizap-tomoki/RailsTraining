@@ -1,14 +1,22 @@
-<h1>従業員管理サイト</h1>
-<%= link_to "従業員情報登録", new_admin_user_path %><br/>
-<%= link_to "部署名一覧", admin_departments_path %><br/>
-<%= link_to "スキル名一覧", admin_skills_path %>
+<div class="container mt-2">
 
-<ul>
-  <% @users.each do |user| %>
-    <li>
-     <%= link_to user.name, admin_user_path(user) %>
-    </li>
-  <% end %>
-</ul>
+  <div class="row mt-4">
+    <div class="d-flex justify-content-center mt-4">
+      <%= paginate @users, theme: 'bootstrap-5' %>
+    </div>
+  </div>
 
-<%= paginate @users %>
+  <div class="row mt-4 mb-4">
+    <div class="col text-center mx-5">
+      <h2 class="list-group-title text-center border border-secondary p-2 bg-secondary text-white">従業員一覧</h2>
+      <ul class="list-group">
+      <% @users.each do |user| %>
+        <li class="list-group-item text-center">
+          <%= link_to "#{user.name} (#{user.hiragana_nama})".html_safe, admin_user_path(user), class: "text-decoration-none" %>      </li>
+        </li>
+      <% end %>
+    </ul>
+    </div>
+  </div>
+
+</div>

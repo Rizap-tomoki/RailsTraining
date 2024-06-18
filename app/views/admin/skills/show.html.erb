@@ -1,16 +1,46 @@
-<h1>スキル名詳細ページ</h1>
-<div class="skilldetail">
-  <label>スキル名:</label><%= @skill.name %>
-  <% @skill.users.each do |user| %>
-    <li><%= user.name %></li>
-  <% end %> 
-</div>
-<ul>
-  <li><%= link_to "Edit", edit_admin_skill_path(@skill) %></li>
-  <li><%= link_to "Destroy", admin_skill_path(@skill), data: {
+<% content_for :additional_stylesheets do %>
+  <%= stylesheet_link_tag 'skills', media: 'all', 'data-turbo-track': 'reload' %>
+<% end %>
+<div class="container mt-5">
+  <div class="row mb-4 justify-content-center">
+    <div class="col-md-6">
+      <div class="card shadow-lg">
+        <div class="card-body">
+            <h5 class="card-title">スキル名</h5>
+            <div class="col-md-12 list-group">
+              <li class="list-group-item"><%= @skill.name %></li>
+            </div>
+            <h5 class="card-title mt-5">保有ユーザー</h5>
+            <div class="col-md-12 list-group">
+              <% if @skill.users.present? %>
+                <% @skill.users.each do |user| %>
+                  <li class="list-group-item"><%= user.name %></li>
+                <% end %>
+              <% else %>
+                <li class="list-group-item">ユーザーなし</li>
+              <% end %>
+            </div>
+          </div>
+        <div class="card-footer text-center">
+          <ul class="list-inline mb-0">
+            <li class="list-inline-item">
+              <%= link_to "編集", edit_admin_skill_path(@skill), class: "btn btn-primary btn" %>
+            </li>
+            <li class="list-inline-item">
+              <%= link_to "削除", admin_skill_path(@skill), data: {
                     turbo_method: :delete,
-                    turbo_confirm: "Are you sure?"
-                  } %></li>
-</ul>
+                    turbo_confirm: "#{@skill.name}を削除しますか？"
+                  }, class: "btn btn-danger btn" %>
+            </li>
+          </ul>
+        </div>
+      </div>
+  </div>
 
-<%= link_to "スキル名一覧に戻る", admin_skills_path %>
+    <div class="row">
+      <div class="col text-center mt-3">
+        <%= link_to "スキル一覧に戻る", admin_skills_path, class: "btn btn-secondary" %>
+      </div>
+    </div>
+</div>
+</div>
