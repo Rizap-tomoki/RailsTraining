@@ -1,7 +1,7 @@
 <div class="container mt-5">
   <div class="row justify-content-center">
     <div class="col-md-8">
-      <div class="card">
+      <div class="card mt-5">
       <% if @skill.errors.any? %>
         <div id="error_explanation" class="alert alert-danger">
             <h2>不正な入力があります</h2>
@@ -11,7 +11,7 @@
           <%= form_with model: @skill, url: [:admin, @skill], local: true, class: "needs-validation" do |form| %>
             <div class="skill_form">
               <div class="mb-3">
-                <%= form.label :name, "スキル名", class: "form-label" %>
+                <%= form.label :name, "スキル", class: "form-label" %>
                 <%= form.text_field :name, class: "form-control", placeholder: "例: Rails" %>
                 <% @skill.errors.full_messages_for(:name).each do |message| %>
                   <div class="text-danger"><%= message %></div>

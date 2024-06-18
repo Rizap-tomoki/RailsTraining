@@ -1,7 +1,7 @@
 <div class="container mt-5">
   <div class="row justify-content-center">
     <div class="col-md-8">
-      <div class="card">
+      <div class="card mt-5">
       <% if @department.errors.any? %>
         <div id="error_explanation" class="alert alert-danger">
             <h2>不正な入力があります</h2>
@@ -11,7 +11,7 @@
           <%= form_with model: @department, url: [:admin, @department], local: true, class: "needs-validation" do |form| %>
             <div class="department_form">
               <div class="mb-3">
-                <%= form.label :name, "部署名", class: "form-label" %>
+                <%= form.label :name, "部署", class: "form-label" %>
                 <%= form.text_field :name, class: "form-control", placeholder: "例: プロダクト開発統括1部" %>
                 <% @department.errors.full_messages_for(:name).each do |message| %>
                   <div class="text-danger"><%= message %></div>

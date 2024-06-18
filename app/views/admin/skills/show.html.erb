@@ -5,15 +5,12 @@
   <div class="row mb-4 justify-content-center">
     <div class="col-md-6">
       <div class="card shadow-lg">
-        <div class="card-header bg-primary text-white text-center">
-          スキル詳細
-        </div>
         <div class="card-body">
             <h5 class="card-title">スキル名</h5>
             <div class="col-md-12 list-group">
               <li class="list-group-item"><%= @skill.name %></li>
             </div>
-            <h5 class="card-title">保有ユーザー</h5>
+            <h5 class="card-title mt-5">保有ユーザー</h5>
             <div class="col-md-12 list-group">
               <% if @skill.users.present? %>
                 <% @skill.users.each do |user| %>
@@ -27,7 +24,7 @@
         <div class="card-footer text-center">
           <ul class="list-inline mb-0">
             <li class="list-inline-item">
-              <%= link_to "編集", edit_admin_skill_path(@skill), class: "btn btn-warning btn" %>
+              <%= link_to "編集", edit_admin_skill_path(@skill), class: "btn btn-primary btn" %>
             </li>
             <li class="list-inline-item">
               <%= link_to "削除", admin_skill_path(@skill), data: {
@@ -45,4 +42,5 @@
         <%= link_to "スキル一覧に戻る", admin_skills_path, class: "btn btn-secondary" %>
       </div>
     </div>
+</div>
 </div>
