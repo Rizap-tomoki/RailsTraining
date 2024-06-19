@@ -1,3 +1,7 @@
+<% content_for :breadcrumbs do %>
+  <%= add_breadcrumb '従業員一覧', admin_users_path %>
+  <%= add_breadcrumb @user.name, admin_user_path(@user) %>
+<% end %>
 <div class="container d-flex flex-column align-items-center mt-4">
   <div class="userdetail bg-light p-4 rounded shadow">
     <div class="row mb-3">

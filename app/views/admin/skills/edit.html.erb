@@ -1,1 +1,7 @@
+<% content_for :breadcrumbs do %>
+    <%= add_breadcrumb '従業員一覧', admin_users_path %>
+    <%= add_breadcrumb 'スキル一覧', admin_skills_path %>
+    <%= add_breadcrumb @skill.name, admin_skill_path(@skill) %>
+    <%= add_breadcrumb 'スキル編集', edit_admin_skill_path %>
+  <% end %>
 <%= render "form", skill: @skill %>

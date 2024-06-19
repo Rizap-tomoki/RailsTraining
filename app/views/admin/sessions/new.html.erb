@@ -1,3 +1,7 @@
+<% content_for :breadcrumbs do %>
+    <%= add_breadcrumb '従業員一覧', root_path %>
+    <%= add_breadcrumb 'ログイン', new_admin_session_path %>
+<% end %>
 <% if flash[:alert] %>
   <div class="alert alert-danger" role="alert">
     <%= flash[:alert] %>

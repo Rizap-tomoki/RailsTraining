@@ -1,1 +1,6 @@
+<% content_for :breadcrumbs do %>
+    <%= add_breadcrumb '従業員一覧', admin_users_path %>
+    <%= add_breadcrumb @user.name, admin_user_path(@user) %>
+    <%= add_breadcrumb '従業員編集', edit_admin_user_path %>
+<% end %>
 <%= render "form", user: @user %>

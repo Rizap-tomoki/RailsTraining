@@ -1,1 +1,5 @@
+<% content_for :breadcrumbs do %>
+    <%= add_breadcrumb '従業員一覧', admin_users_path %>
+    <%= add_breadcrumb '部署作成', new_admin_department_path %>
+<% end %>
 <%= render "form", department: @department %>
