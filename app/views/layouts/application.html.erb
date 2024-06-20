@@ -10,7 +10,7 @@
     <%= yield :additional_stylesheets %>
     <% if !current_user %>
       <meta name="description" content="従業員管理システムのユーザー画面です">
-      <meta name="keywords" content="従業員管理, ユーザー画面">
+      <meta name="keywords" content="従業員管理サイト, ユーザー画面, 連絡先情報, 人材管理">
       <meta property="og:title" content="従業員管理システム">
       <meta property="og:description" content="従業員管理システムのユーザー画面です">
       <meta property="og:type" content="website">
@@ -49,12 +49,12 @@
               <%= link_to "ログイン", new_admin_session_path, class: "btn btn-primary mx-3" %>
             <% end %>
           </nav>
-          <nav class="nav">
-            <%= render_breadcrumbs if content_for?(:breadcrumbs) %>
-          </nav>
         </div>
       </div>
     </header>
+        <nav class="nav">
+          <%= render_breadcrumbs if content_for?(:breadcrumbs) %>
+        </nav>
         <%= yield %>
     <footer class="footer mt-auto py-3 bg-light">
       <div class="container">
