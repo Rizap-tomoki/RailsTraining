@@ -54,6 +54,11 @@ group :development, :test do
   gem 'pry-rails'
   gem "rspec-rails", "~> 4.0.1"
   gem 'factory_bot_rails', '~> 5.0'
+  gem 'rubocop', require: false
+  gem 'rubocop-rails', require: false
+  gem 'rubocop-rspec', require: false
+  gem 'brakeman', require: false
+  gem 'bullet'
 end
 
 group :development do

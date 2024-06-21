@@ -9,6 +9,6 @@ module ApplicationHelper
         input_html += " class='#{options[:class]}'" if options[:class]
         input_html += " />"
         
-        input_html.html_safe
+        sanitize(input_html)
     end
 end

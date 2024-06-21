@@ -8,10 +8,14 @@ RSpec.describe "skillのシステムテスト", type: :system do
     expect(page).to have_content('スキル名:新しいスキル')
   end
 
-  it "スキルページでスキル名を入力し、入力されたデータが表示されている" do
+  it "スキル名入力フィールドが空である" do
     visit new_skill_path
     text_field = find('input[type="text"]')
     expect(text_field.value).to be_empty
+  end
+
+  it "スキル名を入力し、送信後に入力されたデータが表示される" do
+    visit new_skill_path
     fill_in "名前", with: "新しいスキル"
     click_button "送信"
     expect(page).to have_content('スキル名:新しいスキル')
