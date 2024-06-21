@@ -140,7 +140,6 @@ RSpec.describe "userのシステムテスト", type: :system do
     expect(page).to have_content('新しい番地')
     expect(page).to have_content('2000-01-01')
     expect(page).to have_selector("img[src$='test_image.jpg']")
-
   end
 
   it "ユーザープロフィール情報の削除し、既存のデータが表示されていない" do
@@ -158,5 +157,4 @@ RSpec.describe "userのシステムテスト", type: :system do
     end
     expect(page).to have_content('テストユーザー')
   end
-
 end

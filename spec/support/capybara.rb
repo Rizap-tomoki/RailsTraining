@@ -9,7 +9,7 @@ RSpec.configure do |config|
   Capybara.app_host = "http://#{Capybara.server_host}:#{Capybara.server_port}"
  end
  
- config.before(:each, type: :system, js: true) do
+ config.before(:each, :js, type: :system) do
   driven_by :remote_chrome
   Capybara.server_host = IPSocket.getaddress(Socket.gethostname)
   Capybara.server_port = 4444

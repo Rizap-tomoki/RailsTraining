@@ -16,6 +16,6 @@ FactoryBot.define do
     address5 { "新しい番地" }
     birthday { "2000-01-01" }
     association :department, factory: :department
-    image { Rack::Test::UploadedFile.new(Rails.root.join('spec', 'image', 'test_image.jpg')) }
+    Rack::Test::UploadedFile.new(Rails.root.join('spec', 'image', 'test_image.jpg'))
   end
 end
