@@ -16,5 +16,4 @@ Rails.application.routes.draw do
   resources :users, only: [:index, :show]
   root "users#index"
   # Defines the root path route ("/")
-  match "*path", to: "application#record_or_routing_not_found", via: :all
 end
