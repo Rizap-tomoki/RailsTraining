@@ -16,4 +16,5 @@ Rails.application.routes.draw do
   resources :users, only: [:index, :show]
   root "users#index"
   # Defines the root path route ("/")
+  match "*path", to: "application#render_404", via: :all
 end
