@@ -1,5 +1,6 @@
 # See https://www.robotstxt.org/robotstxt.html for documentation on how to use the robots.txt file
 User-agent: *
 Disallow: /admin/
+Disallow: /user/
 
-Sitemap: http://localhost:3000/sitemap.xml
+Sitemap: http://localhost:3000/sitemap

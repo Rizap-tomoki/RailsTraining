@@ -1,7 +1,8 @@
-<% content_for :breadcrumbs do %>
-    <%= add_breadcrumb '従業員一覧', admin_users_path %>
-    <%= add_breadcrumb 'スキル一覧', admin_skills_path %>
-    <%= add_breadcrumb @skill.name, admin_skill_path(@skill) %>
-    <%= add_breadcrumb 'スキル編集', edit_admin_skill_path %>
-  <% end %>
+<nav style="--bs-breadcrumb-divider:" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="<%= admin_users_path %>">従業員一覧</a></li>
+        <li class="breadcrumb-item"><a href="<%= admin_skills_path %>">スキル一覧</a></li>
+        <li class="breadcrumb-item"><a href="<%= admin_skill_path(@skill) %>">スキル詳細</a></li>
+        <li class="breadcrumb-item" aria-current="page">スキル編集</li>
+</nav>
 <%= render "form", skill: @skill %>

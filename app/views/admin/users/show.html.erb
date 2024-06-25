@@ -1,7 +1,9 @@
-<% content_for :breadcrumbs do %>
-  <%= add_breadcrumb '従業員一覧', admin_users_path %>
-  <%= add_breadcrumb @user.name, admin_user_path(@user) %>
-<% end %>
+<nav style="--bs-breadcrumb-divider: '';" aria-label="breadcrumb">
+  <ol class="breadcrumb">
+  <li class="breadcrumb-item"><a href="<%= admin_users_path %>">従業員一覧</a></li>
+    <li class="breadcrumb-item active" aria-current="page">従業員詳細</li>
+  </ol>
+</nav>
 <div class="container d-flex flex-column align-items-center mt-4">
   <div class="userdetail bg-light p-4 rounded shadow">
     <div class="row mb-3">

@@ -1,5 +1,7 @@
-<% content_for :breadcrumbs do %>
-    <%= add_breadcrumb '従業員一覧', admin_users_path %>
-    <%= add_breadcrumb '部署作成', new_admin_department_path %>
-<% end %>
+<nav style="--bs-breadcrumb-divider:" aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="<%= admin_users_path %>">従業員一覧</a></li>
+    <li class="breadcrumb-item" aria-current="page">部署作成</li>
+  </ol>
+</nav>
 <%= render "form", department: @department %>
