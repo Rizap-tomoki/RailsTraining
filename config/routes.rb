@@ -1,8 +1,7 @@
 Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   get "auth/:provider/callback", to: "admin/sessions#create"
-  get '/sitemap', to: 'users#sitemap', format: 'xml'
-  get '/robots.txt', to: 'users#robots'
+  get '/sitemap.xml', to: 'users#sitemap'
   namespace :admin do
     resource :session, only: [:new, :destroy, :create]
     resources :departments
