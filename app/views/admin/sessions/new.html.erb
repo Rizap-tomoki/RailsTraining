@@ -1,3 +1,9 @@
+<nav style="--bs-breadcrumb-divider: '';" aria-label="breadcrumb">
+  <ol class="breadcrumb">
+  <li class="breadcrumb-item"><a href="<%= users_path %>">従業員一覧</a></li>
+    <li class="breadcrumb-item active" aria-current="page">ログイン画面</li>
+  </ol>
+</nav>
 <% if flash[:alert] %>
   <div class="alert alert-danger" role="alert">
     <%= flash[:alert] %>
