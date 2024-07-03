@@ -23,7 +23,7 @@
     <div class="row mb-3">
       <div class="col-md-3 font-weight-bold">名前</div>
       <div class="col-md-9 list-group">
-        <li class="list-group-item"><%= @user.name %></li>
+        <li class="list-group-item"><%= @user.name.html_safe %></li>
       </div>
     </div>
     <div class="row mb-3">

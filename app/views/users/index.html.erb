@@ -39,6 +39,7 @@
     <% @users.each do |user| %>
       <li class="list-group-item text-center">
 <%= link_to "#{user.name} (#{user.hiragana_nama})<br>居住地:#{user.address1}<br>誕生日:#{user.birthday}".html_safe, user_path(user), class: "text-decoration-none" %>      </li>
+<p>Skills: <%= user.skills.map(&:name).join(', ') %></p>
     <% end %>
   </ul>
   </div>
