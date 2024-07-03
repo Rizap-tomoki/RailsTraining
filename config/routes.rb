@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-  match '*path', to: 'application#routing_error', via: :all
   get "auth/:provider/callback", to: "admin/sessions#create"
   namespace :admin do
     resource :session, only: [:new, :destroy, :create]
@@ -16,5 +15,6 @@ Rails.application.routes.draw do
   end
   resources :users, only: [:index, :show]
   root "users#index"
+  match '*path', to: 'application#render_404', via: :all
   # Defines the root path route ("/")
 end

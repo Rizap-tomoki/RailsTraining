@@ -4,14 +4,9 @@ class ApplicationController < ActionController::Base
   rescue_from ActionController::RoutingError, with: :render_404
 
   def render_404
-    respond_to do |format|
-      format.html { render template: 'error/404', status: 404 }
-    end
+    render template: 'error/404', status: 404
   end
 
-  def routing_error
-    render_404
-  end
   private
     def current_user
       @_current_user ||= session[:current_user_id] &&
