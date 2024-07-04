@@ -1,38 +1,10 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>ページが見つかりません</title>
-    <style>
-      h1 {
-        font-size: 50px;
-      }
-      article {
-        display: block;
-        text-align: center;
-        width: 650px;
-        margin: 0 auto;
-        position: absolute;
-        top: 40%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-      }
-      a {
-        color: #dc8100;
-        text-decoration: none;
-      }
-      a:hover {
-        color: #333;
-        text-decoration: none;
-      }
-    </style>
-  </head>
-  <body>
-    <article>
-      <h1>ページが見つかりません</h1>
-      <div>
-        <p>不正なアクセスであるためページが表示されません</p>
-        <p><a href="/">トップページへ</a></p>
-      </div>
-    </article>
-  </body>
-</html>
+<% content_for :additional_stylesheets do %>
+  <%= stylesheet_link_tag 'error', media: 'all', 'data-turbo-track': 'reload' %>
+<% end %>
+<article>
+  <h1>ページが見つかりません</h1>
+  <div>
+    <p>不正なアクセスであるためページが表示されません</p>
+    <p><a href="/">トップページへ</a></p>
+  </div>
+</article>
