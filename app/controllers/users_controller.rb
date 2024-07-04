@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  
+
   def index
     @per_page = params[:per_page]
     @name = params[:name]

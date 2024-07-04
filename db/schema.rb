@@ -10,6 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+
 ActiveRecord::Schema[7.0].define(version: 2024_06_24_030124) do
   create_table "departments", charset: "utf8mb4", force: :cascade do |t|
     t.string "name"
@@ -26,7 +27,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_24_030124) do
   create_table "skills_users", id: false, charset: "utf8mb4", force: :cascade do |t|
     t.bigint "skill_id"
     t.bigint "user_id"
-    t.index ["skill_id", "user_id"], name: "index_skills_users_on_skill_id_and_user_id", unique: true
+    t.index %w[skill_id user_id], name: "index_skills_users_on_skill_id_and_user_id", unique: true
     t.index ["skill_id"], name: "index_skills_users_on_skill_id"
     t.index ["user_id"], name: "index_skills_users_on_user_id"
   end

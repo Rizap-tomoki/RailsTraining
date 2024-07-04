@@ -8,15 +8,18 @@ RSpec.describe "departmentのシステムテスト", type: :system do
     expect(page).to have_content('部署名:新しい部署')
   end
 
-  it "投稿ページで部署名を入力し、入力したデータが表示されている" do
+  it "投稿ページで部署名を入力できる" do
     visit new_department_path
     text_field = find('input[type="text"]')
     expect(text_field.value).to be_empty
     fill_in "名前", with: "テスト部署"
     click_button "送信"
-    expect(page).to have_content('部署名:テスト部署')
   end
 
+  it "入力したデータが表示されている" do
+    visit departments_path
+    expect(page).to have_content('部署名:テスト部署')
+  end
 
   it "部署名情報を編集し、編集されたデータが表示されている" do
     visit edit_department_path(department.id)
