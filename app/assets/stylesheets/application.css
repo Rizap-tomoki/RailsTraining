@@ -53,6 +53,23 @@ header h1 {
   padding: 1rem;
 }
 
+.nav-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* 行間のスペースを設定 */
+}
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px; /* ボタン間のスペースを設定 */
+}
+
+.nav a {
+  text-decoration: none;
+  font-size: 20px;
+}
+
 .footer {
   width: 100%;
   background-color: #212529 !important;
