@@ -1,0 +1,10 @@
+<% content_for :additional_stylesheets do %>
+  <%= stylesheet_link_tag 'error', media: 'all', 'data-turbo-track': 'reload' %>
+<% end %>
+<article>
+  <h1>ページが見つかりません</h1>
+  <div>
+    <p>不正なアクセスであるためページが表示されません</p>
+    <p><a href="/">トップページへ</a></p>
+  </div>
+</article>
