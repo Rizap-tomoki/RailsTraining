@@ -6,12 +6,11 @@
     display: none;
   }
 </style>
+
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     fetch('/users/user_scripts.json')
-      .then(response => {
-        return response.json();
-      })
+      .then(response => response.json())
       .then(users => {
         const userList = document.getElementById('user-list');
         if (userList) {
@@ -20,48 +19,46 @@
             const nameSpan = document.createElement('span');
             nameSpan.textContent = `名前: ${user.name}`;
             listItem.appendChild(nameSpan);
-            listItem.appendChild(document.createTextNode(`, メール: ${user.email}`));
+            listItem.appendChild(document.createTextNode(`, メール: ${user.mail}`));
 
             // 画像を表示
             if (user.image) {
+              const byteArray = new Uint8Array(user.image.match(/.{1,2}/g).map(byte => parseInt(byte, 16)));
+              const blob = new Blob([byteArray], { type: 'image/png' });
+              const url = URL.createObjectURL(blob);
               const img = document.createElement('img');
-              img.src = `data:image/png;base64,${user.image}`;
+              img.src = url;
               listItem.appendChild(img);
             }
-            // 奇数の判別
-            if (index % 2 === 1) {
-              listItem.classList.add('even');
-            }
+
             userList.appendChild(listItem);
+
+            // ボタンを追加するためのdivを作成
+            const buttonContainer = document.createElement('div');
+
+            // 名前を赤くするボタン
+            const redButton = document.createElement('button');
+            redButton.textContent = '名前を赤くする';
+            redButton.addEventListener('click', function() {
+              nameSpan.classList.add('red');
+            });
+            buttonContainer.appendChild(redButton);
+
+            // ユーザーを非表示にするボタン
+            const hideButton = document.createElement('button');
+            hideButton.textContent = 'ユーザーを非表示にする';
+            hideButton.addEventListener('click', function() {
+              listItem.classList.add('hidden');
+            });
+            buttonContainer.appendChild(hideButton);
+
+            // ボタンをliの下に追加
+            listItem.appendChild(buttonContainer);
           });
         } 
       })
       .catch(error => console.error('jsonデータが正しく呼び出されていません:', error));
-
-    // 名前を赤文字表示にするボタンのロジック
-    const redButton = document.getElementById('names-red');
-    if (redButton) {
-      redButton.addEventListener('click', function() {
-        const nameSpans = document.querySelectorAll('#user-list li span');
-        nameSpans.forEach(span => {
-          span.classList.add('red');
-        });
-      });
-    }
-
-    // 偶数行を非表示にするボタンのロジック
-    const hideEvenRowsButton = document.getElementById('hide-even-rows');
-    if (hideEvenRowsButton) {
-      hideEvenRowsButton.addEventListener('click', function() {
-        const evenRows = document.querySelectorAll('#user-list li.even');
-        evenRows.forEach(row => {
-          row.classList.toggle('hidden');
-        });
-      });
-    } 
   });
 </script>
 <h1>従業員一覧</h1>
-<button id="names-red">名前を赤くする</button>
-<button id="hide-even-rows">偶数行を非表示にする</button>
 <ul id="user-list"></ul>

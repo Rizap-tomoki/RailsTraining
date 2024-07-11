@@ -19,20 +19,10 @@ class UsersController < ApplicationController
   def user_scripts
     @users = User.all
     respond_to do |format|
-      format.html
-      format.json { render json: @users.map { |user| user_to_json(user) } }
+      format.html 
+      format.json { render json: @users } 
     end
   end
 
-  private
-
-  def user_to_json(user)
-    {
-      id: user.id,
-      name: user.name,
-      email: user.mail,
-      image: user.image ? Base64.encode64(user.image) : nil
-    }
-  end
 end
   
