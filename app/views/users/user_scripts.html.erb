@@ -1,0 +1,62 @@
+<style>
+    .red {
+      color: red;
+    }
+    .hidden {
+      display: none;
+    }
+</style>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+      fetch('/users/user_scripts.json')
+        .then(response => response.json())
+        .then(users => {
+          const userList = document.getElementById('user-list');
+          if (userList) {
+            users.forEach((user, index) => {
+              const listItem = document.createElement('li');
+              const nameSpan = document.createElement('span');
+              nameSpan.textContent = `名前: ${user.name}`;
+              listItem.appendChild(nameSpan);
+              listItem.appendChild(document.createTextNode(`, メール: ${user.mail}`));
+              if (index % 2 === 1) {
+                listItem.classList.add('even');
+              }
+              userList.appendChild(listItem);
+            });
+          } else {
+            console.error('Userデータが見つかりません');
+          }
+        })
+        .catch(error => console.error('jsonデータが正しく呼び出されていません:', error));
+
+      const redButton = document.getElementById('names-red');
+      if (redButton) {
+        redButton.addEventListener('click', function() {
+          const nameSpans = document.querySelectorAll('#user-list li span');
+          nameSpans.forEach(span => {
+            span.classList.add('red');
+          });
+        });
+      } else {
+        console.error('Element with id "names-red" not found.');
+      }
+
+      // 偶数行を非表示にするボタンのロジック
+      const hideEvenRowsButton = document.getElementById('hide-even-rows');
+      if (hideEvenRowsButton) {
+        hideEvenRowsButton.addEventListener('click', function() {
+          const evenRows = document.querySelectorAll('#user-list li.even');
+          evenRows.forEach(row => {
+            row.classList.toggle('hidden');
+          });
+        });
+      } else {
+        console.error('Element with id "hide-even-rows" not found.');
+      }
+    });
+</script>
+<h1>従業員一覧</h1>
+  <button id="names-red">名前を赤くする</button>
+  <button id="hide-even-rows">偶数行を非表示にする</button>
+  <ul id="user-list"></ul>
