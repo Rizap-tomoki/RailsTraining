@@ -1,62 +1,67 @@
 <style>
-    .red {
-      color: red;
-    }
-    .hidden {
-      display: none;
-    }
+  .red {
+    color: red;
+  }
+  .hidden {
+    display: none;
+  }
 </style>
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      fetch('/users/user_scripts.json')
-        .then(response => response.json())
-        .then(users => {
-          const userList = document.getElementById('user-list');
-          if (userList) {
-            users.forEach((user, index) => {
-              const listItem = document.createElement('li');
-              const nameSpan = document.createElement('span');
-              nameSpan.textContent = `名前: ${user.name}`;
-              listItem.appendChild(nameSpan);
-              listItem.appendChild(document.createTextNode(`, メール: ${user.mail}`));
-              if (index % 2 === 1) {
-                listItem.classList.add('even');
-              }
-              userList.appendChild(listItem);
-            });
-          } else {
-            console.error('Userデータが見つかりません');
-          }
-        })
-        .catch(error => console.error('jsonデータが正しく呼び出されていません:', error));
+  document.addEventListener('DOMContentLoaded', function() {
+    fetch('/users/user_scripts.json')
+      .then(response => {
+        return response.json();
+      })
+      .then(users => {
+        const userList = document.getElementById('user-list');
+        if (userList) {
+          users.forEach((user, index) => {
+            const listItem = document.createElement('li');
+            const nameSpan = document.createElement('span');
+            nameSpan.textContent = `名前: ${user.name}`;
+            listItem.appendChild(nameSpan);
+            listItem.appendChild(document.createTextNode(`, メール: ${user.email}`));
 
-      const redButton = document.getElementById('names-red');
-      if (redButton) {
-        redButton.addEventListener('click', function() {
-          const nameSpans = document.querySelectorAll('#user-list li span');
-          nameSpans.forEach(span => {
-            span.classList.add('red');
+            // 画像を表示
+            if (user.image) {
+              const img = document.createElement('img');
+              img.src = `data:image/png;base64,${user.image}`;
+              listItem.appendChild(img);
+            }
+            // 奇数の判別
+            if (index % 2 === 1) {
+              listItem.classList.add('even');
+            }
+            userList.appendChild(listItem);
           });
-        });
-      } else {
-        console.error('Element with id "names-red" not found.');
-      }
+        } 
+      })
+      .catch(error => console.error('jsonデータが正しく呼び出されていません:', error));
 
-      // 偶数行を非表示にするボタンのロジック
-      const hideEvenRowsButton = document.getElementById('hide-even-rows');
-      if (hideEvenRowsButton) {
-        hideEvenRowsButton.addEventListener('click', function() {
-          const evenRows = document.querySelectorAll('#user-list li.even');
-          evenRows.forEach(row => {
-            row.classList.toggle('hidden');
-          });
+    // 名前を赤文字表示にするボタンのロジック
+    const redButton = document.getElementById('names-red');
+    if (redButton) {
+      redButton.addEventListener('click', function() {
+        const nameSpans = document.querySelectorAll('#user-list li span');
+        nameSpans.forEach(span => {
+          span.classList.add('red');
         });
-      } else {
-        console.error('Element with id "hide-even-rows" not found.');
-      }
-    });
+      });
+    }
+
+    // 偶数行を非表示にするボタンのロジック
+    const hideEvenRowsButton = document.getElementById('hide-even-rows');
+    if (hideEvenRowsButton) {
+      hideEvenRowsButton.addEventListener('click', function() {
+        const evenRows = document.querySelectorAll('#user-list li.even');
+        evenRows.forEach(row => {
+          row.classList.toggle('hidden');
+        });
+      });
+    } 
+  });
 </script>
 <h1>従業員一覧</h1>
-  <button id="names-red">名前を赤くする</button>
-  <button id="hide-even-rows">偶数行を非表示にする</button>
-  <ul id="user-list"></ul>
+<button id="names-red">名前を赤くする</button>
+<button id="hide-even-rows">偶数行を非表示にする</button>
+<ul id="user-list"></ul>
