@@ -1,0 +1,21 @@
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  fetch('/users/user_scripts.json') 
+    .then(response => response.json())
+    .then(users => {
+      const userList = document.getElementById('user-list');
+      if (userList) {
+        users.forEach(user => {
+          const listItem = document.createElement('li');
+          listItem.textContent = `名前: ${user.name}, メール: ${user.mail}`;
+          userList.appendChild(listItem);
+        });
+      } else {
+        console.error('Userデータが見つかりません');
+      }
+    })
+    .catch(error => console.error('jsonデータが正しく呼び出されていません:', error));
+});
+</script>
+<h1>従業員一覧</h1>
+  <ul id="user-list"></ul>

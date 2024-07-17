@@ -14,7 +14,11 @@ Rails.application.routes.draw do
         end
     end
   end
-  resources :users, only: [:index, :show]
+  resources :users, only: [:index, :show] do
+    collection do
+      get "user_scripts", to: "user_scripts"
+    end
+  end
   root "users#index"
   match '*path', to: 'application#render_404', via: :all
   # Defines the root path route ("/")
