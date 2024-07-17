@@ -1,21 +1,64 @@
+<style>
+  .red {
+    color: red;
+  }
+  .hidden {
+    display: none;
+  }
+</style>
+
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-  fetch('/users/user_scripts.json') 
-    .then(response => response.json())
-    .then(users => {
-      const userList = document.getElementById('user-list');
-      if (userList) {
-        users.forEach(user => {
-          const listItem = document.createElement('li');
-          listItem.textContent = `名前: ${user.name}, メール: ${user.mail}`;
-          userList.appendChild(listItem);
-        });
-      } else {
-        console.error('Userデータが見つかりません');
-      }
-    })
-    .catch(error => console.error('jsonデータが正しく呼び出されていません:', error));
-});
+  document.addEventListener('DOMContentLoaded', function() {
+    fetch('/users/user_scripts.json')
+      .then(response => response.json())
+      .then(users => {
+        const userList = document.getElementById('user-list');
+        if (userList) {
+          users.forEach((user, index) => {
+            const listItem = document.createElement('li');
+            const nameSpan = document.createElement('span');
+            nameSpan.textContent = `名前: ${user.name}`;
+            listItem.appendChild(nameSpan);
+            listItem.appendChild(document.createTextNode(`, メール: ${user.mail}`));
+
+            // 画像を表示
+            if (user.image) {
+              const byteArray = new Uint8Array(user.image.match(/.{1,2}/g).map(byte => parseInt(byte, 16)));
+              const blob = new Blob([byteArray], { type: 'image/png' });
+              const url = URL.createObjectURL(blob);
+              const img = document.createElement('img');
+              img.src = url;
+              listItem.appendChild(img);
+            }
+
+            userList.appendChild(listItem);
+
+            // ボタンを追加するためのdivを作成
+            const buttonContainer = document.createElement('div');
+
+            // 名前を赤くするボタン
+            const redButton = document.createElement('button');
+            redButton.textContent = '名前を赤くする';
+            redButton.addEventListener('click', function() {
+              nameSpan.classList.add('red');
+            });
+            buttonContainer.appendChild(redButton);
+
+            // ユーザーを非表示にするボタン
+            const hideButton = document.createElement('button');
+            hideButton.textContent = 'ユーザーを非表示にする';
+            hideButton.addEventListener('click', function() {
+              listItem.classList.add('hidden');
+            });
+            buttonContainer.appendChild(hideButton);
+
+            // ボタンをliの下に追加
+            listItem.appendChild(buttonContainer);
+          });
+        } 
+      })
+      .catch(error => console.error('jsonデータが正しく呼び出されていません:', error));
+  });
 </script>
 <h1>従業員一覧</h1>
-  <ul id="user-list"></ul>
+<ul id="user-list"></ul>

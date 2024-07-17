@@ -21,7 +21,9 @@ class Admin::UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    @user.image = params[:user][:image].read if params[:user][:image]
+    if params[:user].present? && params[:user][:image].present?
+      params[:user][:image] = params[:user][:image].read.unpack1('H*')
+    end
     encrypt_password_digest(@user, params[:user][:password])
     if @user.save
       redirect_to admin_user_path(@user)
@@ -41,7 +43,7 @@ class Admin::UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if params[:user].present? && params[:user][:image].present?
-      params[:user][:image] = params[:user][:image].read
+      params[:user][:image] = params[:user][:image].read.unpack1('H*')
     end
     encrypt_password_digest(@user, params[:user][:password])
     if @user.update(user_params)

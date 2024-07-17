@@ -23,6 +23,6 @@ class UsersController < ApplicationController
       format.json { render json: @users } 
     end
   end
-  
+
 end
   
