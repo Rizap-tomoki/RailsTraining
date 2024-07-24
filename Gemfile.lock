@@ -217,6 +217,8 @@ GEM
       nio4r (~> 2.0)
     racc (1.7.1)
     rack (2.2.8)
+    rack-cors (2.0.2)
+      rack (>= 2.0.0)
     rack-protection (3.2.0)
       base64 (>= 0.1.0)
       rack (~> 2.2, >= 2.2.4)
@@ -366,6 +368,7 @@ DEPENDENCIES
   omniauth-rails_csrf_protection
   pry-rails
   puma (~> 5.0)
+  rack-cors
   rails (~> 7.0.5)
   rspec-rails (~> 4.0.1)
   rubocop
